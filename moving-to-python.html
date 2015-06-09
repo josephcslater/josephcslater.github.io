@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Joseph C. Slater</title>
+		<meta name="description" content="">
+		<meta name="author" content="Joseph C. Slater">
+
+		<link rel="stylesheet" href="/theme/css/foundation.css" />
+		<link rel="stylesheet" href="/theme/css/pygment/fruity.css" />
+		<link rel="stylesheet" href="/theme/css/custom.css" />
+
+		<!-- GOOGLE WEB FONTS -->
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/theme/css/alt-fonts.css" />
+
+		<script src="/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">Joseph&nbsp;C.&nbsp;Slater</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="">Home</a></li>
+						<li><label>Categories</label></li>
+							<li class="active"><a href="/category/programming.html">Programming</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://www.cecs.wright.edu/~jslater">Joseph C. Slater</a></li>
+
+
+
+						<li><label>Social</label></li>
+							<li><a href="http://www.linkedin.com/in/JosephCSlater">LinkedIn</a></li>
+							<li><a href="https://twitter.com/JosephCSlater">Twitter</a></li>
+					</ul>	
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="/">Joseph C. Slater</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+								<li class="active"><a href="/category/programming.html">Programming</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>My Journey to Python</h2>
+	<p>Back in 1989, when I first entered graduate school, I knew a handful
+of languages to some modest degree. For the sake of computations, I
+knew Basic and Fortran. During that first year I was assigned a
+project that required substantial programing (for my skill set at the
+time). This project was almost complete with about an hour to go
+before the deadline. Unfortunately, this was the days of floppy drives
+(it was not a personally owned PC). I accidentally stepped on the
+switch on a power strip and damaged the files beyond my capability to
+recover them. With about an hour to go a fellow student, Jeff Umland-
+now of JPL, suggested that perhaps I should heed his advice and use
+Matlab. <em>The project would be simple</em> in Matlab according to him. There
+was certainly no way I could complete the project in Fortran so with
+him responding to my shouted out questions I started using Matlab, and
+I finished with time to spare. That was the last time I started a
+project using Fortran. Fortran has its place, but it has been clear to
+me ever since that for most problems facing me, time of development
+far exceeded time of program execution. So, the cost of using an
+interpreted language was well worth the price in time when development
+time was greatly reduced.</p>
+<p>Unfortunately, this can build some bad habits that I am still working
+through. Nevertheless, I continued to learn <a class="reference external" href="http://www.mathworks.com">Matlab</a> and later wrote the
+<a class="reference external" href="http://www.vtoolbox.com">Engineering Vibration Toolbox</a> in <a class="reference external" href="http://www.mathworks.com">Matlab</a>. I immediately noticed that
+in Matlab each function is the name of a file, an once that file is in
+the path, you can have a clash of names. Over the years many of my
+programs have been broken because of the shared name space, which
+continues to grow. Names such as <em>addpath</em>, <em>spectrum</em>, <em>plot3</em>,
+etc. have been replace by Mathworks m-files. Further, when I
+distribute a code, I have to be concerned about their
+clashes. Fortunately I was savvy enough to effectively create my own
+name space for the <a class="reference external" href="http://www.vtoolbox.com">Engineering Vibration Toolbox</a> to name each and
+every file <strong>vtb#_#.m</strong>, hoping that my starting them with <em>vtb</em> they
+would remain safe. That seems to have stood the test of time.</p>
+<p>So, although the names stood the test of time, and I noticed many of
+my programs for personal use did not. I've become further
+disenfranchised by the lack of ability for me to truly own my own
+codes. Without a Matlab license, until <em>Octave</em> came around, your
+M-files were your own, but ot little value if you didn't continue to
+pay the MathWorks. I appreciate the effort that they put into writing
+Matlab, but I put time into my code as well, and I cannot afford to be
+tied to them.</p>
+<p>As you can guess, I later switched to <a class="reference external" href="http://www.octave.org">Octave</a>. Ironically, what I
+liked the best about Octave initially was that it wasn't a <a class="reference external" href="http://www.mathworks.com">Matlab</a>
+clone. As time has moved on, the author, John Eaton, has acquiesced to
+public pleading and moved further and further towards <a class="reference external" href="http://www.mathworks.com">Matlab</a>
+compatibility[#]_.</p>
+<p>I still like <a class="reference external" href="http://www.octave.org">Octave</a> and have great respect for the developer, but I
+noticed <a class="reference external" href="http://www.python.org">Python</a> and that it seemed to really be taking programming to
+another level. The add-on packages are extensive. The language isn't
+designed to be purely for computation/data manipulation, but in many
+respects, it's better, IMHO. Instead of rehashing, I'll redirect you to
+the opinions of <a class="reference external" href="http://www.pyzo.org/python_vs_matlab.html">Pyzo</a>, <a class="reference external" href="https://www.stat.washington.edu/~hoytak/blog/whypython.html">Hoyt Koepke</a>, and
+<a class="reference external" href="http://phillipmfeldman.org/Python/Advantages_of_Python_Over_Matlab.html">Phillip M. Feldman</a>. I
+personally love the readability of the code. It just looks good, and
+that prevents mistakes. I've attempted Object Oriented Programming in
+<a class="reference external" href="http://www.mathworks.com">Matlab</a> (reinvented it myself) for a purpose. After looking at <a class="reference external" href="http://www.python.org">Python</a>,
+I wish I never had. <a class="reference external" href="http://www.mathworks.com">Matlab</a>, and by analogy <a class="reference external" href="http://www.octave.org">Octave</a>, are somewhat
+limiting languages compared to <a class="reference external" href="http://www.python.org">Python</a>. They have served me well.
+I will likely use them again in the future. However, <a class="reference external" href="http://www.python.org">Python</a> has empowered
+me to generate more capable code than I ever could in <a class="reference external" href="http://www.mathworks.com">Matlab</a> due to
+Matlab's limitations.</p>
+<p>Oh, and I made this website in <a class="reference external" href="http://www.python.org">Python</a>, using <a class="reference external" href="http://getpelican.com/">Pelican</a>, and writing
+the source files in <a class="reference external" href="http://docutils.sourceforge.net/rst.html">ReST</a>.</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Ironically, early on he expressed clear reluctance on my part
+to convert to the standards of the then substantially differing
+Octave help system. I think he missed when I came to agree with
+him about that and other things!</td></tr>
+</tbody>
+</table>
+
+	<hr/>
+	<h6>Written by <a href="/author/joseph-c.-slater.html">Joseph C. Slater</a> in <a href="/category/programming.html">Programming</a> on Mon 08 June 2015. Tags: <a href="/tag/python.html">Python</a>, <a href="/tag/scipy.html">Scipy</a>, <a href="/tag/numpy.html">Numpy</a>, <a href="/tag/octave.html">Octave</a>, <a href="/tag/matlab.html">Matlab</a>, </h6>
+</article>
+
+<hr/>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="http://getpelican.com/">Pelican</a></li>
+									<li><a href="http://www.cecs.wright.edu/~jslater">Joseph C. Slater</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+									<li><a href="/tag/scipy.html" class="tag-4">Scipy</a></li>
+									<li><a href="/tag/octave.html" class="tag-4">Octave</a></li>
+									<li><a href="/tag/python.html" class="tag-4">Python</a></li>
+									<li><a href="/tag/matlab.html" class="tag-4">Matlab</a></li>
+									<li><a href="/tag/numpy.html" class="tag-4">Numpy</a></li>
+								</ul>
+							</div>
+
+
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+									<li><a href="http://www.linkedin.com/in/JosephCSlater">LinkedIn</a></li>
+									<li><a href="https://twitter.com/JosephCSlater">Twitter</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="/theme/js/jquery.js"></script>
+		<script src="/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>
