@@ -118,9 +118,9 @@ it couldn't be automated. So, after a bit of work, I found that it
 took precisely 4 lines of code in Python.</p>
 <div class="highlight"><pre><span class="c"># findmissing.py</span>
 <span class="kn">import</span> <span class="nn">pandas</span>
-<span class="n">list1</span><span class="o">=</span><span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list1.csv&#39;</span><span class="p">)</span> <span class="c"># my member database. I care</span>
+<span class="n">list1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list1.csv&#39;</span><span class="p">)</span> <span class="c"># my member database. I care</span>
              <span class="c"># that they have registered on list2</span>
-<span class="n">list2</span><span class="o">=</span><span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list2.csv&#39;</span><span class="p">)</span> <span class="c"># list of everyone who has</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list2.csv&#39;</span><span class="p">)</span> <span class="c"># list of everyone who has</span>
              <span class="c"># registered. This includes people not in my member</span>
              <span class="c"># database. I don&#39;t need those people in my output</span>
 <span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">])]</span> <span class="c"># all data for people</span>
@@ -146,7 +146,7 @@ next two lines.</p>
 </div>
 <div class="section" id="step-2">
 <h2>Step 2</h2>
-<div class="highlight"><pre><span class="n">list2</span><span class="o">=</span><span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list2.csv&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">list2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list2.csv&#39;</span><span class="p">)</span>
 </pre></div>
 <p>imports the list of members of
 my group. I want to know who in this list is not in the second
@@ -250,33 +250,18 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/numpy.html">
-                            Numpy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="/tag/octave.html">
                             Octave
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/pandas.html">
-                            Pandas
+                        <a href="/tag/numpy.html">
+                            Numpy
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
                         <a href="/tag/.html">
                             
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/graduate-employment.html">
-                            Graduate Employment
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/higher-education.html">
-                            Higher Education
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -290,13 +275,28 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/matlab.html">
-                            Matlab
+                        <a href="/tag/scipy.html">
+                            Scipy
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/scipy.html">
-                            Scipy
+                        <a href="/tag/higher-education.html">
+                            Higher Education
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/graduate-employment.html">
+                            Graduate Employment
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/pandas.html">
+                            Pandas
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/matlab.html">
+                            Matlab
                         </a>
                     </li>
                 </ul>
