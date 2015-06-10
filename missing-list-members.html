@@ -116,7 +116,15 @@ list (in the thousands). Each search isn't that long, but nobody in my
 team wanted to do all of the searches. It seemed rather barbaric that
 it couldn't be automated. So, after a bit of work, I found that it
 took precisely 4 lines of code in Python.</p>
-<div class="highlight"><pre><span class="c"># findmissing.py</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># findmissing.py</span>
 <span class="kn">import</span> <span class="nn">pandas</span>
 <span class="n">list1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list1.csv&#39;</span><span class="p">)</span> <span class="c"># my member database. I care</span>
              <span class="c"># that they have registered on list2</span>
@@ -126,7 +134,7 @@ took precisely 4 lines of code in Python.</p>
 <span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">])]</span> <span class="c"># all data for people</span>
              <span class="c"># in my member list who have not signed up</span>
 </pre></div>
-<p>As you can anticipate, a lot is happening in a very small
+</td></tr></table><p>As you can anticipate, a lot is happening in a very small
 space. However, it's pretty easy if you parse is step by
 step. Admittedly, the last line would be simpler if I did it in
 multiple steps. On the other hand, at least I didn't execute all of
@@ -139,7 +147,10 @@ use another name, but you need to adapt my later instructions.</p>
 </div>
 <div class="section" id="step-1">
 <h2>Step 1</h2>
-<p>We start with the line <tt class="docutils literal">import pandas</tt>. This imports <a class="reference external" href="http://pandas.pydata.org">pandas</a>,
+<p>We start with the line:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">pandas</span>
+</pre></div>
+<p>This imports <a class="reference external" href="http://pandas.pydata.org">pandas</a>,
 the <a class="reference external" href="http://www.python.org">Python</a> Data Analysis Library. This enables us to import datafiles
 in comma separated value format very easily, as illustrated in the
 next two lines.</p>
@@ -255,8 +266,8 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/student-employability.html">
-                            Student Employability
+                        <a href="/tag/pandas.html">
+                            Pandas
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -265,13 +276,8 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/matlab.html">
-                            Matlab
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/pandas.html">
-                            Pandas
+                        <a href="/tag/graduate-employment.html">
+                            Graduate Employment
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -285,18 +291,23 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/numpy.html">
-                            Numpy
+                        <a href="/tag/matlab.html">
+                            Matlab
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/graduate-employment.html">
-                            Graduate Employment
+                        <a href="/tag/student-employability.html">
+                            Student Employability
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
                         <a href="/tag/scipy.html">
                             Scipy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/numpy.html">
+                            Numpy
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
