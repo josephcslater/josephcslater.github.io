@@ -13,7 +13,7 @@
 <link rel="canonical" href="/missing-list-members.html">
 
         <meta name="author" content="Joseph C. Slater" />
-        <meta name="keywords" content="Python,Pandas," />
+        <meta name="keywords" content="Python,Pandas" />
         <meta name="description" content="Using Python to find absent members" />
 
         <meta property="og:site_name" content="Joseph C. Slater" />
@@ -25,7 +25,6 @@
             <meta property="article:section" content="Programming" />
             <meta property="article:tag" content="Python" />
             <meta property="article:tag" content="Pandas" />
-            <meta property="article:tag" content="" />
             <meta property="article:author" content="Joseph C. Slater" />
 
 
@@ -97,8 +96,6 @@ Joseph C. Slater            </a>
 	<a href="/tag/python.html">Python</a>
         /
 	<a href="/tag/pandas.html">Pandas</a>
-        /
-	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -113,23 +110,27 @@ list (in the thousands). Each search isn't that long, but nobody in my
 team wanted to do all of the searches. It seemed rather barbaric that
 it couldn't be automated. So, after a bit of work, I found that it
 took precisely 4 lines of code in Python.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># findmissing.py</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># findmissing.py</span>
 <span class="kn">import</span> <span class="nn">pandas</span>
 <span class="n">list1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list1.csv&#39;</span><span class="p">)</span> <span class="c"># my member database. I care</span>
              <span class="c"># that they have registered on list2</span>
 <span class="n">list2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;list2.csv&#39;</span><span class="p">)</span> <span class="c"># list of everyone who has</span>
              <span class="c"># registered. This includes people not in my member</span>
              <span class="c"># database. I don&#39;t need those people in my output</span>
-<span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">])]</span> <span class="c"># all data for people</span>
-             <span class="c"># in my member list who have not signed up</span>
+<span class="n">delinquent</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s">&#39;Email&#39;</span><span class="p">])]</span> <span class="c"># all data</span>
+             <span class="c"># of people in my member list who have not signed up</span>
+<span class="n">delinquent</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s">&#39;Phone&#39;</span><span class="p">,</span> <span class="s">&#39;Last Name&#39;</span><span class="p">,</span> <span class="s">&#39;First Name&#39;</span><span class="p">]))</span> <span class="c"># print</span>
+             <span class="c"># the useful information</span>
 </pre></div>
 </td></tr></table><p>As you can anticipate, a lot is happening in a very small
 space. However, it's pretty easy if you parse is step by
@@ -257,41 +258,6 @@ note.</p>
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/pandas.html">
-                            Pandas
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/matlab.html">
-                            Matlab
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/octave.html">
-                            Octave
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/scipy.html">
-                            Scipy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/numpy.html">
-                            Numpy
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
