@@ -212,7 +212,7 @@ great deal of effort. If all of it was generated manually, then you have
 made life hard on yourself. Most tasks involving data processing
 plotting are easily automated with modern tools. In performing many
 tasks by hand, you require the future user of the data to know each and
-every step you followed to process then plot the data. Guess what, this
+every step you followed to process then plot the data. Guess what: this
 is the second part of the <em>README.TXT</em> file. Most likely, a user will want
 to change one or two simple steps of the process. The more complex the
 process, the more specific the instructions will be.</p>
@@ -227,9 +227,9 @@ processing and plotting (or rendering) should be separated into two or
 more tasks, with two or more scripts. Ideally these scripts should not
 prompt the user for information, but define answers to pertinent
 questions as variables that can be edited. Better yet is to have one
-script for each data file, with the names easily identifiable. For
+script for each data file with the names easily identifiable. For
 example: <em>plotfrfdata.m</em> and <em>frfdata.txt</em>.</p>
-<p>These files need not read directly from the ASCII file, but should make
+<p>These files need not read directly from the raw ASCII date file but should make
 clear how to load data from the text file if necessary.</p>
 </div>
 <div class="section" id="file-formats-for-graphics">
@@ -237,21 +237,20 @@ clear how to load data from the text file if necessary.</p>
 <p>Use of the wrong graphics formats for data presentation is the best way
 to make good results look sloppy. The following is an incomplete list of
 graphics file formats. It lists the most reliable ones for the tasks
-stated. Reliable means commonly acceptable and readable.</p>
+stated. Reliable means <em>commonly acceptable</em> and <em>readable</em>.</p>
 </div>
 <div class="section" id="photographs">
 <h2>Photographs</h2>
-<p>TIFF (Tagged Image File Format) is a very, very high quality format for
+<p>TIFF (Tagged Image File Format) is a very, very (usually) high quality format for
 graphics such as scanned images and photographs. It also results in some
 very large files. Joint Photographic Experts Group (JPEG or JPG) allows
-significant compression with minimal loss of the same types of data,
-however the compression can lose some information and thus jpeg
-shouldn’t be used when image processing may later be performed. Both
+significant compression with minimal loss of the same types of data. However the compression can lose some information and thus jpeg
+shouldn’t be used when image processing might later be performed. Both
 work well when various shades of color/brightness are used, with
 relatively soft edges. Storing a photograph in any other format likely
 makes no sense at all. Using these formats for graphics other than
 scanned images or photographs is not recommended. A very coarse
-description of these formats are that for each pixel they record the
+description of these formats is that for each pixel they record the
 appropriate color and darkness to plot. JPG uses schemes to compress
 this data. In the compression process, JPG (before 2000, which is far
 form standard) uses techniques which cause strange aberrations in data
@@ -338,7 +337,7 @@ notice the jaggedness of the line.</p>
 <p class="caption">Figure 2: Zoomed line from an EPS file. Zoom in as much as you want. The line will be no more jagged than the resolution of your screen.</p>
 </div>
 <p>The website <a class="reference external" href="http://vectormagic.stanford.edu/">http://vectormagic.stanford.edu/</a> can convert pixelated
-graphics to vector graphics, but there’s no substitute for the real
+graphics to vector graphics, but there is no substitute for the real
 thing.</p>
 </div>
 <div class="section" id="drawings">
@@ -461,27 +460,29 @@ source so keeping the media at least 2” away from a magnetic field in a
 typical office should be sufficient. It is typically easy to guarantee
 multiple feet, making any nearby field irrelevant.</p>
 <p>Often the technology that writes to and reads from the media is more
-finite than the storage lie of the media. The 5<span class="formula"><span class="fraction"><span class="ignored">(</span><span class="numerator">1</span><span class="ignored">)/(</span><span class="denominator">4</span><span class="ignored">)</span></span></span>”
+finite than the storage life of the media. The 5<span class="formula"><span class="fraction"><span class="ignored">(</span><span class="numerator">1</span><span class="ignored">)/(</span><span class="denominator">4</span><span class="ignored">)</span></span></span>”
 and 3” floppy combined had a technology life of approximately 20 years
 total before being replaced by newer formats with higher storage
 densities. Many older scientists and engineers have boxes of programs on
 punch cards that can no longer be read. <a class="footnote-reference" href="#id7" id="id4">[2]</a> As new technology becomes
 available, it is prudent to occasionally, say every 10 years, create an
 additional archive of the data in the new format (transcription). It is
-prudent to understand if that format is useful for archiving or not
-(long life, inexpensive, sufficiently popular that there will be readers
+further prudent to understand whether that format is useful for archiving or not
+(long life, inexpensive, sufficiently popular/simple that there will be readers
 in the future, sufficiently robust to errors). The original archive
 should not be discarded. The benefit of discarding it (minimal) is
 likely heavily outweighed by the cost necessary to verify that the new
-media is a perfect duplicate, and will also survive as long.</p>
+media is a perfect duplicate and will also survive equally as long.</p>
 <p>Further, as archived data is important, so is its physical protection.
 Buildings burn down, are flooded, robbed, boxes are lost and accidents
 happen. It is prudent to have a second archive in another physical
 location. Rarely will this ever be needed. However, if the data is
 important, it is certainly worth the redundancy. Most people can use
-their home and office for such locations. I've had to use secondary
+their home and office for such redundant locations. I've had to use secondary
 archives due to failed magnetic media in the past. When one loses data
-it can be very trying.</p>
+it can be very trying. <em>The cloud</em> is a sound option for
+many. However, legal privacy issues such af <a class="reference external" href="http://www2.ed.gov/policy/gen/guid/fpco/ferpa/index.html">FERPA</a>, <a class="reference external" href="https://www.pmddtc.state.gov/regulations_laws/itar.html">ITAR</a>, and <a class="reference external" href="http://www.hhs.gov/ocr/privacy/">HIPPA</a>
+have to be considered before using such.</p>
 <p>While this document is intended to give some insight as to how to
 archive data, it is not intended to cover backups, which are somewhat
 like short-term archives that can be replaced. It is left to the reader
