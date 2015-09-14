@@ -262,8 +262,9 @@ with lines or text.</p>
 <div class="section" id="line-art-plots-graphs-computer-renderings-of-objects-with-computer-drawn-axes-lines-text">
 <h2>Line art, plots, graphs, computer renderings of objects with computer drawn axes/lines, text</h2>
 <p>Vector graphic formats are ideal for these cases. Encapsulated
-PostScript (EPS) is the best way to go, with Portable Document Format
-(PDF) a close second. Windows Meta File (WMF) may work if you are
+PostScript (EPS) or Scalable Vector Graphics (SVG) is the best way to
+go, with Portable Document
+Format (PDF) a close second. Windows Meta File (WMF) may work if you are
 confident that you are getting vector graphics. Encapsulated PostScript
 (EPS) or Portable Document Format (PDF) done correctly doesn't know what
 a pixel is. Thus it prints to infinite resolution by telling the output
@@ -291,12 +292,12 @@ appearance of the line.</p>
 <table border="1" class="docutils" id="table">
 <caption>How to generate vector graphics.</caption>
 <colgroup>
-<col width="25%" />
-<col width="50%" />
-<col width="25%" />
+<col width="31%" />
+<col width="42%" />
+<col width="27%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Language</th>
+<tr><th class="head">Language-platform</th>
 <th class="head">Command</th>
 <th class="head">Help</th>
 </tr>
@@ -306,15 +307,23 @@ appearance of the line.</p>
 <td>print -depsc2 filename</td>
 <td>(help print)</td>
 </tr>
+<tr><td>Python Pyplot</td>
+<td>savefig with the <em>ext=&quot;svg&quot;</em>
+option. Alternatively eps or
+pdf.</td>
+<td>help(plt.savefig)</td>
+</tr>
 <tr><td>Mathematica</td>
 <td>Export[&quot;filename.eps&quot;,&quot;eps&quot;]</td>
 <td>Help menu</td>
 </tr>
 <tr><td>MS Windows</td>
 <td>Install a PS driver, print
-with this driver</td>
-<td>Google it
-sorry. Edit
+with this driver. This won't
+work with all programs in
+Windows.</td>
+<td>Google it.
+Sorry. Edit
 text file to
 start with %!</td>
 </tr>
