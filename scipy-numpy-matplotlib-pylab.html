@@ -117,9 +117,10 @@ depth understanding, that's the place to go. My goal here is to
 clarify what's going on when you look at example programs in terms of
 when to use what package, or more precisely, what steps you can take
 to determine what package/s to use for your purposes.</p>
-<p>First, let me point out that many of the codes you will see will
+<p>First, let me point out that many of the codes you will see on the web will
 likely have redundant calls, or will not suite your style or
-needs. Nothing should be taken as gospel while you develop an
+needs. In forums where feedback is enabled, you can often hunt for the
+<em>best</em> version. Nothing should be taken as gospel while you develop an
 understanding. If something works, well, it works. It
 may not be the best way for you in the long run, but it is a way that
 will work in the short term.</p>
@@ -128,7 +129,7 @@ reasonable assessment of the relative roles.</p>
 <div class="section" id="numpy">
 <h2>NumPy</h2>
 <p>NumPy, the Numerical Python package, forms much of the underlying numerical foundation that
-everything else here relies on for some functionality. If you don't do
+everything else here relies on. If you don't do
 a lot of sophisticated math, this might just be enough for you. The
 odds are against it simply by the fact you are taking time to read
 this blog. NumPy adds N-dimensional array capabilities and some linear
@@ -136,7 +137,7 @@ algebra, Fourier analysis, and random number capabilities. It also
 adds some tools for connecting to compiled languages and applying
 functions to arrays (broadcasting) similar to <a class="reference external" href="matlab.com">Matlab®</a>. For a quick overview, a please look at <a class="reference external" href="http://mathesaurus.sourceforge.net/matlab-numpy.html">a table comparing NumPy commands to equivalent Matlab®
 commands</a>.
-A brief summary: NumPy allows Python to do real
+A brief summary: NumPy allows Python to do some substantial
 math.</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="nb">dir</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>             <span class="c"># This will provide a seemingly overwhelming</span>
@@ -150,7 +151,7 @@ np</tt>) we are requiring our code to call functions with the lead
 <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 <p>returns $3$, as $2^3=8$. For this form, <tt class="docutils literal">log2(3)</tt> will return an
-error, as <tt class="docutils literal">log2</tt> is unkown to Python.</p>
+error, as <tt class="docutils literal">log2</tt> is unknown to Python without the <tt class="docutils literal">np.</tt>.</p>
 <p>We could have, less advisedly, used <tt class="docutils literal">from numpy import *</tt>, which
 means to bring everything in to the top level <em>name space</em>. The <em>name
 space</em> is simply the available named commands. To illustrate this,
@@ -227,7 +228,7 @@ I emphathize with those working towards this.</p>
 </div>
 <div class="section" id="pylab">
 <h2>PyLab</h2>
-<p>PyLab is actually embedded inside matplotlib and provides a
+<p>PyLab is actually embedded inside Matplotlib and provides a
 <em>Matlab®-like</em> experience for the user. It imports portions of SciPy
 and NumPy. It is not a bad place to
 start, and can simplify your learning curve, but you may
