@@ -173,7 +173,7 @@ falter when more and more functions are defined.</p>
 </pre></div>
 <p>The best practice when coding is to import only what you need. It
 enables codes to start up faster (less time loading libraries) and
-leaves names available foryour use as variable names. Further, using
+leaves names available for your use as variable names. Further, using
 <tt class="docutils literal">import numpy as np</tt> keeps those NumPy commands separate from your
 workspace. An example that happens in other languages is that <tt class="docutils literal">i =
 <span class="pre">sqrt(-1)</span></tt> by definition. However, you can write over this with
@@ -195,16 +195,22 @@ redundant. The</p>
 <span class="nb">dir</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>             <span class="c"># This will provide a seemingly overwhelming</span>
                     <span class="c"># list of the functions of NumPy</span>
 <span class="n">help</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>            <span class="c"># Help is always available for NumPy,</span>
-<span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">)</span>       <span class="c"># Some NumPy functions are repeated in</span>
+<span class="n">help</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">log2</span><span class="p">)</span>       <span class="c"># Some NumPy functions are repeated in</span>
                     <span class="c"># availability from NumPy. This should be</span>
                     <span class="c"># redundant, but there seems to be some</span>
                     <span class="c"># exceptions. When in doubt, try it both ways.</span>
 </pre></div>
+<p><em>Be aware</em> that if you <tt class="docutils literal">import scipy as sp</tt>, but don't also <tt class="docutils literal">import numpy
+as np</tt>, you will have to use <tt class="docutils literal">sp.function</tt> to call <tt class="docutils literal">function</tt>
+from <tt class="docutils literal">numpy</tt>. I've recently come to the conclusion for my needs that
+using <tt class="docutils literal">import numpy as np</tt> is pointless, and that simply importing
+SciPy's and accessing all of NumPy's capabilities from SciPy is
+simpler and more consistent.</p>
 </div>
 <div class="section" id="matplotlib">
 <h2>Matplotlib</h2>
 <p>This is the most popular plotting (data visualization) routine package
-for Python. Since this is an instroductory document, I won't do
+for Python. Since this is an introductory document, I won't do
 anything other than suggest you start here. If it doesn't fit your
 needs, you can use a more advanced (and possibly harder to use)
 package. I'm not advocating against them... unless you are new. Start
@@ -223,7 +229,7 @@ great enough person to recognize that at this point they should likely
 be deprecated and eventually removed. That is actually a hard thing to
 do, as many codes already rely on these functions, and it would take a
 lot of re-writing/corrections/testing to extricate from everywhere, so
-I emphathize with those working towards this.</p>
+I empathize with those working towards this.</p>
 <p>My advice: If it's in SciPy, use it from SciPy.</p>
 </div>
 <div class="section" id="pylab">
@@ -238,10 +244,22 @@ to be aware of when using PyLab is that it is importing many functions
 directly into the namespace. If you later decide you want to code with
 a cleaner namespace, you are likely to need to change your function
 calls from, for example, <tt class="docutils literal">linspace</tt> to <tt class="docutils literal">sp.linspace</tt>.</p>
-<p>My time is running out, so mu conclusion will have to wait. However,
+<p>My time is running out, so my conclusion will have to wait. However,
 hopefully this gives you some idea of how these pieces fit together,
 and now you can understand a bit of how these code snippets you see on
 the internet  behave.</p>
+</div>
+<div class="section" id="suggested-introductions">
+<h2>Suggested Introductions</h2>
+<p>This can be an overwhelming amount of material, so I suggest skimming
+for awareness (and an occasional refresher), then referencing as
+needed. Sample codes/notebooks are certainly an easier way to get
+started than trying to write code from scratch.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://scipy-lectures.github.io/intro/intro.html">A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab</a></li>
+<li><a class="reference external" href="https://scipy-lectures.github.io/intro/intro.html">Scientific computing with tools and workflow</a></li>
+<li><a class="reference external" href="https://docs.python.org/3/tutorial/index.html">https://docs.python.org/3/tutorial/index.html</a> through chapter 4.</li>
+</ul>
 </div>
 
             </div>
