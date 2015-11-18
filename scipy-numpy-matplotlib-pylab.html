@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab - Joseph C. Slater</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="josephcslater.github.io/scipy-numpy-matplotlib-pylab.html">
+
+        <meta name="author" content="Joseph C. Slater" />
+        <meta name="keywords" content="Python,SciPy,NumPy,Matplotlib,PyLab" />
+        <meta name="description" content="A beginners overview to what they are and how they interact." />
+
+        <meta property="og:site_name" content="Joseph C. Slater" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab"/>
+        <meta property="og:url" content="josephcslater.github.io/scipy-numpy-matplotlib-pylab.html"/>
+        <meta property="og:description" content="A beginners overview to what they are and how they interact."/>
+        <meta property="article:published_time" content="2015-09-18" />
+            <meta property="article:section" content="Programming" />
+            <meta property="article:tag" content="Python" />
+            <meta property="article:tag" content="SciPy" />
+            <meta property="article:tag" content="NumPy" />
+            <meta property="article:tag" content="Matplotlib" />
+            <meta property="article:tag" content="PyLab" />
+            <meta property="article:author" content="Joseph C. Slater" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="josephcslater.github.io/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="josephcslater.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="josephcslater.github.io/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="josephcslater.github.io/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="josephcslater.github.io/" class="navbar-brand">
+Joseph C. Slater            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="josephcslater.github.io/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="josephcslater.github.io/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="josephcslater.github.io/scipy-numpy-matplotlib-pylab.html"
+                       rel="bookmark"
+                       title="Permalink to A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab">
+                        A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-09-18T11:21:00-04:00"> Fri 18 September 2015</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="josephcslater.github.io/tag/python.html">Python</a>
+        /
+	<a href="josephcslater.github.io/tag/scipy.html">SciPy</a>
+        /
+	<a href="josephcslater.github.io/tag/numpy.html">NumPy</a>
+        /
+	<a href="josephcslater.github.io/tag/matplotlib.html">Matplotlib</a>
+        /
+	<a href="josephcslater.github.io/tag/pylab.html">PyLab</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Whenever someone first begins taking any substantial steps into using
+Python for math/science/engineering, they face a confounding situation
+relating the packages SciPy, NumPy, Matplotlib, PyLab. Everything I
+say here is documented in detail on <a class="reference external" href="Scipy.org">SciPy.org</a>, or
+other places that further digging can uncover. If you want a more in
+depth understanding, that's the place to go. My goal here is to
+clarify what's going on when you look at example programs in terms of
+when to use what package, or more precisely, what steps you can take
+to determine what package/s to use for your purposes.</p>
+<p>First, let me point out that many of the codes you will see on the web will
+likely have redundant calls, or will not suite your style or
+needs. In forums where feedback is enabled, you can often hunt for the
+<em>best</em> version. Nothing should be taken as gospel while you develop an
+understanding. If something works, well, it works. It
+may not be the best way for you in the long run, but it is a way that
+will work in the short term.</p>
+<p>Instead of an accurate history of development, I'll piece together a
+reasonable assessment of the relative roles.</p>
+<div class="section" id="numpy">
+<h2>NumPy</h2>
+<p>NumPy, the Numerical Python package, forms much of the underlying numerical foundation that
+everything else here relies on. If you don't do
+a lot of sophisticated math, this might just be enough for you. The
+odds are against it simply by the fact you are taking time to read
+this blog. NumPy adds N-dimensional array capabilities and some linear
+algebra, Fourier analysis, and random number capabilities. It also
+adds some tools for connecting to compiled languages and applying
+functions to arrays (broadcasting) similar to <a class="reference external" href="matlab.com">Matlab®</a>. For a quick overview, a please look at <a class="reference external" href="http://mathesaurus.sourceforge.net/matlab-numpy.html">a table comparing NumPy commands to equivalent Matlab®
+commands</a>.
+A brief summary: NumPy allows Python to do some substantial
+math.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>             <span class="c"># This will provide a seemingly overwhelming</span>
+                    <span class="c"># list of the functions of NumPy</span>
+<span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>            <span class="c"># Help is always available for NumPy</span>
+</pre></div>
+<p>Note that when we import a package in this form (<tt class="docutils literal">import numpy as
+np</tt>) we are requiring our code to call functions with the lead
+<tt class="docutils literal">np.</tt>. For instance</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+<p>returns $3$, as $2^3=8$. For this form, <tt class="docutils literal">log2(3)</tt> will return an
+error, as <tt class="docutils literal">log2</tt> is unknown to Python without the <tt class="docutils literal">np.</tt>.</p>
+<p>We could have, less advisedly, used <tt class="docutils literal">from numpy import *</tt>, which
+means to bring everything in to the top level <em>name space</em>. The <em>name
+space</em> is simply the available named commands. To illustrate this,
+quit Python, rerun it, and try</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+<p>which returns $3$. However, <tt class="docutils literal">np.log2(3)</tt> will no longer work.</p>
+<p>Why does Python do all of this (as compared to Matlab®)? It keeps the
+list of available variable names under control, something that can
+falter when more and more functions are defined.</p>
+<p>Note that we can also</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">)</span>       <span class="c"># a function,</span>
+<span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="p">)</span>         <span class="c"># or a subpackage within numpy</span>
+</pre></div>
+<p>or</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ma</span> <span class="c"># Import only the masked array package</span>
+</pre></div>
+<p>The best practice when coding is to import only what you need. It
+enables codes to start up faster (less time loading libraries) and
+leaves names available for your use as variable names. Further, using
+<tt class="docutils literal">import numpy as np</tt> keeps those NumPy commands separate from your
+workspace. An example that happens in other languages is that <tt class="docutils literal">i =
+<span class="pre">sqrt(-1)</span></tt> by definition. However, you can write over this with
+<tt class="docutils literal">i=1</tt>, perhaps in a loop. Elsewhere, when you go to use <tt class="docutils literal">i</tt> in an
+expression, it no longer carries the expected value of
+<tt class="docutils literal"><span class="pre">sqrt(-1)</span></tt>. The more complicated the code, the more likely this
+becomes.</p>
+<p>When working interactively, it is often fine to take a softer
+(expedient) approach and simply <tt class="docutils literal">from np import *</tt>.</p>
+</div>
+<div class="section" id="scipy">
+<h2>SciPy</h2>
+<p>SciPy, Scientific Python, adds substantial capabilities to
+NumPy. For Matlab® users, it's very much like many of the core
+toolboxes. If you <tt class="docutils literal">import scipy as sp</tt>, you have also by default
+imported the core capabilities of NumPy, making importing NumPy <em>almost</em>
+redundant. The</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>             <span class="c"># This will provide a seemingly overwhelming</span>
+                    <span class="c"># list of the functions of NumPy</span>
+<span class="n">help</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>            <span class="c"># Help is always available for NumPy,</span>
+<span class="n">help</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">log2</span><span class="p">)</span>       <span class="c"># Some NumPy functions are repeated in</span>
+                    <span class="c"># availability from NumPy. This should be</span>
+                    <span class="c"># redundant, but there seems to be some</span>
+                    <span class="c"># exceptions. When in doubt, try it both ways.</span>
+</pre></div>
+<p><em>Be aware</em> that if you <tt class="docutils literal">import scipy as sp</tt>, but don't also <tt class="docutils literal">import numpy
+as np</tt>, you will have to use <tt class="docutils literal">sp.function</tt> to call <tt class="docutils literal">function</tt>
+from <tt class="docutils literal">numpy</tt>. I've recently come to the conclusion for my needs that
+using <tt class="docutils literal">import numpy as np</tt> is pointless, and that simply importing
+SciPy's and accessing all of NumPy's capabilities from SciPy is
+simpler and more consistent.</p>
+</div>
+<div class="section" id="matplotlib">
+<h2>Matplotlib</h2>
+<p>This is the most popular plotting (data visualization) routine package
+for Python. Since this is an introductory document, I won't do
+anything other than suggest you start here. If it doesn't fit your
+needs, you can use a more advanced (and possibly harder to use)
+package. I'm not advocating against them... unless you are new. Start
+here. Many users with Matlab experience will be capable of taking the
+step to using <tt class="docutils literal">import matplotlib.pyplot as plt</tt> as the commands are
+sufficiently similar to Matlab® that the challenges are modest with
+<a class="reference external" href="google.com">Google</a> at hand. One unfortunate oddity is that the
+author of Matplotlib, <a class="reference external" href="http://jessenoller.com/blog/2012/08/30/rest-in-peace-john-hunter-matplotlib-has-passed-away">John Hunter</a>,
+wrote a substantial amount of computational tools and embedded them
+within Matplotlib. This can provide a bonus, as you don't need to then
+import them from elsewhere. However, they are typically inferior to
+SciPy versions, and so best to be avoided in substantial
+circumstances. The debate about what to do about this overlap
+continues, and although I never knew Dr. Hunter, I sense that he was a
+great enough person to recognize that at this point they should likely
+be deprecated and eventually removed. That is actually a hard thing to
+do, as many codes already rely on these functions, and it would take a
+lot of re-writing/corrections/testing to extricate from everywhere, so
+I empathize with those working towards this.</p>
+<p>My advice: If it's in SciPy, use it from SciPy.</p>
+</div>
+<div class="section" id="pylab">
+<h2>PyLab</h2>
+<p>PyLab is actually embedded inside Matplotlib and provides a
+<em>Matlab®-like</em> experience for the user. It imports portions of SciPy
+and NumPy. It is not a bad place to
+start, and can simplify your learning curve, but you may
+eventually decide that you were better off not using it. It is a
+matter of philosophy, and I'll leave that debate to others. The thing
+to be aware of when using PyLab is that it is importing many functions
+directly into the namespace. If you later decide you want to code with
+a cleaner namespace, you are likely to need to change your function
+calls from, for example, <tt class="docutils literal">linspace</tt> to <tt class="docutils literal">sp.linspace</tt>.</p>
+<p>My time is running out, so my conclusion will have to wait. However,
+hopefully this gives you some idea of how these pieces fit together,
+and now you can understand a bit of how these code snippets you see on
+the internet  behave.</p>
+</div>
+<div class="section" id="suggested-introductions">
+<h2>Suggested Introductions</h2>
+<p>This can be an overwhelming amount of material, so I suggest skimming
+for awareness (and an occasional refresher), then referencing as
+needed. Sample codes/notebooks are certainly an easier way to get
+started than trying to write code from scratch.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://scipy-lectures.github.io/intro/intro.html">A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab</a></li>
+<li><a class="reference external" href="https://scipy-lectures.github.io/intro/intro.html">Scientific computing with tools and workflow</a></li>
+<li><a class="reference external" href="https://docs.python.org/3/tutorial/index.html">The Python Tutorial</a> through chapter 4.</li>
+</ul>
+</div>
+
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="http://www.linkedin.com/in/JosephCSlater"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+                <li class="list-group-item"><a href="https://twitter.com/JosephCSlater"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="josephcslater.github.io/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://www.cecs.wright.edu/~jslater" target="_blank">
+                Joseph C. Slater
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Joseph C. Slater
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="josephcslater.github.io/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="josephcslater.github.io/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="josephcslater.github.io/theme/js/respond.min.js"></script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-62100376-3']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>
