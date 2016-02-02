@@ -135,11 +135,13 @@ linear algebra package).</p>
 <span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="kn">as</span> <span class="nn">la</span>
 </pre>
 <p>We are going to attempt to solve for</p>
-<div class="formula">
-<i>A</i><i>r</i> = <i>r</i><i>v</i>
+<div class="math">
+\begin{equation*}
+A r = r v
+\end{equation*}
 </div>
-<p>where A is the matrix, and <span class="formula"><i>r</i></span> represents the right eigenvectors,
-while <span class="formula"><i>v</i></span> represents the eigenvalues. We are also going to obtain
+<p>where A is the matrix, and <span class="math">\(r\)</span> represents the right eigenvectors,
+while <span class="math">\(v\)</span> represents the eigenvalues. We are also going to obtain
 the left eigenvalues as well, for later use.</p>
 <pre class="code python literal-block">
 <span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>  <span class="c1"># Defining the array (I'm avoiding using the matrix class)</span>
@@ -202,12 +204,16 @@ array([[ 1.+0.j,  2.+0.j,  3.+0.j],
 </pre>
 <p>Avoiding the inverse is a bit unfomfortable in this case, but a bit of
 doodling yields that</p>
-<div class="formula">
-<i>A</i><i>B</i><sup> − 1</sup> = <span class="symbol">(</span><span class="symbol">(</span><i>A</i><i>B</i><sup> − 1</sup><span class="symbol">)</span><sup><i>T</i></sup><span class="symbol">)</span><sup><i>T</i></sup> = <span class="symbol">(</span><span class="symbol">(</span><i>B</i><sup> − 1</sup><span class="symbol">)</span><sup><i>T</i></sup><i>A</i><sup><i>T</i></sup><span class="symbol">)</span><sup><i>T</i></sup>
+<div class="math">
+\begin{equation*}
+A B^{-1}  = \left(\left(A B^{-1}\right)^T\right)^T = \left(\left(B^{-1}\right)^T A^T  \right)^T
+\end{equation*}
 </div>
 <p>Noting that</p>
-<div class="formula">
-<span class="symbol">(</span><i>B</i><sup> − 1</sup><span class="symbol">)</span><sup><i>T</i></sup> = <span class="symbol">(</span><i>B</i><sup><i>T</i></sup><span class="symbol">)</span><sup> − 1</sup>
+<div class="math">
+\begin{equation*}
+\left(B^{-1}\right)^T  = \left(B^{T}\right)^{-1}
+\end{equation*}
 </div>
 <p>we can use</p>
 <pre class="code python literal-block">
@@ -220,8 +226,10 @@ array([[ 1.+0.j,  2.+0.j,  3.+0.j],
 </pre>
 <p>For the left eigenvectors, they are actually simply the right
 eigenvectors of the transpose of the matrix, so</p>
-<div class="formula">
-<i>A</i><sup><i>T</i></sup><i>l</i> = <i>l</i><i>v</i>
+<div class="math">
+\begin{equation*}
+A^T l = l  v
+\end{equation*}
 </div>
 <p>Below I lazily obtain the eigenvalues using the left eigenvectors, with
 an inverse.</p>
@@ -233,7 +241,63 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
        [  1.94289029e-15,  -1.11684397e+00,  -4.99600361e-16],
        [  1.66684734e-15,   1.64791705e-16,   9.06493304e-17]])
 </pre>
+<script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
 
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
             </div>
             <!-- /.entry-content -->
     <hr/>
@@ -289,6 +353,60 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
 
 
 
+            <li class="list-group-item"><a href="http://josephcslater.github.io/tags.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="http://josephcslater.github.io/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://josephcslater.github.io/tag/programming.html">
+                            Programming
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://josephcslater.github.io/tag/scipy.html">
+                            SciPy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://josephcslater.github.io/tag/numpy.html">
+                            NumPy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/pylab.html">
+                            PyLab
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/eigenvectors.html">
+                            Eigenvectors
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/data.html">
+                            Data
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/aiaa.html">
+                            AIAA
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/pandas.html">
+                            Pandas
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/eigenanalysis.html">
+                            Eigenanalysis
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
 
 
