@@ -120,9 +120,17 @@ using Python 3.5 for eigenanalysis. A few things to note:</p>
 <li>If you use
 an earlier version of Python (than 3.5), the <tt class="docutils literal">&#64;</tt> operator isn't
 defined yet. To perform matrix multiplication, you neet to type use
-<tt class="docutils literal">numpy.dot(A,B)</tt> in place of <tt class="docutils literal">A&#64;B</tt>.</li>
+<tt class="docutils literal">numpy.dot(A,B)</tt> in place of <tt class="docutils literal">A&#64;B</tt>. That will require you to
+start with <tt class="docutils literal">import numpy</tt> before doing any of this.</li>
 <li>I demonstrate for a
-non-symmetric matrix. For a symmetric matrix, see the end section.</li>
+non-symmetric matrix. For a symmetric matrix, you should use
+<tt class="docutils literal">eigh</tt>. The <em>H</em> in <tt class="docutils literal">eigh</tt> means <em>Hermetian</em>, and is a more
+general definition than symmetric. If you don't deal with complex
+valued matrices, it's irrelevant to you. Using <tt class="docutils literal">eigh</tt> leverages
+the properties of Hermetian matrices in the solution process
+resulting in potentially faster <em>and</em> more accurate results than
+the more general <tt class="docutils literal">eig</tt> code. For a small matrix, this is
+irrelevant, but it becomes important for more substantial calculations.</li>
 <li>I
 show a couple of tips later that matter for later matrices (avoiding the
 inverse). Be aware of them. Why may or may not matter to you, but when
@@ -361,11 +369,6 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/scipy.html">
-                            SciPy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://josephcslater.github.io/tag/numpy.html">
                             NumPy
                         </a>
@@ -375,24 +378,19 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
                             Programming
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/data.html">
-                            Data
+                    <li class="list-group-item tag-2">
+                        <a href="http://josephcslater.github.io/tag/scipy.html">
+                            SciPy
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/matlab.html">
-                            Matlab
+                        <a href="http://josephcslater.github.io/tag/aiaa.html">
+                            AIAA
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/graphics.html">
-                            Graphics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/eigenanalysis.html">
-                            Eigenanalysis
+                        <a href="http://josephcslater.github.io/tag/pylab.html">
+                            PyLab
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -403,6 +401,16 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
                     <li class="list-group-item tag-4">
                         <a href="http://josephcslater.github.io/tag/latex.html">
                             LaTeX
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/graphics.html">
+                            Graphics
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/linear-algebra.html">
+                            Linear Algebra
                         </a>
                     </li>
                 </ul>
