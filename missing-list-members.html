@@ -129,7 +129,7 @@ took precisely 4 lines of code in Python.</p>
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1"># findmissing.py</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># findmissing.py</span>
 <span class="kn">import</span> <span class="nn">pandas</span>
 <span class="n">list1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;list1.csv&#39;</span><span class="p">)</span> <span class="c1"># my member database. I care</span>
              <span class="c1"># that they have registered on list2</span>
@@ -155,7 +155,7 @@ use another name, but you need to adapt my later instructions.</p>
 <div class="section" id="step-1">
 <h2>Step 1</h2>
 <p>We start with the line:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">pandas</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
 </pre></div>
 <p>This imports <a class="reference external" href="http://pandas.pydata.org">pandas</a>,
 the <a class="reference external" href="http://www.python.org">Python</a> Data Analysis Library. This enables us to import datafiles
@@ -164,7 +164,7 @@ next two lines.</p>
 </div>
 <div class="section" id="step-2">
 <h2>Step 2</h2>
-<div class="highlight"><pre><span class="n">list1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;list1.csv&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;list1.csv&#39;</span><span class="p">)</span>
 </pre></div>
 <p>imports the list of members of
 my group. I want to know who in this list is not in the second
@@ -189,7 +189,7 @@ do it on your own. If I can filter the before the export,
 without losing any of my people, that's fine. However, it's not
 necessary.</p>
 <p>Once I do that, I can import the registrants database with</p>
-<div class="highlight"><pre><span class="n">list2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;list2.csv&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">list2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;list2.csv&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Note that we have to assure filename and path are
 correct/accommodated.</p>
@@ -198,7 +198,7 @@ correct/accommodated.</p>
 <h2>Step 4</h2>
 <p>We have one line left, and that's where all the work is done. Let's do
 this in steps, peeling from the inside out.</p>
-<div class="highlight"><pre><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span>
 </pre></div>
 <p>One of the columns is named <tt class="docutils literal">Email</tt>. You have to adjust for what you
 think is an appropriate identifier, whether it's a username, social
@@ -207,13 +207,13 @@ requirements: be reliably correct, be unique, and never be absent.</p>
 <p>The result of this snippet is to create a list of all email addresses
 (my chosen identifier) from my registrants list. This lists a bunch of
 people who I don't need to know about.</p>
-<div class="highlight"><pre><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])</span>
 </pre></div>
 <p>This is an operator that operates on the stuff passed to it (the stuff
 before the period). It's receiving a list and answering, for each
 member in the list, whether or not that member is in
 <tt class="docutils literal"><span class="pre">list1['email']</span></tt>. So,</p>
-<div class="highlight"><pre><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])</span>
 </pre></div>
 <p>will give me <em>True</em> for each member of list1 who is in list 2, and
 <em>False</em> otherwise. The
@@ -221,7 +221,7 @@ result is another list, corresponding one-to-one with the members of
 list1. Now recall that we wanted to find out who is <strong>not</strong>
 registered. This is where the <tt class="docutils literal">~</tt> comes in to play by inverting the
 results of <tt class="docutils literal">isin</tt>.</p>
-<div class="highlight"><pre><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])</span>
 </pre></div>
 <p>will give me a list that has <em>False</em> for each member of list1 who is in list 2, and
 <em>True</em> otherwise. So, we now have a list that states when it is true
@@ -231,11 +231,11 @@ that a member hasn't signed up.</p>
 <h2>Step 5</h2>
 <p>Now all I need to do is pull out of <tt class="docutils literal">list1</tt> the information for
 those people who are not registered (the result of the prior step).</p>
-<div class="highlight"><pre><span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])]</span>
+<div class="highlight"><pre><span></span><span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])]</span>
 </pre></div>
 <p>For the sake of convenience, if I want to do anything more with this,
 I should probably assign it to a variable, such as</p>
-<div class="highlight"><pre><span class="n">delinquent</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])]</span>
+<div class="highlight"><pre><span></span><span class="n">delinquent</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[</span><span class="o">~</span><span class="n">list1</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">])]</span>
 <span class="n">delinquent</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Phone&#39;</span><span class="p">,</span> <span class="s1">&#39;Last Name&#39;</span><span class="p">,</span> <span class="s1">&#39;First Name&#39;</span><span class="p">]))</span>
 </pre></div>
 <p>which will list phone numbers for those who haven't registered. <tt class="docutils literal">Phone</tt>
@@ -313,23 +313,8 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/scipy.html">
-                            SciPy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/matplotlib.html">
-                            Matplotlib
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="http://josephcslater.github.io/tag/graphics.html">
                             Graphics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/eigenvectors.html">
-                            Eigenvectors
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -338,8 +323,8 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/aiaa.html">
-                            AIAA
+                        <a href="http://josephcslater.github.io/tag/matplotlib.html">
+                            Matplotlib
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -348,8 +333,23 @@ note.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/jupyter.html">
-                            Jupyter
+                        <a href="http://josephcslater.github.io/tag/matlab.html">
+                            Matlab
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/aiaa.html">
+                            AIAA
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/sympy.html">
+                            SymPy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/scipy.html">
+                            SciPy
                         </a>
                     </li>
                 </ul>

@@ -148,7 +148,7 @@ functions to arrays (broadcasting) similar to <a class="reference external" href
 commands</a>.
 A brief summary: NumPy allows Python to do some substantial
 math.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="nb">dir</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>             <span class="c1"># This will provide a seemingly overwhelming</span>
                     <span class="c1"># list of the functions of NumPy</span>
 <span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>            <span class="c1"># Help is always available for NumPy</span>
@@ -156,7 +156,7 @@ math.</p>
 <p>Note that when we import a package in this form (<tt class="docutils literal">import numpy as
 np</tt>) we are requiring our code to call functions with the lead
 <tt class="docutils literal">np.</tt>. For instance</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 <p>returns <span class="math">\(3\)</span>, as <span class="math">\(2^3=8\)</span>. For this form, <tt class="docutils literal">log2(3)</tt> will return an
@@ -165,7 +165,7 @@ error, as <tt class="docutils literal">log2</tt> is unknown to Python without th
 means to bring everything in to the top level <em>name space</em>. The <em>name
 space</em> is simply the available named commands. To illustrate this,
 quit Python, rerun it, and try</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 <p>which returns <span class="math">\(3\)</span>. However, <tt class="docutils literal">np.log2(3)</tt> will no longer work.</p>
@@ -173,12 +173,12 @@ quit Python, rerun it, and try</p>
 list of available variable names under control, something that can
 falter when more and more functions are defined.</p>
 <p>Note that we can also</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">)</span>       <span class="c1"># a function,</span>
 <span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="p">)</span>         <span class="c1"># or a subpackage within numpy</span>
 </pre></div>
 <p>or</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ma</span> <span class="c1"># Import only the masked array package</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ma</span> <span class="c1"># Import only the masked array package</span>
 </pre></div>
 <p>The best practice when coding is to import only what you need. It
 enables codes to start up faster (less time loading libraries) and
@@ -200,7 +200,7 @@ becomes.</p>
 toolboxes. If you <tt class="docutils literal">import scipy as sp</tt>, you have also by default
 imported the core capabilities of <a class="reference external" href="http://www.numpy.org">NumPy</a>, making importing NumPy <em>almost</em>
 redundant. The</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
 <span class="nb">dir</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>             <span class="c1"># This will provide a seemingly overwhelming</span>
                     <span class="c1"># list of the functions of NumPy</span>
 <span class="n">help</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>            <span class="c1"># Help is always available for NumPy,</span>
@@ -399,23 +399,8 @@ started than trying to write code from scratch.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/scipy.html">
-                            SciPy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/matplotlib.html">
-                            Matplotlib
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="http://josephcslater.github.io/tag/graphics.html">
                             Graphics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/eigenvectors.html">
-                            Eigenvectors
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -424,8 +409,8 @@ started than trying to write code from scratch.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/aiaa.html">
-                            AIAA
+                        <a href="http://josephcslater.github.io/tag/matplotlib.html">
+                            Matplotlib
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -434,8 +419,23 @@ started than trying to write code from scratch.</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/jupyter.html">
-                            Jupyter
+                        <a href="http://josephcslater.github.io/tag/matlab.html">
+                            Matlab
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/aiaa.html">
+                            AIAA
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/sympy.html">
+                            SymPy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/scipy.html">
+                            SciPy
                         </a>
                     </li>
                 </ul>

@@ -122,133 +122,129 @@ presuming intertias <span class="math">\(I_1, I_2, I_3\)</span>.</p>
 </div>
 <p>I am using Python 3.5 in iPython (now called Jupyter). The notebook is
 available at <a class="reference external" href="https://github.com/josephcslater/iPythonExamples/blob/master/SymPy_Multiple_Eqn_solution.ipynb">my github examples repository</a>.</p>
-<pre class="code python literal-block">
-<span class="c1"># import symbolic capability to Python</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
-</pre>
-<pre class="code python literal-block">
-<span class="c1"># print things all pretty</span>
-<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">init_printing</span><span class="p">()</span>
-</pre>
-<pre class="code python literal-block">
-<span class="c1"># Need to define variables as symbolic for sympy to use them.</span>
-<span class="n">r_A</span><span class="p">,</span> <span class="n">r_B</span><span class="p">,</span> <span class="n">r_C</span><span class="p">,</span> <span class="n">r_D</span><span class="p">,</span> <span class="n">F_AB</span><span class="p">,</span> <span class="n">F_DC</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;r_A r_B r_C r_D F_AB F_DC M&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-</pre>
-<pre class="code python literal-block">
-<span class="n">I_1</span><span class="p">,</span> <span class="n">I_2</span><span class="p">,</span> <span class="n">I_3</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;I_1 I_2 I_3&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-</pre>
-<pre class="code python literal-block">
-<span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">,</span> <span class="n">theta_3</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;theta_1 theta_2 theta_3&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-</pre>
-<p>Defining equations. In SymPy, and equation is an expression that is
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># import symbolic capability to Python</span>
+ <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+ <span class="c1"># print things all pretty</span>
+ <span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="o">*</span>
+ <span class="n">init_printing</span><span class="p">()</span>
+ <span class="c1"># Need to define variables as symbolic for sympy to use them.</span>
+ <span class="n">r_A</span><span class="p">,</span> <span class="n">r_B</span><span class="p">,</span> <span class="n">r_C</span><span class="p">,</span> <span class="n">r_D</span><span class="p">,</span> <span class="n">F_AB</span><span class="p">,</span> <span class="n">F_DC</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;r_A r_B r_C r_D F_AB F_DC M&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+ <span class="n">I_1</span><span class="p">,</span> <span class="n">I_2</span><span class="p">,</span> <span class="n">I_3</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;I_1 I_2 I_3&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+ <span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">,</span> <span class="n">theta_3</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;theta_1 theta_2 theta_3&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>Defining equations. In SymPy, and equation is an expression that is
 equal to zero. All terms must be brought to the same side in defining
 it.</p>
-<pre class="code python literal-block">
-<span class="n">EA</span> <span class="o">=</span> <span class="n">F_DC</span> <span class="o">*</span><span class="n">r_D</span>  <span class="o">-</span> <span class="n">I_3</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
-<span class="n">EA</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">EA</span> <span class="o">=</span> <span class="n">F_DC</span> <span class="o">*</span><span class="n">r_D</span>  <span class="o">-</span> <span class="n">I_3</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+ <span class="n">EA</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 F_{DC} r_{D} - I_{3} \frac{d^{2}}{d t^{2}}  \theta_{3}{\left (t \right )}
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">EB</span> <span class="o">=</span> <span class="n">r_B</span><span class="o">*</span> <span class="n">F_AB</span> <span class="o">-</span> <span class="n">r_C</span><span class="o">*</span> <span class="n">F_DC</span> <span class="o">-</span> <span class="n">I_2</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
-<span class="n">EB</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">EB</span> <span class="o">=</span> <span class="n">r_B</span><span class="o">*</span> <span class="n">F_AB</span> <span class="o">-</span> <span class="n">r_C</span><span class="o">*</span> <span class="n">F_DC</span> <span class="o">-</span> <span class="n">I_2</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+ <span class="n">EB</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 F_{AB} r_{B} - F_{DC} r_{C} - I_{2} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )}
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">EC</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">F_AB</span><span class="p">)</span> <span class="o">+</span> <span class="n">M</span> <span class="o">-</span> <span class="n">I_1</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
-<span class="n">EC</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">EC</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">F_AB</span><span class="p">)</span> <span class="o">+</span> <span class="n">M</span> <span class="o">-</span> <span class="n">I_1</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+ <span class="n">EC</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 - F_{AB} r_{A} - I_{1} \frac{d^{2}}{d t^{2}}  \theta_{1}{\left (t \right )} + M
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">E1</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span><span class="o">*</span> <span class="n">r_D</span> <span class="o">-</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span><span class="n">r_C</span>
-<span class="n">E1</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">E1</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span><span class="o">*</span> <span class="n">r_D</span> <span class="o">-</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span><span class="n">r_C</span>
+ <span class="n">E1</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 - r_{C} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )} + r_{D} \frac{d^{2}}{d t^{2}}  \theta_{3}{\left (t \right )}
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">E2</span> <span class="o">=</span> <span class="n">r_B</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span><span class="n">r_A</span>
-<span class="n">E2</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">E2</span> <span class="o">=</span> <span class="n">r_B</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span><span class="n">r_A</span>
+ <span class="n">E2</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 - r_{A} \frac{d^{2}}{d t^{2}}  \theta_{1}{\left (t \right )} + r_{B} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )}
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">solve</span><span class="p">(</span><span class="n">EA</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">solve</span><span class="p">(</span><span class="n">EA</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 \left [ \frac{F_{DC} r_{D}}{I_{3}}\right ]
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">solve</span><span class="p">(</span><span class="n">EB</span><span class="p">,</span><span class="n">F_AB</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">solve</span><span class="p">(</span><span class="n">EB</span><span class="p">,</span><span class="n">F_AB</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 \frac{1}{r_{B}} \left(F_{DC} r_{C} + I_{2} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )}\right)
 \end{equation*}
 </div>
 <p>I'm going to do substitutions in stages, eliminating one variable at a
 time for clarity.</p>
-<pre class="code python literal-block">
-<span class="n">step1</span> <span class="o">=</span> <span class="n">EC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">F_AB</span><span class="p">,</span> <span class="n">solve</span><span class="p">(</span><span class="n">EB</span><span class="p">,</span><span class="n">F_AB</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">step1</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">step1</span> <span class="o">=</span> <span class="n">EC</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">F_AB</span><span class="p">,</span> <span class="n">solve</span><span class="p">(</span><span class="n">EB</span><span class="p">,</span><span class="n">F_AB</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="n">step1</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 - I_{1} \frac{d^{2}}{d t^{2}}  \theta_{1}{\left (t \right )} + M - \frac{r_{A}}{r_{B}} \left(F_{DC} r_{C} + I_{2} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )}\right)
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">step2</span> <span class="o">=</span> <span class="n">step1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">F_DC</span><span class="p">,</span><span class="n">solve</span><span class="p">(</span><span class="n">EA</span><span class="p">,</span><span class="n">F_DC</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">step2</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">step2</span> <span class="o">=</span> <span class="n">step1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">F_DC</span><span class="p">,</span><span class="n">solve</span><span class="p">(</span><span class="n">EA</span><span class="p">,</span><span class="n">F_DC</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="n">step2</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 - I_{1} \frac{d^{2}}{d t^{2}}  \theta_{1}{\left (t \right )} + M - \frac{r_{A}}{r_{B}} \left(I_{2} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )} + \frac{I_{3} r_{C}}{r_{D}} \frac{d^{2}}{d t^{2}}  \theta_{3}{\left (t \right )}\right)
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">step3</span> <span class="o">=</span> <span class="n">step2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">),</span><span class="n">solve</span><span class="p">(</span><span class="n">E2</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">step3</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">step3</span> <span class="o">=</span> <span class="n">step2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">),</span><span class="n">solve</span><span class="p">(</span><span class="n">E2</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_1</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="n">step3</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 - \frac{I_{1} r_{B}}{r_{A}} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )} + M - \frac{r_{A}}{r_{B}} \left(I_{2} \frac{d^{2}}{d t^{2}}  \theta_{2}{\left (t \right )} + \frac{I_{3} r_{C}}{r_{D}} \frac{d^{2}}{d t^{2}}  \theta_{3}{\left (t \right )}\right)
 \end{equation*}
 </div>
-<pre class="code python literal-block">
-<span class="n">step4</span> <span class="o">=</span> <span class="n">step3</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">),</span><span class="n">solve</span><span class="p">(</span><span class="n">E1</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">step4</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">step4</span> <span class="o">=</span> <span class="n">step3</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">),</span><span class="n">solve</span><span class="p">(</span><span class="n">E1</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_2</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="n">step4</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 - \frac{I_{1} r_{B} r_{D}}{r_{A} r_{C}} \frac{d^{2}}{d t^{2}}  \theta_{3}{\left (t \right )} + M - \frac{r_{A}}{r_{B}} \left(\frac{I_{2} r_{D}}{r_{C}} \frac{d^{2}}{d t^{2}}  \theta_{3}{\left (t \right )} + \frac{I_{3} r_{C}}{r_{D}} \frac{d^{2}}{d t^{2}}  \theta_{3}{\left (t \right )}\right)
 \end{equation*}
 </div>
 <p>Finally, the acceleration of the right most gear as a function of the
 input moment</p>
-<pre class="code python literal-block">
-<span class="n">solve</span><span class="p">(</span><span class="n">step4</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))</span>
-</pre>
-<div class="math">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">solve</span><span class="p">(</span><span class="n">step4</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">theta_3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</td></tr></table><div class="math">
 \begin{equation*}
 \left [ \frac{M r_{A} r_{B} r_{C} r_{D}}{I_{1} r_{B}^{2} r_{D}^{2} + I_{2} r_{A}^{2} r_{D}^{2} + I_{3} r_{A}^{2} r_{C}^{2}}\right ]
 \end{equation*}
@@ -378,23 +374,8 @@ input moment</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/scipy.html">
-                            SciPy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/matplotlib.html">
-                            Matplotlib
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="http://josephcslater.github.io/tag/graphics.html">
                             Graphics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/eigenvectors.html">
-                            Eigenvectors
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -403,8 +384,8 @@ input moment</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/aiaa.html">
-                            AIAA
+                        <a href="http://josephcslater.github.io/tag/matplotlib.html">
+                            Matplotlib
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -413,8 +394,23 @@ input moment</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/jupyter.html">
-                            Jupyter
+                        <a href="http://josephcslater.github.io/tag/matlab.html">
+                            Matlab
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/aiaa.html">
+                            AIAA
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/sympy.html">
+                            SymPy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/scipy.html">
+                            SciPy
                         </a>
                     </li>
                 </ul>
