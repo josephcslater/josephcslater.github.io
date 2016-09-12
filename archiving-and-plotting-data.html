@@ -156,13 +156,7 @@ Information Interchange), or raw text, files. Other formats can
 10-20 years. The ASCII format has been around for a long time, and is
 the format of the programming languages used to write the codes that
 read other formats, so it's a good bet that this format will exist
-indefinitely. A good compromise are the <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reST</a> and <a class="reference external" href="http://daringfireball.net/projects/markdown/">Markdown</a>. The advantages of
-these are they are ASCII, but very readable. I have more experience
-with <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reST</a> and favor it's ability to
-be re-rendered in a slew of other formats using tools such as <a class="reference external" href="http://sphinx-doc.org">Sphinx</a>. In fact, the source of <a class="reference external" href="http://cecs.wright.edu/~jslater/_sources/archivingdata/archivingdata.txt">this very page</a>. Further,
-while perusing my site you may notice that there is a link to the
-left that almost always allows you to see the original source in <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reST</a>
-format.</p>
+indefinitely.</p>
 <p>Data should be stored in column delimited format. You can use whatever
 character you like for delimiting. Spaces, commas, tabs, all can work
 fine, but make sure that none of those characters are part of your data.
@@ -175,7 +169,7 @@ format for the code. In fact, you should almost always save in <em>both</em>
 formats. The ASCII format is your emergency backup for when you can no
 longer read a data file written by a code that has either a) been
 extinct for many years, or b) is unavailable to you due to licenses at
-your new place of employment. <a class="footnote-reference" href="#id6" id="id3">[1]</a> If there is a <em>standard</em> format for
+your new place of employment. <a class="footnote-reference" href="#id6" id="id1">[1]</a> If there is a <em>standard</em> format for
 your field, you should also save in that format. This means up to three
 archived data files in the place of one. If this seems like a lot, then
 you don't think much of your data, and this document is irrelevant.</p>
@@ -185,13 +179,21 @@ you don't think much of your data, and this document is irrelevant.</p>
 <p>Just having your data stored in files is not enough. It must be
 documented. This documentation may be in your report/thesis. If so, this
 document must be part of the data archive. Further, this documentation
-must be provided in ASCII format too! We really don't know if MS Word
-2000 will be readable in the year 2020. Probably not. If that s the
-case, when you come back to this data in the future to see if some new
-processing technique yields new and exciting insight, you'd better hope
-that the data is documented in an ASCII file. Typically, this file is
-named &quot;README.TXT&quot;. The reason should be readily apparent. This is the
-first document you should look at. Sets of data described by this
+must be provided in ASCII format too! We really don't know if a MS Word
+'95 file will be readable in the year 2020. Probably not. If that's the
+case, then when you or another researcher come back to this data in
+the future to see if some new processing technique yields new and exciting insight, you'd better hope
+that the data is documented in an ASCII (text) file. Often, this file is
+named <em>README.TXT</em>. The reason should be readily apparent. This is the
+first document you should look at.</p>
+<p>A good form to use is either the <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reST</a> or <a class="reference external" href="http://daringfireball.net/projects/markdown/">Markdown</a> standards. The advantages of
+these are they are ASCII, but very readable. I have more experience
+with <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reST</a> and favor it's ability to
+be re-rendered in a slew of other formats using tools such as <a class="reference external" href="http://sphinx-doc.org">Sphinx</a>. In fact, the source of <a class="reference external" href="http://cecs.wright.edu/~jslater/_sources/archivingdata/archivingdata.txt">this very page</a>. Further,
+while perusing my website (not this blog) you may notice that there is a link to the
+left that almost always allows you to see the original source in <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reST</a>
+format.</p>
+<p>Sets of data described by this
 document should be in the same directory as this document, or
 subdirectories beneath it. This document must contain:</p>
 <ol class="arabic simple">
@@ -227,7 +229,8 @@ process, the more specific the instructions will be.</p>
 </div>
 <div class="section" id="plotting">
 <h2>Plotting</h2>
-<p>Languages such as Octave, Gnuplot, Matlab, Mathematica, IDL, etc allow
+<p>Languages such as <a class="reference external" href="https://www.gnu.org/software/octave/">Octave</a>,
+<a class="reference external" href="http://gnuplot.sourceforge.net">gnuplot</a>, <a class="reference external" href="http://www.mathworks.com/products/matlab/">MATLAB</a>, <a class="reference external" href="https://www.wolfram.com/mathematica/">Mathematica</a>,  <a class="reference external" href="http://www.harrisgeospatial.com/ProductsandSolutions/GeospatialProducts/IDL.aspx">IDL</a>, <a class="reference external" href="http://matplotlib.org">Python matplotlib</a> etc allow
 scripting. A compiled language can also be used with the same results.
 You should provide a file that when executed will generate the files
 that became your plots. If the data processing is extensive, the
@@ -301,9 +304,9 @@ appearance of the line.</p>
 <table border="1" class="docutils" id="table">
 <caption>How to generate vector graphics.</caption>
 <colgroup>
-<col width="31%" />
-<col width="42%" />
-<col width="27%" />
+<col width="28%" />
+<col width="43%" />
+<col width="28%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head">Language-platform</th>
@@ -313,32 +316,31 @@ appearance of the line.</p>
 </thead>
 <tbody valign="top">
 <tr><td>Matlab</td>
-<td>print -depsc2 filename</td>
-<td>(help print)</td>
+<td><cite>print -depsc2 filename</cite></td>
+<td><cite>help print</cite></td>
 </tr>
-<tr><td>Python Pyplot</td>
-<td>savefig with the <em>ext=&quot;svg&quot;</em>
+<tr><td>Python matplotlib</td>
+<td><cite>savefig</cite> with the <em>ext=&quot;svg&quot;</em>
 option. Alternatively eps or
 pdf.</td>
-<td>help(plt.savefig)</td>
+<td><cite>help(plt.savefig)</cite></td>
 </tr>
 <tr><td>Mathematica</td>
-<td>Export[&quot;filename.eps&quot;,&quot;eps&quot;]</td>
+<td><cite>Export[&quot;filename.eps&quot;,&quot;eps&quot;]</cite></td>
 <td>Help menu</td>
 </tr>
 <tr><td>MS Windows</td>
-<td>Install a PS driver, print
-with this driver. This won't
-work with all programs in
-Windows.</td>
+<td>Install a PS driver, print with
+this driver. This won't work
+with all programs in Windows.</td>
 <td>Google it.
 Sorry. Edit
 text file to
 start with %!</td>
 </tr>
 <tr><td>Macintosh</td>
-<td>Print, note options at
-bottom left of dialog box</td>
+<td>Print, note options at bottom
+left of dialog box</td>
 <td>PDF is
 built-in</td>
 </tr>
@@ -530,7 +532,7 @@ set you on the right path to protecting your hard work for future use.</p>
 <table class="docutils footnote" frame="void" id="id6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>Using GNU software protects you from much of this by being free for
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Using GNU software protects you from much of this by being free for
 use in any environment.</td></tr>
 </tbody>
 </table>
@@ -673,13 +675,8 @@ electronic storage media with lives longer than cards!</td></tr>
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/scipy.html">
-                            SciPy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/sympy.html">
-                            SymPy
+                        <a href="http://josephcslater.github.io/tag/jupyter.html">
+                            Jupyter
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -688,8 +685,18 @@ electronic storage media with lives longer than cards!</td></tr>
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
+                        <a href="http://josephcslater.github.io/tag/sympy.html">
+                            SymPy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
                         <a href="http://josephcslater.github.io/tag/octave.html">
                             Octave
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://josephcslater.github.io/tag/scipy.html">
+                            SciPy
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -697,19 +704,14 @@ electronic storage media with lives longer than cards!</td></tr>
                             NumPy
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/jupyter.html">
-                            Jupyter
+                    <li class="list-group-item tag-4">
+                        <a href="http://josephcslater.github.io/tag/aiaa.html">
+                            AIAA
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/curl.html">
-                            cURL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/eigenvalues.html">
-                            Eigenvalues
+                        <a href="http://josephcslater.github.io/tag/differential-equations.html">
+                            Differential Equations
                         </a>
                     </li>
                 </ul>
