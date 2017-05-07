@@ -144,7 +144,7 @@ is likely the best way to start from zero knowledge.</p>
 <p>Just to give a flavor of why you wouldn't want to do this, note that the installation I recommend installs <a class="reference external" href="https://docs.continuum.io/anaconda/pkg-docs">445</a> unique sub-packages and ensures that they all work properly, without operating system hangups, missing sub parts, failed compiles of executables, etcetera. These sub-packages include high performance optimally compiled libraries that you would need to install yourself after installing compilers and making sure you have all of the necessary dependencies. If this sounds like a lot of fun, you are reading the wrong page, and I can't even direct you to a right page.</p>
 <div class="section" id="any-platform-mac-windows-linux">
 <h3>Any platform (Mac/Windows/Linux)</h3>
-<p>At this point in time, I believe that it is <em>very</em> clear that the hands-down winner for installing <a class="reference external" href="http://python.org">Python</a> as a novice is the <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a> distribution by <a class="reference external" href="https://www.continuum.io">Continuum Analytics</a>. Their website has plenty of information that you can peruse for getting an installation of everything you will need. The CEO, <a class="reference external" href="https://www.continuum.io/leadership">Travis Oliphant</a>, is widely credited for molding <a class="reference external" href="http://python.org">Python</a> into a computational language through his development of <a class="reference external" href="http://numpy.org">Numpy</a>, which became the basis for so much more. While arguments are sometimes made that using a <a class="reference external" href="https://www.continuum.io">Continuum Analytics</a> is insufficiently &quot;pure&quot; for the open source community, I strongly disagree. <a class="footnote-reference" href="#id3" id="id2">[1]</a></p>
+<p>At this point in time, I believe that it is <em>very</em> clear that the hands-down winner for installing <a class="reference external" href="http://python.org">Python</a> as a novice is the <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a> distribution by <a class="reference external" href="https://www.continuum.io">Continuum Analytics</a>. Their website has plenty of information that you can peruse for getting an installation of everything you will need. The CEO, <a class="reference external" href="https://www.continuum.io/leadership">Travis Oliphant</a>, is widely credited for molding <a class="reference external" href="http://python.org">Python</a> into a computational language through his development of <a class="reference external" href="http://numpy.org">Numpy</a>, which became the basis for so much more. While arguments are sometimes made that using a <a class="reference external" href="https://www.continuum.io">Continuum Analytics</a> is insufficiently &quot;pure&quot; for the open source community, I strongly disagree. <a class="footnote-reference" href="#id4" id="id2">[1]</a></p>
 <p>Other available distributions, that I don't personally have experience with, are</p>
 <p>1. <a class="reference external" href="http://www.activestate.com/activepython/downloads">Active State Python</a>
 is a Commercial distribution with a &quot;community edition&quot;. Active State is a solid supporter of the broader community by being a sponsor of the <a class="reference external" href="https://www.python.org/psf/sponsorship/sponsors/">Python Software Foundation</a>.</p>
@@ -181,16 +181,22 @@ I'm not a fan of this as it is still not using Python 3. Due to inertia and some
 <p>The big argument about open source software is that &quot;anybody&quot; can embed code in the software, risking the security of your systems.</p>
 <p>Yup. That's true. However, it's also irrelevant. Here's why. Every single unix system contains open source software on it. Yes, that includes the Mac, which comes with an old underwhelming version of <a class="reference external" href="http://python.org">Python</a>. <a class="reference external" href="http://www.forbes.com/sites/gordonkelly/2015/04/05/open-source-microsoft-windows/#66c7ed963628">Windows is gradually becoming more open source</a> as well. Why? Because over time we've begun to realize that <a class="reference external" href="http://www.forbes.com/sites/gordonkelly/2014/04/28/microsoft-races-to-fix-massive-internet-explorer-hack-no-fix-for-windows-xp-leaves-1-in-4-pcs-exposed/#1189788831a2">closed source software is more vulnerable than open source software</a> because vulnerabilities are found faster, and there are more good guys looking than bad guys. The beauty in open source software is that you, the user, can look for vulnerabilities yourself. You may not be qualified, but surely your IT person is (unlikely, but they often act that way by espousing security mantras that have been refuted.).</p>
 <p><em>What about the risk of foreign nationals embedding code in the software?</em> Well, couldn't that be happening to Windows/MacOS/Linux right now? Do you think they don't have programmers oversees working on their operating systems? Call tech support and find out. Commercial packages that are core also have foreign nationals working on them, certainly many on H1B visas. This is also a red herring. The problem with security is it's never as easy as the security people try to tell you it is with platitudes of rules and more rules. Most real vulnerabilities are of the human type, <a class="reference external" href="https://hbr.org/2016/09/the-biggest-cybersecurity-threats-are-inside-your-company">phishing</a> for example. It's getting the door ajar that is the real threat.</p>
-<p>So, I'm not an expert in Cyber security, but security people shouldn't make it easy for me to prove them wrong. However, this all won't convince them. So, instead, point out that there is a process already in place to get open source software in a secure environment: <a class="reference external" href="http://www.activestate.com/government">get commercial support</a>. Further, you can have them contact other SCIFs and ask them how they are using open source. It's inconceivable that <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/ale3d">Lawrence Livermore is writing open source software</a> and not using it where it needs to be used.</p>
+<p>So, I'm not an expert in Cyber security, but security people shouldn't make it easy for me to prove them wrong. However, this document won't convince them. So, instead, point out that there is a process already in place to get open source software in a secure environment: <a class="reference external" href="http://www.activestate.com/government">get commercial support</a>. Further, you can have them contact other SCIFs and ask them how they are using open source. It's inconceivable that <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/ale3d">Lawrence Livermore is writing open source software</a> and not using it where it needs to be used. What may actually convince some of them is that <a class="reference external" href="https://sector.ca/tackling-open-sources-security-problem/">open source software is actually safer than commercial software</a>. This is illustrated by the <a class="reference external" href="https://na-sjf.marketo.com/rs/157-LQW-289/images/2014-Coverity-Scan-Report.pdf">Coverity Scan report</a> which shows that <em>Open source software had a defect density of 0.61, compared to commercial software’s 0.76</em>. <a class="footnote-reference" href="#id5" id="id3">[2]</a></p>
 <p>That said, there are <a class="reference external" href="http://softwareengineering.stackexchange.com/questions/206558/why-does-the-us-government-disallow-dynamic-languages-for-secure-projects">valid reasons</a> not to use a dynamic language for code that must be secure. However, one has to ask: is this what's really going on? Are you using Python for analysis, or for delivering code? Those are two different issues that very well may lead to two different security responses.</p>
 </div>
 <div class="section" id="questions">
 <h3>Questions?</h3>
 <p>These tips only get better with your feedback, so please provide it below.</p>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>The <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a> distribution you install is completely open source. They constantly feed their software into the open source community, for free, and are unbelievably good citizens in the free software community. Keep in mind: the people doing this work need to eat. They've somehow managed to find a way to give away the product, even provide support for it, and get paid for yet a higher level of service. From my experience, they must flying in to your city, stopping by your MD's waiting room, and helping you code while you wait. I don't know what they do, but they do it, so I don't but this argument. A more eloquent argument is provided by <a class="reference external" href="https://jakevdp.github.io">Jake VanderPlas</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td><a class="reference external" href="https://sector.ca/tackling-open-sources-security-problem/">Tackling Open Source's Security Problem.</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -264,6 +270,11 @@ I'm not a fan of this as it is still not using Python 3. Due to inertia and some
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
+                        <a href="http://josephcslater.github.io/tag/programming.html">
+                            Programming
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
                         <a href="http://josephcslater.github.io/tag/jupyter.html">
                             Jupyter
                         </a>
@@ -278,14 +289,9 @@ I'm not a fan of this as it is still not using Python 3. Due to inertia and some
                             Scipy
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/programming.html">
-                            Programming
-                        </a>
-                    </li>
                     <li class="list-group-item tag-3">
-                        <a href="http://josephcslater.github.io/tag/octave.html">
-                            Octave
+                        <a href="http://josephcslater.github.io/tag/matlab.html">
+                            Matlab
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -294,13 +300,13 @@ I'm not a fan of this as it is still not using Python 3. Due to inertia and some
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="http://josephcslater.github.io/tag/matlab.html">
-                            Matlab
+                        <a href="http://josephcslater.github.io/tag/octave.html">
+                            Octave
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/step-response.html">
-                            Step Response
+                        <a href="http://josephcslater.github.io/tag/mathematics.html">
+                            Mathematics
                         </a>
                     </li>
                 </ul>
