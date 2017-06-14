@@ -121,16 +121,17 @@ Inside the Ivory Tower            </a>
 looking at <a class="reference external" href="http://scipy.github.io/old-wiki/pages/NumPy_for_Matlab_Users.html">Numpy for Matlab
 Users</a>
 before reading this. The following is simply a brief demonstration of
-using Python 3.5 for eigenanalysis. A few things to note:</p>
+using Python 3.5 (or greater) for eigenanalysis. The original notebook is
+available at <a class="reference external" href="https://github.com/josephcslater/iPythonExamples">my github examples repository</a>. A few things to note:</p>
 <ol class="arabic simple">
 <li>If you use
 an earlier version of Python (than 3.5), the <tt class="docutils literal">&#64;</tt> operator isn't
-defined yet. To perform matrix multiplication, you neet to type use
+defined &quot;yet&quot;. To perform matrix multiplication, you need to type use
 <tt class="docutils literal">numpy.dot(A,B)</tt> in place of <tt class="docutils literal">A&#64;B</tt>. That will require you to
 start with <tt class="docutils literal">import numpy</tt> before doing any of this.</li>
 <li>I demonstrate for a
 non-symmetric matrix. For a symmetric matrix, you should use
-<tt class="docutils literal">eigh</tt>. The <em>H</em> in <tt class="docutils literal">eigh</tt> means <em>Hermetian</em>, and is a more
+<tt class="docutils literal">eigh</tt>. The <em>h</em> in <tt class="docutils literal">eigh</tt> means <em>Hermetian</em>, and is a more
 general definition than symmetric. If you don't deal with complex
 valued matrices, it's irrelevant to you. Using <tt class="docutils literal">eigh</tt> leverages
 the properties of Hermetian matrices in the solution process
@@ -138,11 +139,11 @@ resulting in potentially faster <em>and</em> more accurate results than
 the more general <tt class="docutils literal">eig</tt> code. For a small matrix, this is
 irrelevant, but it becomes important for more substantial calculations.</li>
 <li>I
-show a couple of tips later that matter for later matrices (avoiding the
+show a couple of tips later that matter for larger matrices (avoiding the
 inverse). Be aware of them. Why may or may not matter to you, but when
 you get to big or sensitive problems, they do.</li>
 </ol>
-<p>The first thing I need to do is import a couple of tools (scipy, and its
+<p>The first thing I need to do is import a couple of tools (Scipy, and its
 linear algebra package).</p>
 <pre class="code python literal-block">
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
@@ -154,9 +155,9 @@ linear algebra package).</p>
 A r = r v
 \end{equation*}
 </div>
-<p>where A is the matrix, and <span class="math">\(r\)</span> represents the right eigenvectors,
+<p>where <span class="math">\(A\)</span> is the matrix, and <span class="math">\(r\)</span> represents the right eigenvectors,
 while <span class="math">\(v\)</span> represents the eigenvalues. We are also going to obtain
-the left eigenvalues as well, for later use.</p>
+the left eigenvalues as well for later use.</p>
 <pre class="code python literal-block">
 <span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>  <span class="c1"># Defining the array (I'm avoiding using the matrix class)</span>
 <span class="c1"># It's a personal preference, and I'm still not locked into it myself.</span>
@@ -177,7 +178,7 @@ the left eigenvalues as well, for later use.</p>
  [-0.52532209 -0.08675134 -0.81649658]
  [-0.8186735   0.61232756  0.40824829]]
 </pre>
-<p>These should be identical based on the eigen equation. They are to the
+<p>These should be identical based on the eigen-equation. They are to the
 default precision.</p>
 <pre class="code python literal-block">
 <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -191,12 +192,12 @@ default precision.</p>
  [ -2.49800181e-15  -1.11684397e+00  -2.77555756e-17]
  [  2.79947848e-15   4.62304004e-16   9.86076132e-32]]
 </pre>
-<p>In reality, one should never ever use the inverse function, unless the
+<p>In reality, one should never ever use the inverse function unless the
 actual answer you want is the inverse itself (which I've never seen for
 a real problem). What you typically want is the inverse of a matrix
-times another matrix or vector, which is the solution to a linear
+times another matrix or vector- which is the solution to a linear
 algebra problem. We can use the <tt class="docutils literal">solve</tt> function to obtain this. This
-is arguably no better, but illustrative. For a larger problem, the
+is arguably no better, but it is illustrative. For a larger problem, the
 benefit is easier to demonstrate.</p>
 <pre class="code python literal-block">
 <span class="n">la</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="nd">&#64;r</span>
@@ -216,7 +217,7 @@ array([[ 1.+0.j,  2.+0.j,  3.+0.j],
        [ 4.+0.j,  5.+0.j,  6.+0.j],
        [ 7.+0.j,  8.+0.j,  9.+0.j]])
 </pre>
-<p>Avoiding the inverse is a bit unfomfortable in this case, but a bit of
+<p>Avoiding the inverse is a bit uncomfortable in this case, but a bit of
 doodling yields that</p>
 <div class="math">
 \begin{equation*}
@@ -375,13 +376,13 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/numpy.html">
-                            Numpy
+                        <a href="http://josephcslater.github.io/tag/sympy.html">
+                            SymPy
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/programming.html">
-                            Programming
+                        <a href="http://josephcslater.github.io/tag/numpy.html">
+                            Numpy
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -390,8 +391,8 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://josephcslater.github.io/tag/sympy.html">
-                            Sympy
+                        <a href="http://josephcslater.github.io/tag/programming.html">
+                            Programming
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -400,8 +401,8 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="http://josephcslater.github.io/tag/matlab.html">
-                            Matlab
+                        <a href="http://josephcslater.github.io/tag/differential-equations.html">
+                            Differential Equations
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -414,9 +415,9 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
                             Octave
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://josephcslater.github.io/tag/mathematics.html">
-                            Mathematics
+                    <li class="list-group-item tag-3">
+                        <a href="http://josephcslater.github.io/tag/matlab.html">
+                            Matlab
                         </a>
                     </li>
                 </ul>
