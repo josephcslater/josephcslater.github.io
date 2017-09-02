@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>My Journey to Python - Inside the Ivory Tower</title>
+    <title>Why Matlab Users Should be Moving to Python - Inside the Ivory Tower</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
 
         <meta property="og:site_name" content="Inside the Ivory Tower" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="My Journey to Python"/>
+        <meta property="og:title" content="Why Matlab Users Should be Moving to Python"/>
         <meta property="og:url" content="https://josephcslater.github.io/moving-to-python.html"/>
         <meta property="og:description" content="Why I&#39;m moving to Python after 25 years of Matlab"/>
         <meta property="article:published_time" content="2015-06-08" />
@@ -86,8 +86,8 @@ Inside the Ivory Tower            </a>
                 <h1>
                     <a href="https://josephcslater.github.io/moving-to-python.html"
                        rel="bookmark"
-                       title="Permalink to My Journey to Python">
-                        My Journey to Python
+                       title="Permalink to Why Matlab Users Should be Moving to Python">
+                        Why Matlab Users Should be Moving to Python
                     </a>
                 </h1>
             </header>
@@ -117,28 +117,29 @@ Inside the Ivory Tower            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Back in 1989, when I first entered graduate school, I knew a handful of
+                <p>Back in 1989, when I first entered graduate school as an engineering student, I knew a handful of
 languages to some modest degree. For the sake of computations, I knew Basic and
-Fortran. During that first year I was assigned a project that required
+Fortran 77 (the horror!). During that first year I was assigned a project that required
 substantial programming (for my skill set at the time). This project was almost
 complete with about an hour to go before the deadline. Unfortunately, this was
 the days of floppy drives (it was not a personally owned PC). I accidentally
 stepped on the switch on a power strip and damaged the files beyond my
-capability to recover them. With about an hour to go a fellow student, Jeff
+capability to recover them.</p>
+<p>With about an hour to go a fellow graduate student, Jeff
 Umland- now of JPL, suggested that perhaps I should heed his advice and use
-Matlab. <em>The project would be simple</em> in <a class="reference external" href="http://www.mathworks.com">Matlab</a> according to him. There was
-certainly no way I could complete the project in Fortran. So, with him
-responding to my shouted out questions (learning under fire) I started  using
-<a class="reference external" href="http://www.mathworks.com">Matlab</a>, and I finished with time to spare. That was the last time I started a
-project using Fortran. Fortran has its place, but it has been clear to me ever
-since that for most problems facing me, time of development far exceeded time of
-program execution. So, the cost of using an interpreted language was well worth
-the price in time when development time was greatly reduced.</p>
+<a class="reference external" href="http://www.mathworks.com">Matlab</a>. <a class="footnote-reference" href="#id3" id="id1">[1]</a> <em>The project would be simple</em> in <a class="reference external" href="http://www.mathworks.com">Matlab</a> according to him. There was
+certainly no way I could complete the project in Fortran 77 in the remaining time. So, with him
+responding to my shouted out questions (learning under fire - ''How do you write a loop?'') I started  using
+<a class="reference external" href="http://www.mathworks.com">Matlab</a> and finished with time to spare. That was the last time I started a
+project using Fortran. Fortran has its place (although it seems to be slowly fading away), but it has been clear to me ever
+since that for most problems facing me, and most engineers, time of development far exceeds time of
+program execution. When it doesn't, your prototype in a scriptable language is still not a bad first start. So, the speed cost of using an interpreted language was well worth
+the savings in development time.</p>
 <p>Unfortunately, this can build some bad habits that I am still working
 through. Nevertheless, I continued to learn <a class="reference external" href="http://www.mathworks.com">Matlab</a> and later wrote the
 <a class="reference external" href="http://www.vtoolbox.com">Engineering Vibration Toolbox</a> in <a class="reference external" href="http://www.mathworks.com">Matlab</a>. I immediately noticed that
 in <a class="reference external" href="http://www.mathworks.com">Matlab</a> each function is the name of a file, an once that file is in
-the path, you can have a clash of names. Over the years many of my
+the path, you can have a clash of names (<a class="reference external" href="http://www.python-course.eu/namespaces.php">namespaces</a> are a major improvement with <a class="reference external" href="http://www.python.org">Python</a>). Over the years many of my
 programs have been broken because of the shared name space, which
 continues to grow. Names such as <em>addpath</em>, <em>spectrum</em>, <em>plot3</em>,
 etc. have been replace by Mathworks m-files. Further, when I
@@ -146,47 +147,47 @@ distribute a code, I have to be concerned about their
 clashes. Fortunately I was savvy enough to effectively create my own
 name space for the <a class="reference external" href="http://www.vtoolbox.com">Engineering Vibration Toolbox</a> to name each and
 every file <strong>vtb#_#.m</strong>, hoping that my starting them with <em>vtb</em> they
-would remain safe. That seems to have stood the test of time.</p>
-<p>So, although the names stood the test of time, and I noticed many of
-my programs for personal use did not. I've become further
+would remain safe. That seems to have stood the test of time, but no function has a name that can be reasonably guessed. They just have ugly serial numbers.</p>
+<p>So, although the names stood the test of time,  many of
+my programs written for personal (not for distribution) use did not. I've become further
 disenfranchised by the lack of ability for me to truly own my own
-codes. Without a Matlab license, until <em>Octave</em> came around, your
-M-files were your own, but ot little value if you didn't continue to
-pay the MathWorks. I appreciate the effort that they put into writing
-Matlab, but I put time into my code as well, and I cannot afford to be
-tied to them.</p>
-<p>As you might guess, I  later switched to <a class="reference external" href="http://www.octave.org">Octave</a>. Ironically, what I
-liked the best about Octave initially was that it wasn't a <a class="reference external" href="http://www.mathworks.com">Matlab</a>
-clone. As time has moved on the author, John Eaton, has acquiesced to
+codes. Without a <a class="reference external" href="http://www.mathworks.com">Matlab</a> license, until <em>Octave</em> came around, your
+M-files were of little value if you didn't continue to
+pay the MathWorks for a license. I appreciate the effort that they put into writing
+<a class="reference external" href="http://www.mathworks.com">Matlab</a>, but I put time into my code as well and I am not willing to be hostage to them. My code doesn't exist without me paying the MathWorks to use it. That means it's not truly my code.</p>
+<p>As some might guess, I later switched to <a class="reference external" href="http://www.octave.org">Octave</a>. Ironically, what I
+liked the best about <a class="reference external" href="http://www.octave.org">Octave</a> initially was that it wasn't a <a class="reference external" href="http://www.mathworks.com">Matlab</a>
+clone, but nominally equivalent for most tasks. As time has progressed the author, John Eaton, has acquiesced to
 public pleading and moved further and further towards <a class="reference external" href="http://www.mathworks.com">Matlab</a>
-compatibility <a class="footnote-reference" href="#id2" id="id1">[1]</a>. While I respect why he made the move, for my
+compatibility. <a class="footnote-reference" href="#id4" id="id2">[2]</a> While I respect why he made the move, for my
 interests it downgraded <a class="reference external" href="http://www.octave.org">Octave</a>, although
-I'm likely a minority.</p>
+I'm likely a minority, but it is likely the right decision for the <a class="reference external" href="http://www.octave.org">Octave</a> ecosystem.</p>
 <p>I still love <a class="reference external" href="http://www.octave.org">Octave</a> and have great respect for the John (he is
 certainly a much more accomplished programmer), but I
-noticed <a class="reference external" href="http://www.python.org">Python</a> and that it seemed to really be taking programming to
-another level. The add-on packages are extensive. The language isn't
+noticed <a class="reference external" href="http://www.python.org">Python</a> and that it seemed to really be taking scientific programming to
+another level after <a class="reference external" href="https://en.wikipedia.org/wiki/NumPy">Travis Oliphant created NumPy</a>. The add-on packages for scientific programming are extensive. The language isn't
 designed to be purely for computation/data manipulation, but in many
-respects, it's better, IMHO. Instead of rehashing, I'll redirect you to
+respects, it's better, IMHO. Instead of rehashing arguments, I'll redirect you to
 the opinions of <a class="reference external" href="http://www.pyzo.org/python_vs_matlab.html">Pyzo</a>, <a class="reference external" href="https://www.stat.washington.edu/~hoytak/blog/whypython.html">Hoyt Koepke</a>, and
-<a class="reference external" href="http://phillipmfeldman.org/Python/Advantages_of_Python_Over_Matlab.html">Phillip M. Feldman</a>. I
-personally love the readability of the code. It just looks good, and
-that prevents mistakes. I've attempted Object Oriented Programming in
-<a class="reference external" href="http://www.mathworks.com">Matlab</a> (reinvented it myself given my lack of formal training) for a purpose. After looking at <a class="reference external" href="http://www.python.org">Python</a>,
-I wish I never had. <a class="reference external" href="http://www.mathworks.com">Matlab</a>, and by analogy <a class="reference external" href="http://www.octave.org">Octave</a>, are somewhat
-limiting languages compared to <a class="reference external" href="http://www.python.org">Python</a>. They have served me well.
-I will likely use them again in the future. However, <a class="reference external" href="http://www.python.org">Python</a> has empowered
+<a class="reference external" href="http://phillipmfeldman.org/Python/Advantages_of_Python_Over_Matlab.html">Phillip M. Feldman</a>. Further, as scientific support for <a class="reference external" href="http://www.python.org">Python</a> continues, the speed penalty compared to a compiled language is <a class="reference external" href="https://www.ibm.com/developerworks/community/blogs/jfp/entry/A_Comparison_Of_C_Julia_Python_Numba_Cython_Scipy_and_BLAS_on_LU_Factorization?lang=en">disappearing</a>.  I
+personally love the readability of the code, and that prevents mistakes. It just looks good. <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> and other standards can seem onerous to new users, but in time they prove their value in generating code that is more easily readable and debuggable. Installing scientific tools is easy with modern distributions documented at <a class="reference external" href="https://www.numfocus.org">NumFOCUS</a>, and other packages (including my own) can be easily installed from <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a>  using <a class="reference external" href="https://pip.pypa.io/en/stable/">PIP</a>.</p>
+<p>I will likely use them (<a class="reference external" href="http://www.mathworks.com">Matlab</a>/<a class="reference external" href="http://www.octave.org">Octave</a>) again in the future. However, <a class="reference external" href="http://www.python.org">Python</a> has empowered
 me to generate more capable code than I ever could in <a class="reference external" href="http://www.mathworks.com">Matlab</a> due to
-Matlab's limitations.</p>
-<p>Oh, and I made this website in <a class="reference external" href="http://www.python.org">Python</a>, using <a class="reference external" href="http://getpelican.com/">Pelican</a>, and writing
+<a class="reference external" href="http://www.mathworks.com">Matlab</a>'s limitations and focus. <a class="reference external" href="http://www.python.org">Python</a>'s malleability for such a wide variety of tasks has made it the <a class="reference external" href="http://www.bestprogramminglanguagefor.me/why-learn-python">best single language</a> to learn, IMHO. It will often not be the best language for a single task. However, it is good enough often enough that if you are going to learn a single language, <a class="reference external" href="http://www.python.org">Python</a> is your best bet for your multi-tool. If you have time to learn multiple languages, and have specific needs, by all means grow your language skills as necessary. However, if you spend little time programming, <a class="reference external" href="http://www.python.org">Python</a> is likely the most power you can get for the time you have available.</p>
+<p>Incidentally, and I made this blog in <a class="reference external" href="http://www.python.org">Python</a>, using <a class="reference external" href="http://getpelican.com/">Pelican</a>, writing
 the source files in <a class="reference external" href="http://docutils.sourceforge.net/rst.html">ReST</a>.</p>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Ironically, early on he expressed clear reluctance on my part
-to convert to the standards of the then substantially differing
-Octave help system. I think he missed when I came to agree with
-him about that and other things!</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>I have always been a bit stubborn in my opinion. I think I'd made some positive strides as I've grown older.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Ironically, early on he observed clear reluctance on my part
+to convert to the <a class="reference external" href="http://www.octave.org">Octave</a> standards of
+<a class="reference external" href="http://www.octave.org">Octave</a>'s help system compared to <a class="reference external" href="http://www.mathworks.com">Matlab</a>. I think he missed the moment when I came to agree with him about that and other things! I'm sorry!</td></tr>
 </tbody>
 </table>
 
@@ -231,7 +232,7 @@ him about that and other things!</td></tr>
 <div id="aboutme">
     <p>
         <strong>About Joseph C. Slater</strong><br/>
-        I am chair and a professor of mechanical and materials engineering at Wright State University. I've spent some time working in employer relations, trying to bridge the gap between higher education and employers, and learned about how poorly we understand  each other. I continue to perform research, service and teaching, including substantial programming. Those activities dominate this space.
+        Joseph C. Slater is chair and a professor of mechanical and materials engineering at Wright State University. I've spent some time working in employer relations, trying to bridge the gap between higher education and employers, and learned about how poorly we understand  each other. I continue to perform research, service and teaching, including substantial programming. Those activities dominate this space.
     </p>
 </div>
 <section class="well well-sm">
@@ -263,11 +264,6 @@ him about that and other things!</td></tr>
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="https://josephcslater.github.io/tag/programming.html">
-                            Programming
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="https://josephcslater.github.io/tag/sympy.html">
                             SymPy
                         </a>
@@ -277,9 +273,14 @@ him about that and other things!</td></tr>
                             Scipy
                         </a>
                     </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://josephcslater.github.io/tag/programming.html">
+                            Programming
+                        </a>
+                    </li>
                     <li class="list-group-item tag-3">
-                        <a href="https://josephcslater.github.io/tag/octave.html">
-                            Octave
+                        <a href="https://josephcslater.github.io/tag/matlab.html">
+                            Matlab
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -293,8 +294,8 @@ him about that and other things!</td></tr>
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="https://josephcslater.github.io/tag/matlab.html">
-                            Matlab
+                        <a href="https://josephcslater.github.io/tag/octave.html">
+                            Octave
                         </a>
                     </li>
                 </ul>
