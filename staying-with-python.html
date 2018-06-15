@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Why Matlab Users Should be Moving to Python - Inside the Ivory Tower</title>
+    <title>Why I Moved to Python From Proprietary Solutions and Will Not Go Back - Inside the Ivory Tower</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,24 +9,22 @@
 
 
 
-<link rel="canonical" href="http://josephcslater.github.io/moving-to-python.html">
+<link rel="canonical" href="http://josephcslater.github.io/staying-with-python.html">
 
         <meta name="author" content="Joseph C. Slater" />
-        <meta name="keywords" content="Python,Scipy,Numpy,Octave,Matlab" />
-        <meta name="description" content="Why I&#39;m moving to Python after 25 years of Matlab" />
+        <meta name="keywords" content="Python,development,open source" />
+        <meta name="description" content="Why open source computing is the future of engineering computing" />
 
         <meta property="og:site_name" content="Inside the Ivory Tower" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Why Matlab Users Should be Moving to Python"/>
-        <meta property="og:url" content="http://josephcslater.github.io/moving-to-python.html"/>
-        <meta property="og:description" content="Why I&#39;m moving to Python after 25 years of Matlab"/>
-        <meta property="article:published_time" content="2015-06-08" />
+        <meta property="og:title" content="Why I Moved to Python From Proprietary Solutions and Will Not Go Back"/>
+        <meta property="og:url" content="http://josephcslater.github.io/staying-with-python.html"/>
+        <meta property="og:description" content="Why open source computing is the future of engineering computing"/>
+        <meta property="article:published_time" content="2018-03-15" />
             <meta property="article:section" content="Programming" />
             <meta property="article:tag" content="Python" />
-            <meta property="article:tag" content="Scipy" />
-            <meta property="article:tag" content="Numpy" />
-            <meta property="article:tag" content="Octave" />
-            <meta property="article:tag" content="Matlab" />
+            <meta property="article:tag" content="development" />
+            <meta property="article:tag" content="open source" />
             <meta property="article:author" content="Joseph C. Slater" />
 
 
@@ -87,10 +85,10 @@ Inside the Ivory Tower            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://josephcslater.github.io/moving-to-python.html"
+                    <a href="http://josephcslater.github.io/staying-with-python.html"
                        rel="bookmark"
-                       title="Permalink to Why Matlab Users Should be Moving to Python">
-                        Why Matlab Users Should be Moving to Python
+                       title="Permalink to Why I Moved to Python From Proprietary Solutions and Will Not Go Back">
+                        Why I Moved to Python From Proprietary Solutions and Will Not Go Back
                     </a>
                 </h1>
             </header>
@@ -100,7 +98,7 @@ Inside the Ivory Tower            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-06-08T23:21:00-04:00"> Mon 08 June 2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-03-15T23:21:00-04:00"> Thu 15 March 2018</time>
     </span>
 
 
@@ -110,27 +108,45 @@ Inside the Ivory Tower            </a>
 <span class="label label-default">Tags</span>
 	<a href="http://josephcslater.github.io/tag/python.html">Python</a>
         /
-	<a href="http://josephcslater.github.io/tag/scipy.html">Scipy</a>
+	<a href="http://josephcslater.github.io/tag/development.html">development</a>
         /
-	<a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
-        /
-	<a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
-        /
-	<a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
+	<a href="http://josephcslater.github.io/tag/open-source.html">open source</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Back in 1989, when I first entered graduate school as an engineering student, I knew a handful of
-languages to some modest degree. For the sake of computations, I knew Basic and
-Fortran 77 (the horror!). During that first year I was assigned a project that required
-substantial programming (for my skill set at the time). This project was almost
-complete with about an hour to go before the deadline. Unfortunately, this was
-the days of floppy drives (it was not a personally owned PC). I accidentally
-stepped on the switch on a power strip and damaged the files beyond my
-capability to recover them.</p>
+                <p>Three years ago I wrote my first ever blog entry:
+<a class="reference external" href="http://josephcslater.github.io/moving-to-python.html">Why Matlab Users Should be Moving to Python</a>. It opened with:</p>
+<blockquote>
+Back in 1989, when I first entered graduate school as an engineering
+student, I knew a handful of languages to some modest degree. For the sake
+of computations, I knew Basic and Fortran 77 (the horror!).</blockquote>
+<p>My knowledge of programming was elementary by the standards of the day, but I
+did fancy myself as relatively capable. Of course, I made that judgement based on the company I kept, and <a class="reference external" href="http://www.mathworks.com">Matlab</a> was plenty powerful to perform the tasks we
+needed (still is- even more so). Amongst engineers in my field I was close to the top in &quot;getting stuff
+done&quot; computationally and still am. However, that came at the price of not developing the next level of high-power computing skills and I lived for 25 years in the golden cage of a single commercial software solution. If they didn't have it, I didn't know about it. It continues to grow and thrive, but there is far more growing and thriving that that singular environment.</p>
+<p>As a result <strong>I'm doubling down</strong> on open source, with <a class="reference external" href="https://www.scipy.org/install.html">Python</a> as my primary tool. Why?</p>
+<ul class="simple">
+<li>I'm an engineer. My time will always be focused on engineering and the time to create great C or Fortran that is parallelized for a particular problem won't happen unless it's necessary. It's a lot of work- a task in itself. If I need to, I'll do it, but it's not a great starting point because the time spent programming exceeds time spent executing code far too often. Code should be written as minimally as possible to get the job done. <a class="reference external" href="https://blog.codinghorror.com/the-best-code-is-no-code-at-all/">The best code is no code at all</a>. C and Fortran are not concise and require details that interpreted languages do not. There is a benefit to those details, but most of the time they bear little real fruit.</li>
+<li><a class="reference external" href="https://blog.codinghorror.com/the-best-code-is-no-code-at-all/">The best code is no code at all</a>. <a class="reference external" href="http://www.skrenta.com/2007/05/code_is_our_enemy.html">Code is our enemy</a>. That means libraries, libraries, libraries, or in <a class="reference external" href="https://www.scipy.org/install.html">Python</a> languages <a class="reference external" href="https://pypi.python.org/pypi">packages</a> (soon to be <a class="reference external" href="https://pypi.org/">here</a>). Python had 135,356 projects at the moment I wrote this, and growing. The open source nature, amongst other benefits, has made Python the place to share your package. As a user, that means we get to leverage all of this instead of writing the code all over again. Matthew Rocklin's blog opens with an outstanding observation: <a class="reference external" href="https://matthewrocklin.com/">Programming often limits research more than fundamental domain challenges.</a>. The <a class="reference external" href="https://www.scipy.org/install.html">Python</a> ecosystem continues to grow and be put together to minimize how much coding users have to do themselves.</li>
+<li>Open source means people gladly help you do your work. When you make your project open source and post it, as I do on <a class="reference external" href="https://github.com/">GitHub</a>, and then announce it, you might think &quot;oh, I'm just going to embarrass myself.&quot; <strong>False!</strong> I will posit that humility is an effective way to grow. Setting that aside, what you will find is others who are interested in your work. They won't usually take over and do it for you, but sometimes they will as Raphael Timbó did with the <a class="reference external" href="https://github.com/vibrationtoolbox/vibration_toolbox">Vibration Toolbox for Python</a>. <a class="footnote-reference" href="#id4" id="id1">[1]</a> Short of that, they will provide fixes, highlight deficiencies, provide documentation, etc. Many will test your code for you, many will provide programing advice to improve your programing skills.</li>
+</ul>
+<p><strong>Getting things done takes priority over writing great code.</strong> Unfortunately,
+this results in a lot of code, often poorly documented, with limited
+reusability (especially by others). Further, this habit creates a culture of
+isolation, where I and hundreds of others, perhaps thousands, have rewritten
+the same code for nearly the same purpose, without thousands if not tens of
+thousands of hours wasted and who knows how many incorrect results impacting
+designs. The argument for using commercial code is usually something like: *
+well, let experts write code for you. They validate it, and you can trust it as
+the best that can be.* Well, that's simply wrong.</p>
+<ul class="simple">
+<li>First, consider the warrantee you agree to when you purchase and use commercial code. They don't take any responsibility for the code being fit for your purpose. <strong>That's on you!</strong></li>
+<li>Second, major corporations validate commercial code then validate it more. Then, they revalidate it. They take the attitude <em>trust but verify</em>, which means they don't trust it, but find it more cost effective than writing their own code.</li>
+</ul>
+<p>How do I know this? My job is to know and talk to people in industry regarding research, technology, and our graduates and their preparation. More o, they are writing their own code as the cost savings isn't as grea</p>
 <p>With about an hour to go a fellow graduate student, Jeff
 Umland- now of JPL, suggested that perhaps I should heed his advice and use
-<a class="reference external" href="http://www.mathworks.com">Matlab</a>. <a class="footnote-reference" href="#id3" id="id1">[1]</a> <em>The project would be simple</em> in <a class="reference external" href="http://www.mathworks.com">Matlab</a> according to him. There was
+<a class="reference external" href="http://www.mathworks.com">Matlab</a>. <a class="footnote-reference" href="#id5" id="id2">[2]</a> <em>The project would be simple</em> in <a class="reference external" href="http://www.mathworks.com">Matlab</a> according to him. There was
 certainly no way I could complete the project in Fortran 77 in the remaining time. So, with him
 responding to my shouted out questions (learning under fire - ''How do you write a loop?'') I started  using
 <a class="reference external" href="http://www.mathworks.com">Matlab</a> and finished with time to spare. That was the last time I started a
@@ -162,7 +178,7 @@ pay the MathWorks for a license. I appreciate the effort that they put into writ
 liked the best about <a class="reference external" href="http://www.octave.org">Octave</a> initially was that it wasn't a <a class="reference external" href="http://www.mathworks.com">Matlab</a>
 clone, but nominally equivalent for most tasks. As time has progressed the author, John Eaton, has acquiesced to
 public pleading and moved further and further towards <a class="reference external" href="http://www.mathworks.com">Matlab</a>
-compatibility. <a class="footnote-reference" href="#id4" id="id2">[2]</a> While I respect why he made the move, for my
+compatibility. <a class="footnote-reference" href="#id6" id="id3">[3]</a> While I respect why he made the move, for my
 interests it downgraded <a class="reference external" href="http://www.octave.org">Octave</a>, although
 I'm likely a minority, but it is likely the right decision for the <a class="reference external" href="http://www.octave.org">Octave</a> ecosystem.</p>
 <p>I still love <a class="reference external" href="http://www.octave.org">Octave</a> and have great respect for the John (he is
@@ -179,18 +195,28 @@ me to generate more capable code than I ever could in <a class="reference extern
 <a class="reference external" href="http://www.mathworks.com">Matlab</a>'s limitations and focus. <a class="reference external" href="https://www.scipy.org/install.html">Python</a>'s malleability for such a wide variety of tasks has made it the <a class="reference external" href="http://www.bestprogramminglanguagefor.me/why-learn-python">best single language</a> to learn, IMHO. It will often not be the best language for a single task. However, it is good enough often enough that if you are going to learn a single language, <a class="reference external" href="https://www.scipy.org/install.html">Python</a> is your best bet for your multi-tool. If you have time to learn multiple languages, and have specific needs, by all means grow your language skills as necessary. However, if you spend little time programming, <a class="reference external" href="https://www.scipy.org/install.html">Python</a> is likely the most power you can get for the time you have available.</p>
 <p>Incidentally, and I made this blog in <a class="reference external" href="https://www.scipy.org/install.html">Python</a>, using <a class="reference external" href="http://getpelican.com/">Pelican</a>, writing
 the source files in <a class="reference external" href="http://docutils.sourceforge.net/rst.html">ReST</a>.</p>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>I have always been a bit stubborn in my opinion. I think I'd made some positive strides as I've grown older.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>I have always been a bit stubborn in my opinion. I think I'd made some
+positive strides as I've grown older.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Ironically, early on he observed clear reluctance on my part
 to convert to the <a class="reference external" href="http://www.octave.org">Octave</a> standards of
 <a class="reference external" href="http://www.octave.org">Octave</a>'s help system compared to <a class="reference external" href="http://www.mathworks.com">Matlab</a>. I think he missed the moment when I came to agree with him about that and other things! I'm sorry!</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>In fact, he drove me crazy pushing the project forward so fast that I
+spent extra time working on formulating project objectives and
+priorities. In a few months we had a working release, and the project
+has had thousands of downloads since.</td></tr>
 </tbody>
 </table>
 
@@ -205,8 +231,8 @@ to convert to the <a class="reference external" href="http://www.octave.org">Oct
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'josephcslater'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'moving-to-python';
-                var disqus_url = 'http://josephcslater.github.io/moving-to-python.html';
+                    var disqus_identifier = 'staying-with-python';
+                var disqus_url = 'http://josephcslater.github.io/staying-with-python.html';
 
             var disqus_config = function () {
                 this.language = "en";
