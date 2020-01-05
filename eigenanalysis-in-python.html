@@ -150,8 +150,8 @@ you get to big or sensitive problems, they do.</li>
 <p>The first thing I need to do is import a couple of tools (Scipy, and its
 linear algebra package).</p>
 <pre class="code python literal-block">
-<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
-<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="kn">as</span> <span class="nn">la</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
 </pre>
 <p>We are going to attempt to solve for</p>
 <div class="math">
@@ -165,11 +165,11 @@ the left eigenvalues as well for later use.</p>
 <pre class="code python literal-block">
 <span class="n">A</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>  <span class="c1"># Defining the array (I'm avoiding using the matrix class)</span>
 <span class="c1"># It's a personal preference, and I'm still not locked into it myself.</span>
-<span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">left</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span> <span class="c1"># You can read the help, buy the left eigenvectors don't get created without this.</span>
+<span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">left</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># You can read the help, buy the left eigenvectors don't get created without this.</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>  <span class="c1"># by default, eig puts the eigenvalues in a 1-D array. We will need a diagonal matrix in a moment.</span>
-<span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre>
 <pre class="literal-block">
 [[-0.46454727 -0.88290596  0.40824829]
@@ -185,8 +185,8 @@ the left eigenvalues as well for later use.</p>
 <p>These should be identical based on the eigen-equation. They are to the
 default precision.</p>
 <pre class="code python literal-block">
-<span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">la</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="nd">&#64;A&#64;r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">la</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="nd">&#64;A&#64;r</span><span class="p">)</span>
 </pre>
 <pre class="literal-block">
 [[  1.61168440e+01+0.j   0.00000000e+00+0.j   0.00000000e+00+0.j]
@@ -214,7 +214,7 @@ array([[  1.61168440e+01,   3.05037570e-15,  -4.48960353e-17],
 <p>This is &quot;rebuilding&quot; the original matrix from the eigensolution. Looks
 pretty good.</p>
 <pre class="code python literal-block">
-<span class="n">r</span><span class="nd">&#64;v&#64;la.inv</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="n">r</span><span class="nd">&#64;v&#64;la</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre>
 <pre class="literal-block">
 array([[ 1.+0.j,  2.+0.j,  3.+0.j],
@@ -236,7 +236,7 @@ A B^{-1}  = \left(\left(A B^{-1}\right)^T\right)^T = \left(\left(B^{-1}\right)^T
 </div>
 <p>we can use</p>
 <pre class="code python literal-block">
-<span class="n">r</span><span class="nd">&#64;la.solve</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">v</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">r</span><span class="nd">&#64;la</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">v</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 </pre>
 <pre class="literal-block">
 array([[ 1.+0.j,  2.+0.j,  3.+0.j],
@@ -253,7 +253,7 @@ A^T l = l  v
 <p>Below I lazily obtain the eigenvalues using the left eigenvectors, with
 an inverse.</p>
 <pre class="code python literal-block">
-<span class="n">la</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="nd">&#64;A.T&#64;l</span>
+<span class="n">la</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="nd">&#64;A</span><span class="o">.</span><span class="n">T</span><span class="nd">&#64;l</span>
 </pre>
 <pre class="literal-block">
 array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
@@ -363,7 +363,7 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
 <div id="aboutme">
     <p>
       <strong>About Joseph C. Slater</strong><br/>
-        I am dean and a professor of mechanical engineering at Tennessee Technological University. This blog contains numerous, often unrelated, thoughts I've put together. 
+        Dean and professor of mechanical engineering at Tennessee Technological University. This blog contains numerous, often unrelated, thoughts. I hope they may be of some value to you.
     </p>
 </div><!-- Sidebar -->
 <section class="well well-sm">
@@ -387,13 +387,16 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
       <a href="http://josephcslater.github.io/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
+      <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
+      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
@@ -403,9 +406,6 @@ array([[  1.61168440e+01,   1.77635684e-15,   8.88178420e-16],
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>
