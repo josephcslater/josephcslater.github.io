@@ -1,0 +1,2 @@
+source activate pelican 
+is necessary because mathjax doesn't work with python 3.6 yet. 

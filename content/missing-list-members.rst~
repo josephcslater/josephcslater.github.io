@@ -1,0 +1,185 @@
+
+Using Python to find absent members
+####################################
+
+:date: 2015-06-10 11:21 EDT
+:tags: Python, Pandas, 
+:category: Programming
+:slug: missing-list-members
+:author: Joseph C. Slater
+:summary: Using Python to find absent members
+:Status: published
+
+Recentl,y as part of my professional service activities, I was tasked to
+ask a substantial number of people to register in an online database
+with relevant information. Getting people to do such things can tack
+some coaxing to reach completion. That's well known. However, the time
+consuming part of the task is matching the lists to see who hasn't
+completed registering. This can be a substantial task as I would have
+to manually search for each of the 70 members in what is a rather long
+list (in the thousands). Each search isn't that long, but nobody in my
+team wanted to do all of the searches. It seemed rather barbaric that
+it couldn't be automated. So, after a bit of work, I found that it
+took precisely 4 lines of code in Python. 
+
+.. code-block:: python
+   :linenos:
+
+   # findmissing.py
+   import pandas
+   list1 = pandas.read_csv('list1.csv') # my member database. I care
+                # that they have registered on list2
+   list2 = pandas.read_csv('list2.csv') # list of everyone who has
+                # registered. This includes people not in my member
+                # database. I don't need those people in my output
+   delinquent = list1[~list1['Email'].isin(list2['Email'])] # all data
+                # of people in my member list who have not signed up
+   delinquent(np.array(['Phone', 'Last Name', 'First Name'])) # print
+                # the useful information
+
+
+As you can anticipate, a lot is happening in a very small
+space. However, it's pretty easy if you parse is step by
+step. Admittedly, the last line would be simpler if I did it in
+multiple steps. On the other hand, at least I didn't execute all of
+this in one line of code.
+
+Step 0
+-------
+I simply put the name of my file inside the file so have it. Take my
+block and make a text file with the name ``findmissing.py``. You can
+use another name, but you need to adapt my later instructions. 
+
+Step 1
+-------
+
+We start with the line:
+
+.. code-block:: python
+                
+   import pandas
+
+This imports pandas_,
+the Python_ Data Analysis Library. This enables us to import datafiles
+in comma separated value format very easily, as illustrated in the
+next two lines.
+
+Step 2
+-------
+
+.. code-block:: python
+
+   list1 = pandas.read_csv('list1.csv')
+
+imports the list of members of
+my group. I want to know who in this list is not in the second
+list. Further, I'd like to get all of the information about them. I
+could pull only partial information. I'll explain that in _`Step 5`.
+
+Note that I either have to execute ``findmissing.py`` in the same
+directory (folder) as the files ``list1.csv`` and ``list2.csv``, or I
+need to insert paths to these files. On my computer, the complete path
+(including the filename) is
+``/Users/jslater/Downloads/list1.csv``. You either need to figure this
+out, or just run the script in the same folder.
+
+Don't forget, you
+either have to name your file ``list1.csv`` or modify the code with
+your filename. 
+
+Step 3
+-------
+
+I need to get the database system everyone is registering on to
+export all registrants to a CSV file. This is on *their* end to put
+their data in a file for you. Hopefully they have a method for you to
+do it on your own. If I can filter the before the export,
+without losing any of my people, that's fine. However, it's not
+necessary.
+
+Once I do that, I can import the registrants database with
+
+.. code-block:: python
+
+   list2 = pandas.read_csv('list2.csv')
+
+Note that we have to assure filename and path are
+correct/accommodated.
+
+Step 4
+_______
+
+We have one line left, and that's where all the work is done. Let's do
+this in steps, peeling from the inside out. 
+
+.. code-block:: python
+
+   list2['Email']
+
+One of the columns is named ``Email``. You have to adjust for what you
+think is an appropriate identifier, whether it's a username, social
+security number, phone number, etc. It needs to satisfy 3
+requirements: be reliably correct, be unique, and never be absent.
+
+The result of this snippet is to create a list of all email addresses
+(my chosen identifier) from my registrants list. This lists a bunch of
+people who I don't need to know about.
+
+.. code-block:: python
+
+   isin(list2['Email'])
+
+This is an operator that operates on the stuff passed to it (the stuff
+before the period). It's receiving a list and answering, for each
+member in the list, whether or not that member is in
+``list1['email']``. So,
+
+.. code-block:: python
+   
+   list1['Email'].isin(list2['Email'])
+
+will give me *True* for each member of list1 who is in list 2, and
+*False* otherwise. The
+result is another list, corresponding one-to-one with the members of
+list1. Now recall that we wanted to find out who is **not**
+registered. This is where the ``~`` comes in to play by inverting the
+results of ``isin``.
+
+.. code-block:: python
+   
+   ~list1['Email'].isin(list2['Email'])
+
+will give me a list that has *False* for each member of list1 who is in list 2, and
+*True* otherwise. So, we now have a list that states when it is true
+that a member hasn't signed up.
+
+Step 5
+-------
+
+Now all I need to do is pull out of ``list1`` the information for
+those people who are not registered (the result of the prior step). 
+
+.. code-block:: python
+   
+   list1[~list1['Email'].isin(list2['Email'])]
+
+For the sake of convenience, if I want to do anything more with this,
+I should probably assign it to a variable, such as
+
+.. code-block:: python
+   
+   delinquent = list1[~list1['Email'].isin(list2['Email'])]
+   delinquent(np.array(['Phone', 'Last Name', 'First Name']))
+
+   
+which will list phone numbers for those who haven't registered. ``Phone``
+needs to be the first line header for the phone numbers, along with
+``Last Name`` and ``First Name``.
+
+If this helps you, or if it can be improved, please send me a
+note. 
+   
+
+.. _pandas : http://pandas.pydata.org
+.. _Python : http://www.python.org
+
