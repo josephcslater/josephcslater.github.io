@@ -54,7 +54,6 @@ SOCIAL = (('LinkedIn', 'http://www.linkedin.com/in/JosephCSlater'),
 # https://github.com/danielfrg/pelican-ipynb
 MARKUP = ('md', 'ipynb')
 # print(MARKUP)
-PLUGIN_PATHS = './plugins'
 
 
 # ----------------------
@@ -76,7 +75,8 @@ FOUNDATION_FOOTER_TEXT += 'and <a href="http://foundation.zurb.com/">Zurb '
 FOUNDATION_FOOTER_TEXT += 'Foundation</a>.'
 # Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.'
 FOUNDATION_PYGMENT_THEME = 'fruity'
-PLUGIN_PATHS = ['/Users/jslater/websites/josephcslater/pelican/plugins']
+PLUGIN_PATHS = ["/Users/jslater/Documents/python-dev/plugins"]
+# PLUGIN_PATHS = ['/Users/jslater/websites/josephcslater/pelican/plugins']
 ARTICLE_SAVE_AS = '{slug}.html'
 ARTICLE_URL = '{slug}.html'
 PLUGINS = ['render_math', 'tag_cloud', 'ipynb.markup', 'i18n_subsites']
