@@ -41,7 +41,7 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Website', 'https://josephcslater.github.io/josephcslater/'),
          ('Vibration Testing', 'https://github.com/Vibration-Testing'),
          ('Engineering Vibration Toolbox',
-          'https://github.com/vibrationtoolbox'), )
+         'https://github.com/vibrationtoolbox'),)
 #        ('Jinja2', 'http://jinja.pocoo.org/'),
 #        ('You can modify those links in your config file', '#'),)
 
@@ -54,6 +54,7 @@ SOCIAL = (('LinkedIn', 'http://www.linkedin.com/in/JosephCSlater'),
 # https://github.com/danielfrg/pelican-ipynb
 MARKUP = ('md', 'ipynb')
 # print(MARKUP)
+PLUGIN_PATHS = './plugins'
 
 
 # ----------------------
@@ -75,10 +76,10 @@ FOUNDATION_FOOTER_TEXT += 'and <a href="http://foundation.zurb.com/">Zurb '
 FOUNDATION_FOOTER_TEXT += 'Foundation</a>.'
 # Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.'
 FOUNDATION_PYGMENT_THEME = 'fruity'
-# PLUGIN_PATHS = ['/Users/jslater/websites/josephcslater/pelican/plugins']
+PLUGIN_PATHS = [# "/Users/jslater/websites/josephcslater/josephcslater.github.io/pelican/plugins",
+"/Users/jslater/Documents/python-dev/plugins"]
 ARTICLE_SAVE_AS = '{slug}.html'
 ARTICLE_URL = '{slug}.html'
-PLUGIN_PATHS = ["/Users/jslater/Documents/python-dev/plugins", ]
 PLUGINS = ['render_math', 'tag_cloud', 'ipynb.markup', 'i18n_subsites']
 JINJA_ENVIRONMENT = {
     'extensions': ['jinja2.ext.i18n'],
