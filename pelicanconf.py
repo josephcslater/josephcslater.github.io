@@ -76,7 +76,7 @@ FOUNDATION_FOOTER_TEXT += 'and <a href="http://foundation.zurb.com/">Zurb '
 FOUNDATION_FOOTER_TEXT += 'Foundation</a>.'
 # Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.'
 FOUNDATION_PYGMENT_THEME = 'fruity'
-PLUGIN_PATHS = [# "/Users/jslater/websites/josephcslater/josephcslater.github.io/pelican/plugins",
+PLUGIN_PATHS = ["/Users/jslater/websites/josephcslater/josephcslater.github.io/pelican/plugins",
 "/Users/jslater/Documents/python-dev/plugins"]
 ARTICLE_SAVE_AS = '{slug}.html'
 ARTICLE_URL = '{slug}.html'
@@ -107,7 +107,7 @@ THEME = "/Users/jslater/Documents/python-dev/pelican-themes/pelican-bootstrap3"
 # BOOTSTRAP_THEME =
 # SITELOGO = 'images/JosephSlater8-11-cropped.jpg'
 SITELOGO_SIZE = '60'
-ABOUT_ME = 'Dean and professor of mechanical engineering '
+ABOUT_ME = 'Professor and Dean '
 ABOUT_ME += 'at Tennessee Technological University. This blog contains '
 ABOUT_ME += 'numerous, often unrelated, thoughts. I hope they may be of some '
 ABOUT_ME += 'value to you.'
