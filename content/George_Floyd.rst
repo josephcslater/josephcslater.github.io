@@ -9,6 +9,7 @@ George Floyd
 :Status: published
 
 Dear College of Engineering students, staff, and faculty,
+----------------------------------------------------------
 
 Watching the nation be torn apart is heartbreaking. I have spoken to my
 friends and advisors asking what I should do- what I should communicate.
