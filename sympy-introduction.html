@@ -63,6 +63,9 @@ Inside the Ivory Tower            </a>
                             <a href="http://josephcslater.github.io/category/latex.html">Latex</a>
                         </li>
                         <li >
+                            <a href="http://josephcslater.github.io/category/leadership.html">Leadership</a>
+                        </li>
+                        <li >
                             <a href="http://josephcslater.github.io/category/programming.html">Programming</a>
                         </li>
                         <li class="active">
@@ -136,7 +139,7 @@ repository</a>.</p>
 <p><span class="math">\(y = \frac{x^2\sqrt{3x-2}}{(x+1)^2}\)</span>, find <span class="math">\(\frac{dy}{dx}\)</span></p>
 <pre class="code python literal-block">
 <span class="c1"># Need to define variables as symbolic for sympy to use them.</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 </pre>
 <pre class="code python literal-block">
 <span class="c1"># Define y</span>
@@ -249,9 +252,9 @@ True
 <span class="c1"># To change colors</span>
 <span class="c1"># show = False delays the plot until we can set all of the parameters</span>
 <span class="c1"># legend turns on the legend and uses the labels we have later.</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">((</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">((</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="n">show</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="s1">'blue'</span>
-<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">'$</span><span class="se">\\</span><span class="s1">frac</span><span class="si">{dy}{dx}</span><span class="s1">$'</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">'$</span><span class="se">\\</span><span class="s1">frac{dy}{dx}$'</span>
 <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="s1">'green'</span>
 <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">'$y$'</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -395,19 +398,10 @@ True
       <a href="http://josephcslater.github.io/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
-    </li>
-    <li class="list-group-item tag-2">
       <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
     </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
+    <li class="list-group-item tag-2">
+      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
@@ -415,11 +409,20 @@ True
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
     </li>
-    <li class="list-group-item tag-4">
-      <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://josephcslater.github.io/tag/data.html">Data</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>
     </li>
   </ul>
 </li>
@@ -466,7 +469,7 @@ True
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 Joseph C. Slater
+         <div class="col-xs-10">&copy; 2020 Joseph C. Slater
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
