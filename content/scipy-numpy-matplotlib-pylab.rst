@@ -1,0 +1,226 @@
+
+A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab
+############################################################
+
+:date: 2015-09-18 11:21 EDT
+:tags: Python, SciPy, NumPy, Matplotlib, PyLab
+:category: Programming
+:slug: scipy-numpy-matplotlib-pylab
+:author: Joseph C. Slater
+:summary: A beginners overview to what they are and how they interact.
+:Status: published
+
+
+Whenever someone first begins taking any substantial steps into using
+Python_ for math/science/engineering, they face a confounding situation
+relating the packages SciPy_, NumPy_, Matplotlib_, PyLab_. Everything I
+say here is documented in detail on `SciPy.org <Scipy.org>`__, or
+other places that further digging can uncover. If you want a more in
+depth understanding, that's the place to go. My goal here is to
+clarify what's going on when you look at example programs in terms of
+when to use what package, or more precisely, what steps you can take
+to determine what package/s to use for your purposes.
+
+First, let me point out that many of the codes you will see on the web will
+likely have redundant calls, or will not suite your style or
+needs. In forums where feedback is enabled, you can often hunt for the
+*best* version. Nothing should be taken as gospel while you develop an
+understanding. If something works, well, it works. It 
+may not be the best way for you in the long run, but it is a way that
+will work in the short term.
+
+Instead of an accurate history of development, I'll piece together a
+reasonable assessment of the relative roles.
+
+NumPy_
+------
+NumPy_, the Numerical Python package, forms much of the underlying numerical foundation that
+everything else here relies on. If you don't do
+a lot of sophisticated math, this might just be enough for you. The
+odds are against it simply by the fact you are taking time to read
+this blog. NumPy_ adds N-dimensional array capabilities and some linear
+algebra, Fourier analysis, and random number capabilities. It also
+adds some tools for connecting to compiled languages and applying
+functions to arrays (broadcasting) similar to `Matlab®
+<matlab.com>`__. For a quick overview, a please look at `a table comparing NumPy commands to equivalent Matlab®
+commands <http://mathesaurus.sourceforge.net/matlab-numpy.html>`__. 
+A brief summary: NumPy allows Python to do some substantial
+math. 
+
+.. code-block:: python
+                
+   import numpy as np
+   dir(np)             # This will provide a seemingly overwhelming
+                       # list of the functions of NumPy
+   help(np)            # Help is always available for NumPy
+
+
+Note that when we import a package in this form (``import numpy as
+np``) we are requiring our code to call functions with the lead
+``np.``. For instance
+   
+.. code-block:: python
+
+   import numpy as np
+   np.log2(8)
+
+
+returns :math:`3`, as :math:`2^3=8`. For this form, ``log2(3)`` will return an
+error, as ``log2`` is unknown to Python without the ``np.``. 
+
+We could have, less advisedly, used ``from numpy import *``, which
+means to bring everything in to the top level *name space*. The *name
+space* is simply the available named commands. To illustrate this,
+quit Python, rerun it, and try
+
+.. code-block:: python
+
+   from numpy import *
+   log2(8)
+
+
+which returns :math:`3`. However, ``np.log2(3)`` will no longer work.
+
+Why does Python do all of this (as compared to Matlab®)? It keeps the
+list of available variable names under control, something that can
+falter when more and more functions are defined.
+
+Note that we can also
+
+
+.. code-block:: python
+
+   import numpy as np   
+   help(np.log2)       # a function,
+   help(np.ma)         # or a subpackage within numpy
+
+or
+
+.. code-block:: python
+
+   from numpy import ma # Import only the masked array package
+
+The best practice when coding is to import only what you need. It
+enables codes to start up faster (less time loading libraries) and
+leaves names available for your use as variable names. Further, using
+``import numpy as np`` keeps those NumPy commands separate from your
+workspace. An example that happens in other languages is that ``i =
+sqrt(-1)`` by definition. However, you can write over this with
+``i=1``, perhaps in a loop. Elsewhere, when you go to use ``i`` in an
+expression, it no longer carries the expected value of
+``sqrt(-1)``. The more complicated the code, the more likely this
+becomes.
+
+When working interactively, it is often fine to take a softer
+(expedient) approach and simply ``from np import *``.  
+
+
+SciPy_
+--------
+SciPy_, Scientific Python, adds substantial capabilities to
+NumPy_. For Matlab® users, it's very much like many of the core
+toolboxes. If you ``import scipy as sp``, you have also by default
+imported the core capabilities of NumPy_, making importing NumPy *almost*
+redundant. The 
+
+.. code-block:: python
+                
+   import scipy as sp
+   dir(sp)             # This will provide a seemingly overwhelming
+                       # list of the functions of NumPy
+   help(sp)            # Help is always available for NumPy,
+   help(sp.log2)       # Some NumPy functions are repeated in
+                       # availability from NumPy. This should be
+                       # redundant, but there seems to be some
+                       # exceptions. When in doubt, try it both ways.
+
+*Be aware* that if you ``import scipy as sp``, but don't also ``import numpy
+as np``, you will have to use ``sp.function`` to call ``function``
+from ``numpy``. I've recently come to the conclusion for my needs that
+using ``import numpy as np`` is pointless, and that simply importing
+SciPy's and accessing all of NumPy's capabilities from SciPy is
+simpler and more consistent. 
+
+Matplotlib_
+-----------
+This is the most popular plotting (data visualization) routine package
+for Python. Since this is an introductory document, I won't do
+anything other than suggest you start here. If it doesn't fit your
+needs, you can use a more advanced (and possibly harder to use)
+package. I'm not advocating against them... unless you are new. Start
+here. Many users with Matlab experience will be capable of taking the
+step to using ``import matplotlib.pyplot as plt`` as the commands are
+sufficiently similar to Matlab® that the challenges are modest with
+`Google <google.com>`__ at hand. One unfortunate oddity is that the
+author of Matplotlib, `John Hunter
+<http://jessenoller.com/blog/2012/08/30/rest-in-peace-john-hunter-matplotlib-has-passed-away>`_,
+wrote a substantial amount of computational tools and embedded them
+within Matplotlib. This can provide a bonus, as you don't need to then
+import them from elsewhere. However, they are typically inferior to
+SciPy versions, and so best to be avoided in substantial
+circumstances. The debate about what to do about this overlap
+continues, and although I never knew Dr. Hunter, I sense that he was a
+great enough person to recognize that at this point they should likely
+be deprecated and eventually removed. That is actually a hard thing to
+do, as many codes already rely on these functions, and it would take a
+lot of re-writing/corrections/testing to extricate from everywhere, so
+I empathize with those working towards this.
+
+My advice: If it's in SciPy_, use it from SciPy_.
+
+PyLab_
+-------
+PyLab is actually embedded inside Matplotlib_ and provides a
+*Matlab®-like* experience for the user. It imports portions of Matplotlib_
+and NumPy_. Many examples on the web use it as a simpler
+*Matlab®-like* experience, but it is not recommended anymore as it
+doesn't nurture understanding of Python itself, thus leaving you in a
+limited environment. Of course, you aren't forced to, but it is much
+like a paper box. It is not a bad place to
+start, and can simplify your learning curve, but you may 
+eventually decide that you were better off not using it. It is a
+matter of philosophy, and I'll leave that debate to others. The thing
+to be aware of when using PyLab_ is that it is importing many functions
+directly into the namespace. If you later decide you want to code with
+a cleaner namespace, you are likely to need to change your function
+calls from, for example, ``linspace`` to ``sp.linspace``.
+
+
+My time is running out, so my conclusion will have to wait. However,
+hopefully this gives you some idea of how these pieces fit together,
+and now you can understand a bit of how these code snippets you see on
+the internet  behave. 
+
+Suggested Introductions
+------------------------------
+
+This can be an overwhelming amount of material, so I suggest skimming
+for awareness (and an occasional refresher), then referencing as
+needed. Sample codes/notebooks are certainly an easier way to get
+started than trying to write code from scratch. 
+
+* `A Brief Introduction to SciPy, NumPy, Matplotlib, and PyLab
+  <https://scipy-lectures.github.io/intro/intro.html>`_
+* `Scientific computing with tools and workflow
+  <https://scipy-lectures.github.io/intro/intro.html>`_
+* `The Python Tutorial <https://docs.python.org/3/tutorial/index.html>`_ through chapter 4. 
+
+
+
+
+                       
+                       
+                       
+   
+  
+
+
+
+   
+
+.. _pandas : http://pandas.pydata.org
+.. _Python : http://www.python.org
+.. _PyLab : http://matplotlib.org/faq/usage_faq.html#matplotlib-pyplot-and-pylab-how-are-they-related
+.. _SciPy : http://scipy.org/scipylib/index.html
+.. _NumPy : http://www.numpy.org
+.. _Matplotlib : http://matplotlib.org
