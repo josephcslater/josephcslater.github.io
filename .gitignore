@@ -1,3 +1,4 @@
 .DS_Store
 pelican/plugins/pelican-ipynb/
 pelican/themes/
+.DS_Store
