@@ -47,13 +47,13 @@ def validate(filename):
     # display errors and warning
     for err in vld.errors:
         line = err.get('line') or err['lastLine']
-        col = err.get('col') or '{}-{}'.format(err['firstColumn'], err['lastColumn'])
+        col = err.get('col') or f"{err['firstColumn']}-{err['lastColumn']}"
         LOG.error(u'line: {0}; col: {1}; message: {2}'.
                   format(line, col, h.unescape(err['message']))
                   )
     for err in vld.warnings:
         line = err.get('line') or err['lastLine']
-        col = err.get('col') or '{}-{}'.format(err['firstColumn'], err['lastColumn'])
+        col = err.get('col') or f"{err['firstColumn']}-{err['lastColumn']}"
         LOG.warning(u'line: {0}; col: {1}; message: {2}'.
                     format(line, col, h.unescape(err['message']))
                     )
@@ -63,10 +63,7 @@ def should_validate(filename):
     """Check if the filename is a type of file that should be validated.
     :param filename: A file name to check against
     """
-    for extension in INCLUDE_TYPES:
-        if filename.endswith(extension):
-            return True
-    return False
+    return any(filename.endswith(extension) for extension in INCLUDE_TYPES)
 
 
 def register():

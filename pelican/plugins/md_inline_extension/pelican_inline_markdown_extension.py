@@ -57,11 +57,7 @@ class PelicanInlineMarkdownExtension(markdown.Extension):
     def extendMarkdown(self, md, md_globals):
         # Regex to detect mathjax
         config = self.getConfig('config')
-        patterns = []
-
-        # The following mathjax settings can be set via the settings dictionary
-        for key in config:
-            patterns.append(re.escape(key))
+        patterns = [re.escape(key) for key in config]
 
         inline_regex = r'(?P<prefix>%s)(?P<text>.+?)\2' % ('|'.join(patterns))
 

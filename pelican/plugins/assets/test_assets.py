@@ -18,7 +18,7 @@ CUR_DIR = os.path.dirname(__file__)
 THEME_DIR = os.path.join(CUR_DIR, 'test_data')
 CSS_REF = open(os.path.join(THEME_DIR, 'static', 'css',
                             'style.min.css')).read()
-CSS_HASH = hashlib.md5(CSS_REF.encode()).hexdigest()[0:8]
+CSS_HASH = hashlib.md5(CSS_REF.encode()).hexdigest()[:8]
 
 
 @unittest.skipUnless(module_exists('webassets'), "webassets isn't installed")
@@ -39,7 +39,7 @@ class TestWebAssets(unittest.TestCase):
             'CACHE_CONTENT': False
         }
         if override:
-            settings.update(override)
+            settings |= override
 
         self.settings = read_settings(override=settings)
         pelican = Pelican(settings=self.settings)

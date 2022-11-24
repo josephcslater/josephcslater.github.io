@@ -21,12 +21,12 @@ def article_title(content):
     sub_title = ''
     if hasattr(content, 'subtitle'):
         sub_title = ' ' + BeautifulSoup(content.subtitle, 'html.parser').get_text().strip()  # noqa
-    return quote(('%s%s' % (main_title, sub_title)).encode('utf-8'))
+    return quote(f'{main_title}{sub_title}'.encode('utf-8'))
 
 
 def article_url(content):
     site_url = content.settings['SITEURL']
-    return quote(('%s/%s' % (site_url, content.url)).encode('utf-8'))
+    return quote(f'{site_url}/{content.url}'.encode('utf-8'))
 
 
 def article_summary(content):
@@ -36,12 +36,12 @@ def article_summary(content):
 def twitter_hastags(content):
     tags = getattr(content, 'tags', [])
     hashtags = ','.join((tag.slug for tag in tags))
-    return '' if not hashtags else '&hashtags=%s' % hashtags
+    return f'&hashtags={hashtags}' if hashtags else ''
 
 
 def twitter_via(content):
     twitter_username = content.settings.get('TWITTER_USERNAME', '')
-    return '' if not twitter_username else '&via=%s' % twitter_username
+    return f'&via={twitter_username}' if twitter_username else ''
 
 
 def share_post(content):
@@ -54,19 +54,15 @@ def share_post(content):
     hastags = twitter_hastags(content)
     via = twitter_via(content)
 
-    mail_link = 'mailto:?subject=%s&amp;body=%s' % (title, url)
-    diaspora_link = 'https://sharetodiaspora.github.io/?title=%s&url=%s' % (
-        title, url)
-    facebook_link = 'https://www.facebook.com/sharer/sharer.php?u=%s' % url
-    twitter_link = 'https://twitter.com/intent/tweet?text=%s&url=%s%s%s' % (
-        title, url, via, hastags)
-    hackernews_link = 'https://news.ycombinator.com/submitlink?t=%s&u=%s' % (
-        title, url)
-    linkedin_link = 'https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s&summary=%s&source=%s' % (  # noqa
-        url, title, summary, url
-    )
-    reddit_link = 'https://www.reddit.com/submit?url=%s&title=%s' % (
-        url, title)
+    mail_link = f'mailto:?subject={title}&amp;body={url}'
+    diaspora_link = f'https://sharetodiaspora.github.io/?title={title}&url={url}'
+    facebook_link = f'https://www.facebook.com/sharer/sharer.php?u={url}'
+    twitter_link = f'https://twitter.com/intent/tweet?text={title}&url={url}{via}{hastags}'
+
+    hackernews_link = f'https://news.ycombinator.com/submitlink?t={title}&u={url}'
+    linkedin_link = f'https://www.linkedin.com/shareArticle?mini=true&url={url}&title={title}&summary={summary}&source={url}'
+
+    reddit_link = f'https://www.reddit.com/submit?url={url}&title={title}'
 
     content.share_post = {
         'diaspora': diaspora_link,

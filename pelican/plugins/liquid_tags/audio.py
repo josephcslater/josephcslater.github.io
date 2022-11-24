@@ -34,33 +34,30 @@ AUDIO_TYPEDICT = {'.mp3': 'audio/mpeg',
 
 
 def create_html(markup):
-    match = AUDIO.search(markup)
-    if match:
+    if match := AUDIO.search(markup):
         groups = match.groups()
         audio_files = [g for g in groups if g]
 
-    if any(audio_files):
-        audio_out = '<audio controls>'
-
-        for audio_file in audio_files:
-
-            base, ext = os.path.splitext(audio_file)
-
-            if ext not in AUDIO_TYPEDICT:
-                raise ValueError("Unrecognized audio extension: "
-                                 "{0}".format(ext))
-
-            # add audio source
-            audio_out += '<source src="{}" type="{}">'.format(
-                audio_file, AUDIO_TYPEDICT[ext])
-
-        # close audio tag
-        audio_out += 'Your browser does not support the audio element.'
-        audio_out += '</audio>'
-
-    else:
+    if not any(audio_files):
         raise ValueError("Error processing input, "
                          "expected syntax: {0}".format(SYNTAX))
+
+    audio_out = '<audio controls>'
+
+    for audio_file in audio_files:
+
+        base, ext = os.path.splitext(audio_file)
+
+        if ext not in AUDIO_TYPEDICT:
+            raise ValueError("Unrecognized audio extension: "
+                             "{0}".format(ext))
+
+            # add audio source
+        audio_out += f'<source src="{audio_file}" type="{AUDIO_TYPEDICT[ext]}">'
+
+    # close audio tag
+    audio_out += 'Your browser does not support the audio element.'
+    audio_out += '</audio>'
 
     return audio_out
 

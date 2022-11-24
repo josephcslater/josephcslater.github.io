@@ -32,13 +32,12 @@ class GitHubActivity():
             returns a list of html snippets fetched from github actitivy feed
         """
 
-        entries = []
-        for activity in self.activities['entries']:
-            entries.append(
-                    [element for element in [activity['title'],
-                        activity['content'][0]['value']]])
+        entries = [
+            [activity['title'], activity['content'][0]['value']]
+            for activity in self.activities['entries']
+        ]
 
-        return entries[0:self.max_entries]
+        return entries[:self.max_entries]
 
 
 def fetch_github_activity(gen, metadata):

@@ -19,7 +19,7 @@ class CtagsGeneratorTest(unittest.TestCase):
         settings['GENERATE_CTAGS'] = True
 
         context = settings.copy()
-        context['generated_content'] = dict()
+        context['generated_content'] = {}
         context['static_links'] = set()
         generator = ArticlesGenerator(
             context=context, settings=settings,

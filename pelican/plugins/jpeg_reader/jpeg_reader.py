@@ -55,7 +55,11 @@ class JpegReader(BaseReader):
         description_long = image_data.get(Exiv.COMMENT.value, '')
         summary = image_data.get(Exiv.CAPTION.value, description_long[:140])
 
-        tags = [Tag(tag, self.settings) for tag in image_data.get(Exiv.KEYWORDS.value, list())]
+        tags = [
+            Tag(tag, self.settings)
+            for tag in image_data.get(Exiv.KEYWORDS.value, [])
+        ]
+
 
         content_root = self.settings[PelicanConfig.PATH.value]
         path_output = self.settings[PelicanConfig.OUTPUT_PATH.value]
@@ -103,7 +107,7 @@ class JpegReader(BaseReader):
 
         # Write the size/HTML out before we reduce the image to a thumb
         content = "<img src='{src}' alt='{alt}' style='width: {width}px; height: auto; max-width: 100%;'></img><p>{body}</p>" \
-            .format(src=original_name, alt=title, width=img.width, height=img.height, body=description_long)
+                .format(src=original_name, alt=title, width=img.width, height=img.height, body=description_long)
 
         # Ensure the directory levels exist
         if not isdir(path_output_dir):

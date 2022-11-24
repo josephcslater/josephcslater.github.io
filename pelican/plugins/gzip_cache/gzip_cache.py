@@ -75,11 +75,7 @@ def should_compress(filename):
 
     :param filename: A file name to check against
     '''
-    for extension in EXCLUDE_TYPES:
-        if filename.endswith(extension):
-            return False
-
-    return True
+    return not any(filename.endswith(extension) for extension in EXCLUDE_TYPES)
 
 def should_overwrite(settings):
     '''Check if the gzipped files should overwrite the originals.
@@ -94,7 +90,7 @@ def create_gzip_file(filepath, overwrite):
     :param filepath: A file to compress
     :param overwrite: Whether the original file should be overwritten
     '''
-    compressed_path = filepath + '.gz'
+    compressed_path = f'{filepath}.gz'
 
     with open(filepath, 'rb') as uncompressed:
         gzip_compress_obj = zlib.compressobj(COMPRESSION_LEVEL,
@@ -105,18 +101,18 @@ def create_gzip_file(filepath, overwrite):
         gzipped_data += gzip_compress_obj.flush()
 
         if len(gzipped_data) >= len(uncompressed_data):
-            logger.debug('No improvement: %s' % filepath)
+            logger.debug(f'No improvement: {filepath}')
             return
 
         with open(compressed_path, 'wb') as compressed:
-            logger.debug('Compressing: %s' % filepath)
+            logger.debug(f'Compressing: {filepath}')
             try:
                 compressed.write(gzipped_data)
             except Exception as ex:
-                logger.critical('Gzip compression failed: %s' % ex)
+                logger.critical(f'Gzip compression failed: {ex}')
 
         if overwrite:
-            logger.debug('Overwriting: %s with %s' % (filepath, compressed_path))
+            logger.debug(f'Overwriting: {filepath} with {compressed_path}')
             os.remove(filepath)
             os.rename(compressed_path, filepath)
 

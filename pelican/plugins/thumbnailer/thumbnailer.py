@@ -38,8 +38,7 @@ class Resizer(object):
         return image
 
     def _exact_resize(self, w, h, image):
-        retval = ImageOps.fit(image, (w,h), Image.BICUBIC)
-        return retval
+        return ImageOps.fit(image, (w,h), Image.BICUBIC)
 
     def _aspect_resize(self, w, h, image):
         retval = image.copy()
@@ -134,15 +133,14 @@ def resize_thumbnails(pelican):
 
     in_path = _image_path(pelican)
 
-    include_regex = pelican.settings.get('THUMBNAIL_INCLUDE_REGEX')
-    if include_regex:
+    if include_regex := pelican.settings.get('THUMBNAIL_INCLUDE_REGEX'):
         pattern = re.compile(include_regex)
         is_included = lambda name: pattern.match(name)
     else:
         is_included = lambda name: not name.startswith('.')
 
     sizes = pelican.settings.get('THUMBNAIL_SIZES', DEFAULT_THUMBNAIL_SIZES)
-    resizers = dict((k, Resizer(k, v, in_path)) for k,v in sizes.items())
+    resizers = {k: Resizer(k, v, in_path) for k,v in sizes.items()}
     logger.debug("Thumbnailer Started")
     for dirpath, _, filenames in os.walk(in_path):
         for filename in filenames:

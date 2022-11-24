@@ -63,15 +63,15 @@ def main():
 
         simple_type = full_type[full_type.find('#')+1:]
 
-        if 'settings' == simple_type:
+        if simple_type == 'settings':
             settings += 1
-        elif 'post' == simple_type:
+        elif simple_type == 'post':
             posts += 1
             # process posts here
-        elif 'comment' == simple_type:
+        elif simple_type == 'comment':
             comments += 1
             process_comment(entry, obj)
-        elif 'template' == simple_type:
+        elif simple_type == 'template':
             templates += 1
         else:
             others += 1
@@ -109,11 +109,8 @@ def process_comment(entry, obj):
     # e.g. "4115122471434984978"
     comment_short_id = comment_id[comment_id.find('post-')+5:]
 
-    comment_text = "date: {}\nauthor: {}\nemail: {}\n\n{}\n"\
-                        .format(comment_published,
-                                comment_author,
-                                comment_author_email,
-                                comment_body)
+    comment_text = f"date: {comment_published}\nauthor: {comment_author}\nemail: {comment_author_email}\n\n{comment_body}\n"
+
 
     # article
     for entry in obj.feed.entry:
@@ -150,13 +147,8 @@ def process_comment(entry, obj):
 
 def export_authors():
     to_export = set(authors_and_pics)
-    to_export = list(to_export)
-    to_export.sort()
-
-    str_export = ''
-    for i in to_export:
-        str_export += (i[0] + '\t\t' + i[1] + '\n')
-
+    to_export = sorted(to_export)
+    str_export = ''.join((i[0] + '\t\t' + i[1] + '\n') for i in to_export)
     authors_filename = Path(COMMENTS_DIR).resolve() / AUTHORS_FILENAME
     authors_filename.write_text(str_export)
 

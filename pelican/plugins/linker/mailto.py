@@ -17,7 +17,7 @@ class MailtoLinker(linker.LinkerBase):
     def link(self, link):
         mailto = link.path
 
-        link.path = '/' + encode_mailto_link(mailto) # a.href for JS parsing
+        link.path = f'/{encode_mailto_link(mailto)}'
         link.context['mailtos'].add(mailto) # remember mail address for fallback
 
 
@@ -27,7 +27,7 @@ class MailtoFallbackGenerator(Generator):
 
     def generate_output(self, writer):
         for mailto in self.context['mailtos']:
-            save_as = encode_mailto_link(mailto) + 'index.html'
+            save_as = f'{encode_mailto_link(mailto)}index.html'
 
             writer.write_file(save_as, self.get_template('mailto_fallback'),
                               self.context, mailto=mailto)

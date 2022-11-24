@@ -15,17 +15,15 @@ def getText(node, recursive=False):
     for n in node.childNodes:
         if n.nodeType in (node.TEXT_NODE, node.CDATA_SECTION_NODE):
             L.append(n.data)
-        else:
-            if not recursive:
-                return None
+        elif not recursive:
+            return None
         L.append(getText(n))
     return u''.join(L)
 
 
 def sequence_gen(genlist):
     for gen in genlist:
-        for elem in gen:
-            yield elem
+        yield from gen
 
 
 def parse_for_footnotes(article_or_page_generator):
@@ -52,13 +50,13 @@ def parse_for_footnotes(article_or_page_generator):
                 if leavealone:
                     continue
                 count += 1
-                fnid = u"sf-%s-%s" % (article.slug, count)
-                fnbackid = u"%s-back" % (fnid,)
+                fnid = f"sf-{article.slug}-{count}"
+                fnbackid = f"{fnid}-back"
                 endnotes.append((footnote, fnid, fnbackid))
                 number = dom.createElement(u"sup")
                 number.setAttribute(u"id", fnbackid)
                 numbera = dom.createElement(u"a")
-                numbera.setAttribute(u"href", u"#%s" % fnid)
+                numbera.setAttribute(u"href", f"#{fnid}")
                 numbera.setAttribute(u"class", u"simple-footnote")
                 numbera.appendChild(dom.createTextNode(six.text_type(count)))
                 txt = getText(footnote, recursive=True).replace(u"\n", u" ")
@@ -74,7 +72,7 @@ def parse_for_footnotes(article_or_page_generator):
                     while e.firstChild:
                         li.appendChild(e.firstChild)
                     backlink = dom.createElement(u"a")
-                    backlink.setAttribute(u"href", u"#%s" % fnbackid)
+                    backlink.setAttribute(u"href", f"#{fnbackid}")
                     backlink.setAttribute(u"class", u"simple-footnote-back")
                     backlink.appendChild(dom.createTextNode(u'\u21a9'))
                     li.appendChild(dom.createTextNode(u" "))

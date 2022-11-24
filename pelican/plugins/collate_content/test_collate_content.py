@@ -6,6 +6,7 @@ test_collate_content.py
 
 Tests for the collate_content module
 """
+
 from collections import defaultdict, namedtuple
 import os
 import random
@@ -27,7 +28,7 @@ Category: {category}
 Content = namedtuple('Content', ['title', 'path', 'category'])
 # Characters likely to appear in blog titles/categories. Could eventually
 # extend support to more characters that can't appear in a Python identifier
-BLOG_CHARACTERS = string.ascii_letters + ' -:'
+BLOG_CHARACTERS = f'{string.ascii_letters} -:'
 
 
 def make_content(directory, categories, count=5, categories_per_content=1):
@@ -77,7 +78,7 @@ def modified_pelican_run(self):
     context = self.settings.copy()
     context['filenames'] = {}  # share the dict between all the generators
     context['localsiteurl'] = self.settings['SITEURL']  # share
-    context['generated_content'] = dict()
+    context['generated_content'] = {}
     context['static_links'] = set()
     generators = [
         cls(
@@ -131,7 +132,7 @@ class ContentCollationTester(unittest.TestCase):
             'DEFAULT_DATE': (2014, 6, 8),
             }
         if settings_overrides is not None:
-            settings.update(settings_overrides)
+            settings |= settings_overrides
         settings = read_settings(override=settings)
         pelican = Pelican(settings=settings)
         pelican.modified_run = modified_pelican_run
@@ -148,7 +149,7 @@ class TestCollation(ContentCollationTester):
     def test_articles_with_one_category(self):
 
         for substituted_category, original_category in self.articles.keys():
-            collation_key = '%s_articles' % substituted_category
+            collation_key = f'{substituted_category}_articles'
             self.assertIn(collation_key, self.collations)
 
             collated_titles = [a.title for a in self.collations[collation_key]]
@@ -160,7 +161,7 @@ class TestCollation(ContentCollationTester):
     def test_pages_with_one_category(self):
 
         for substituted_category, original_category in self.pages.keys():
-            collation_key = '%s_pages' % substituted_category
+            collation_key = f'{substituted_category}_pages'
             self.assertIn(collation_key, self.collations)
 
             collated_titles = [a.title for a in self.collations[collation_key]]
@@ -199,7 +200,7 @@ class TestFilteredCategories(ContentCollationTester):
     def test_articles_with_one_category_after_filtering(self):
 
         for substituted_category, original_category in self.articles.keys():
-            collation_key = '%s_articles' % substituted_category
+            collation_key = f'{substituted_category}_articles'
 
             if original_category not in self.retained_categories:
                 self.assertNotIn(collation_key, self.collations)
@@ -216,7 +217,7 @@ class TestFilteredCategories(ContentCollationTester):
     def test_pages_with_one_category_after_filtering(self):
 
         for substituted_category, original_category in self.pages.keys():
-            collation_key = '%s_pages' % substituted_category
+            collation_key = f'{substituted_category}_pages'
 
             if original_category not in self.retained_categories:
                 self.assertNotIn(collation_key, self.collations)

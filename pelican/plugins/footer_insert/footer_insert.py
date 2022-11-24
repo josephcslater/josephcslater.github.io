@@ -9,7 +9,7 @@ from pelican.contents import Content, Article
 def add_footer(content):
     if not isinstance(content, Article):
         return
-    
+
     if 'FOOTER_INSERT_HTML' not in content.settings:
         return
     data_dict = {

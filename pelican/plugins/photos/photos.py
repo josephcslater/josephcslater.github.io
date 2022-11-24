@@ -108,8 +108,8 @@ def read_notes(filename, msg=None):
                     notes[line] = ''
     except Exception as e:
         if msg:
-            logger.info('{} at file {}'.format(msg, filename))
-        logger.debug('read_notes issue: {} at file {}. Debug message:{}'.format(msg, filename, e))
+            logger.info(f'{msg} at file {filename}')
+        logger.debug(f'read_notes issue: {msg} at file {filename}. Debug message:{e}')
     return notes
 
 
@@ -117,11 +117,15 @@ def enqueue_resize(orig, resized, spec=(640, 480, 80)):
     if resized not in DEFAULT_CONFIG['queue_resize']:
         DEFAULT_CONFIG['queue_resize'][resized] = (orig, spec)
     elif DEFAULT_CONFIG['queue_resize'][resized] != (orig, spec):
-        logger.error('photos: resize conflict for {}, {}-{} is not {}-{}'.format(resized, DEFAULT_CONFIG['queue_resize'][resized][0], DEFAULT_CONFIG['queue_resize'][resized][1], orig, spec))
+        logger.error(
+            f"photos: resize conflict for {resized}, {DEFAULT_CONFIG['queue_resize'][resized][0]}-{DEFAULT_CONFIG['queue_resize'][resized][1]} is not {orig}-{spec}"
+        )
 
 
 def isalpha(img):
-    return True if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info) else False
+    return img.mode in ('RGBA', 'LA') or (
+        img.mode == 'P' and 'transparency' in img.info
+    )
 
 
 def remove_alpha(img, bg_color):
@@ -137,11 +141,7 @@ def ReduceOpacity(im, opacity):
     Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
     """
     assert opacity >= 0 and opacity <= 1
-    if isalpha(im):
-        im = im.copy()
-    else:
-        im = im.convert('RGBA')
-
+    im = im.copy() if isalpha(im) else im.convert('RGBA')
     alpha = im.split()[3]
     alpha = ImageEnhance.Brightness(alpha).enhance(opacity)
     im.putalpha(alpha)
@@ -154,8 +154,6 @@ def watermark_photo(image, settings):
 
     watermark_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
     draw_watermark = ImageDraw.Draw(watermark_layer)
-    text_reducer = 32
-    image_reducer = 8
     text_size = [0, 0]
     mark_size = [0, 0]
     text_position = [0, 0]
@@ -163,6 +161,7 @@ def watermark_photo(image, settings):
     if settings['PHOTO_WATERMARK_TEXT']:
         font_name = 'SourceCodePro-Bold.otf'
         default_font = os.path.join(DEFAULT_CONFIG['plugin_dir'], font_name)
+        text_reducer = 32
         font = ImageFont.FreeTypeFont(default_font, watermark_layer.size[0] // text_reducer)
         text_size = draw_watermark.textsize(settings['PHOTO_WATERMARK_TEXT'], font)
         text_position = [image.size[i] - text_size[i] - margin[i] for i in [0, 1]]
@@ -170,11 +169,16 @@ def watermark_photo(image, settings):
 
     if settings['PHOTO_WATERMARK_IMG']:
         mark_image = Image.open(settings['PHOTO_WATERMARK_IMG'])
-        mark_image_size = [watermark_layer.size[0] // image_reducer for size in mark_size]
-        mark_image_size = settings['PHOTO_WATERMARK_IMG_SIZE'] if settings['PHOTO_WATERMARK_IMG_SIZE'] else mark_image_size
+        image_reducer = 8
+        mark_image_size = [watermark_layer.size[0] // image_reducer for _ in mark_size]
+        mark_image_size = settings['PHOTO_WATERMARK_IMG_SIZE'] or mark_image_size
         mark_image.thumbnail(mark_image_size, Image.ANTIALIAS)
         mark_position = [watermark_layer.size[i] - mark_image.size[i] - margin[i] for i in [0, 1]]
-        mark_position = tuple([mark_position[0] - (text_size[0] // 2) + (mark_image_size[0] // 2), mark_position[1] - text_size[1]])
+        mark_position = (
+            mark_position[0] - (text_size[0] // 2) + (mark_image_size[0] // 2),
+            mark_position[1] - text_size[1],
+        )
+
 
         if not isalpha(mark_image):
             mark_image = mark_image.convert('RGBA')
@@ -250,14 +254,14 @@ def manipulate_exif(img, settings):
 
 
 def resize_worker(orig, resized, spec, settings):
-    logger.info('photos: make photo {} -> {}'.format(orig, resized))
+    logger.info(f'photos: make photo {orig} -> {resized}')
     im = Image.open(orig)
 
     if ispiexif and settings['PHOTO_EXIF_KEEP'] and im.format == 'JPEG':  # Only works with JPEG exif for sure.
         try:
             im, exif_copy = manipulate_exif(im, settings)
         except:
-            logger.info('photos: no EXIF or EXIF error in {}'.format(orig))
+            logger.info(f'photos: no EXIF or EXIF error in {orig}')
             exif_copy = b''
     else:
         exif_copy = b''
@@ -277,13 +281,13 @@ def resize_worker(orig, resized, spec, settings):
         try:
             os.makedirs(directory)
         except Exception:
-            logger.exception('Could not create {}'.format(directory))
+            logger.exception(f'Could not create {directory}')
     else:
-        logger.debug('Directory already exists at {}'.format(os.path.split(resized)[0]))
+        logger.debug(f'Directory already exists at {os.path.split(resized)[0]}')
 
     if settings['PHOTO_WATERMARK']:
-        isthumb = True if spec == settings['PHOTO_THUMB'] else False
-        if not isthumb or (isthumb and settings['PHOTO_WATERMARK_THUMB']):
+        isthumb = spec == settings['PHOTO_THUMB']
+        if not isthumb or settings['PHOTO_WATERMARK_THUMB']:
             im = watermark_photo(im, settings)
 
     im.save(resized, 'JPEG', quality=spec[2], icc_profile=icc_profile, exif=exif_copy)
@@ -297,7 +301,7 @@ def resize_photos(generator, writer):
         debug = False
 
     pool = multiprocessing.Pool(generator.settings['PHOTO_RESIZE_JOBS'])
-    logger.debug('Debug Status: {}'.format(debug))
+    logger.debug(f'Debug Status: {debug}')
     for resized, what in DEFAULT_CONFIG['queue_resize'].items():
         resized = os.path.join(generator.output_path, resized)
         orig, spec = what
@@ -333,7 +337,7 @@ def detect_content(content):
                 photo_prefix = os.path.splitext(value)[0].lower()
 
                 if what == 'photo':
-                    photo_article = photo_prefix + 'a.jpg'
+                    photo_article = f'{photo_prefix}a.jpg'
                     enqueue_resize(
                         path,
                         os.path.join('photos', photo_article),
@@ -353,14 +357,14 @@ def detect_content(content):
                     ))
 
                 elif what == 'lightbox' and tag == 'img':
-                    photo_gallery = photo_prefix + '.jpg'
+                    photo_gallery = f'{photo_prefix}.jpg'
                     enqueue_resize(
                         path,
                         os.path.join('photos', photo_gallery),
                         settings['PHOTO_GALLERY']
                     )
 
-                    photo_thumb = photo_prefix + 't.jpg'
+                    photo_thumb = f'{photo_prefix}t.jpg'
                     enqueue_resize(
                         path,
                         os.path.join('photos', photo_thumb),
@@ -436,18 +440,23 @@ def galleries_string_decompose(gallery_string):
     galleries = map(unicode.strip if sys.version_info.major == 2 else str.strip, filter(None, splitter_regex.split(gallery_string)))
     galleries = [gallery[1:] if gallery.startswith('/') else gallery for gallery in galleries]
     if len(galleries) % 2 == 0 and ' ' not in galleries:
-        galleries = zip(zip(['type'] * len(galleries[0::2]), galleries[0::2]), zip(['location'] * len(galleries[0::2]), galleries[1::2]))
+        galleries = zip(
+            zip(['type'] * len(galleries[::2]), galleries[::2]),
+            zip(['location'] * len(galleries[::2]), galleries[1::2]),
+        )
+
         galleries = [dict(gallery) for gallery in galleries]
         for gallery in galleries:
-            title = re.search(title_regex, gallery['location'])
-            if title:
-                gallery['title'] = title.group(1)
+            if title := re.search(title_regex, gallery['location']):
+                gallery['title'] = title[1]
                 gallery['location'] = re.sub(title_regex, '', gallery['location']).strip()
             else:
                 gallery['title'] = DEFAULT_CONFIG['PHOTO_GALLERY_TITLE']
         return galleries
     else:
-        logger.error('Unexpected gallery location format! \n{}'.format(pprint.pformat(galleries)))
+        logger.error(
+            f'Unexpected gallery location format! \n{pprint.pformat(galleries)}'
+        )
 
 
 def process_gallery(generator, content, location):
@@ -470,7 +479,7 @@ def process_gallery(generator, content, location):
             rel_gallery = os.path.join(content.relative_dir, gallery['location'])
 
         if os.path.isdir(dir_gallery):
-            logger.info('photos: Gallery detected: {}'.format(rel_gallery))
+            logger.info(f'photos: Gallery detected: {rel_gallery}')
             dir_photo = os.path.join('photos', rel_gallery.lower())
             dir_thumb = os.path.join('photos', rel_gallery.lower())
             exifs = read_notes(os.path.join(dir_gallery, 'exif.txt'),
@@ -487,8 +496,8 @@ def process_gallery(generator, content, location):
                     continue
                 if pic in blacklist:
                     continue
-                photo = os.path.splitext(pic)[0].lower() + '.jpg'
-                thumb = os.path.splitext(pic)[0].lower() + 't.jpg'
+                photo = f'{os.path.splitext(pic)[0].lower()}.jpg'
+                thumb = f'{os.path.splitext(pic)[0].lower()}t.jpg'
                 content_gallery.append((
                     pic,
                     os.path.join(dir_photo, photo),
@@ -509,7 +518,9 @@ def process_gallery(generator, content, location):
             logger.debug('Gallery Data: '.format(pprint.pformat(content.photo_gallery)))
             DEFAULT_CONFIG['created_galleries']['gallery'] = content_gallery
         else:
-            logger.error('photos: Gallery does not exist: {} at {}'.format(gallery['location'], dir_gallery))
+            logger.error(
+                f"photos: Gallery does not exist: {gallery['location']} at {dir_gallery}"
+            )
 
 
 def detect_gallery(generator, content):
@@ -518,7 +529,7 @@ def detect_gallery(generator, content):
         if gallery.startswith('{photo}') or gallery.startswith('{filename}'):
             process_gallery(generator, content, gallery)
         elif gallery:
-            logger.error('photos: Gallery tag not recognized: {}'.format(gallery))
+            logger.error(f'photos: Gallery tag not recognized: {gallery}')
 
 
 def image_clipper(x):
@@ -538,8 +549,8 @@ def process_image(generator, content, image):
         image = file_clipper(image)
 
     if os.path.isfile(path):
-        photo = os.path.splitext(image)[0].lower() + 'a.jpg'
-        thumb = os.path.splitext(image)[0].lower() + 't.jpg'
+        photo = f'{os.path.splitext(image)[0].lower()}a.jpg'
+        thumb = f'{os.path.splitext(image)[0].lower()}t.jpg'
         content.photo_image = (
             os.path.basename(image).lower(),
             os.path.join('photos', photo),
@@ -553,16 +564,15 @@ def process_image(generator, content, image):
             os.path.join('photos', thumb),
             generator.settings['PHOTO_THUMB'])
     else:
-        logger.error('photo: No photo for {} at {}'.format(content.source_path, path))
+        logger.error(f'photo: No photo for {content.source_path} at {path}')
 
 
 def detect_image(generator, content):
-    image = content.metadata.get('image', None)
-    if image:
+    if image := content.metadata.get('image', None):
         if image.startswith('{photo}') or image.startswith('{filename}'):
             process_image(generator, content, image)
         else:
-            logger.error('photos: Image tag not recognized: {}'.format(image))
+            logger.error(f'photos: Image tag not recognized: {image}')
 
 
 def detect_images_and_galleries(generators):
@@ -586,4 +596,4 @@ def register():
         signals.all_generators_finalized.connect(detect_images_and_galleries)
         signals.article_writer_finalized.connect(resize_photos)
     except Exception as e:
-        logger.exception('Plugin failed to execute: {}'.format(pprint.pformat(e)))
+        logger.exception(f'Plugin failed to execute: {pprint.pformat(e)}')

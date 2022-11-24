@@ -56,7 +56,7 @@ class TestSitesRelpath(unittest.TestCase):
         '''Generate some sample siteurls'''
         self.siteurl = 'http://example.com'
         i18ns._SITE_DB['en'] = self.siteurl
-        i18ns._SITE_DB['de'] = self.siteurl + '/de'
+        i18ns._SITE_DB['de'] = f'{self.siteurl}/de'
 
     def tearDown(self):
         '''Remove sites from db'''
@@ -65,7 +65,7 @@ class TestSitesRelpath(unittest.TestCase):
     def test_get_site_path(self):
         '''Test getting the path within a site'''
         self.assertEqual(i18ns.get_site_path(self.siteurl), '/')
-        self.assertEqual(i18ns.get_site_path(self.siteurl + '/de'), '/de')
+        self.assertEqual(i18ns.get_site_path(f'{self.siteurl}/de'), '/de')
 
     def test_relpath_to_site(self):
         '''Test getting relative paths between sites'''
@@ -135,5 +135,5 @@ class TestFullRun(unittest.TestCase):
             ['git', 'diff', '--no-ext-diff', '--exit-code', '-w', output_path,
              self.temp_path], env={'PAGER': ''},
             stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
-        self.assertFalse(out, 'non-empty `diff` stdout:\n{}'.format(out))
-        self.assertFalse(err, 'non-empty `diff` stderr:\n{}'.format(out))
+        self.assertFalse(out, f'non-empty `diff` stdout:\n{out}')
+        self.assertFalse(err, f'non-empty `diff` stderr:\n{out}')

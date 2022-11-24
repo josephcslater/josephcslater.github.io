@@ -28,8 +28,7 @@ class Txt2tagsReader(BaseReader):
                                 stdout = subprocess.PIPE)
 
         output = proc.communicate(content.encode('utf-8'))[0].decode('utf-8')
-        status = proc.wait()
-        if status:
+        if status := proc.wait():
             raise subprocess.CalledProcessError(status, t2t_cmd)
 
         return output, metadata

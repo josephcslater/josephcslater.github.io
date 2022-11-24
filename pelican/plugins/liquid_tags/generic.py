@@ -23,12 +23,10 @@ from .mdx_liquid_tags import LiquidTags
 @LiquidTags.register('generic')
 def generic(preprocessor, tag, markup):
     (cmd, args) = markup.split(' ', 1)
-    if cmd.lower() == 'config':
-        config_param = args.split()[0].upper()
-        config_val = preprocessor.configs.getConfig(config_param)	
-        return(config_val)
-    else:
-        return 'generic: %s ' % markup
+    if cmd.lower() != 'config':
+        return f'generic: {markup} '
+    config_param = args.split()[0].upper()
+    return preprocessor.configs.getConfig(config_param)
 
 #----------------------------------------------------------------------
 # This import allows image tag to be a Pelican plugin

@@ -58,9 +58,7 @@ def gram(preprocessor, tag, markup):
 
     attrs = None
 
-    # Parse the markup string
-    match = ReGram.search(markup)
-    if match:
+    if match := ReGram.search(markup):
         attrs = dict([(key, val.strip())
                       for (key, val) in match.groupdict().items() if val])
     else:
@@ -70,7 +68,7 @@ def gram(preprocessor, tag, markup):
     # Construct URI
     #print(attrs)
     shortcode = attrs['shortcode']
-    url = 'http://instagr.am/p/'+shortcode+'/media/'
+    url = f'http://instagr.am/p/{shortcode}/media/'
     del attrs['shortcode']
 
     if 'size' in attrs:
@@ -80,15 +78,14 @@ def gram(preprocessor, tag, markup):
 
     r = urlopen(url)
 
-    if(r.getcode()==404):
-        raise ValueError('%s isnt a photo.'%shortcode)
+    if (r.getcode()==404):
+        raise ValueError(f'{shortcode} isnt a photo.')
 
     gram_url = r.geturl()
 
     # Check if alt text is present -- if so, split it from title
     if 'title' in attrs:
-        match = ReTitleAlt.search(attrs['title'])
-        if match:
+        if match := ReTitleAlt.search(attrs['title']):
             attrs.update(match.groupdict())
         if not attrs.get('alt'):
             attrs['alt'] = attrs['title']

@@ -70,8 +70,10 @@ FOUNDATION_ALTERNATE_FONTS = True
 FOUNDATION_TAGS_IN_MOBILE_SIDEBAR = False
 FOUNDATION_NEW_ANALYTICS = False
 FOUNDATION_ANALYTICS_DOMAIN = ''
-FOUNDATION_FOOTER_TEXT = 'Powered by '
-FOUNDATION_FOOTER_TEXT += '<a href="http://getpelican.com">Pelican</a> '
+FOUNDATION_FOOTER_TEXT = (
+    'Powered by ' + '<a href="http://getpelican.com">Pelican</a> '
+)
+
 FOUNDATION_FOOTER_TEXT += 'and <a href="http://foundation.zurb.com/">Zurb '
 FOUNDATION_FOOTER_TEXT += 'Foundation</a>.'
 # Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.'
@@ -107,7 +109,10 @@ THEME = "/Users/jslater/Documents/python-dev/pelican-themes/pelican-bootstrap3"
 # BOOTSTRAP_THEME =
 # SITELOGO = 'images/JosephSlater8-11-cropped.jpg'
 SITELOGO_SIZE = '60'
-ABOUT_ME = 'Professor and Dean '
-ABOUT_ME += 'at Tennessee Technological University. This blog contains '
+ABOUT_ME = (
+    'Professor and Dean '
+    + 'at Tennessee Technological University. This blog contains '
+)
+
 ABOUT_ME += 'numerous, often unrelated, thoughts. I hope they may be of some '
 ABOUT_ME += 'value to you.'

@@ -49,8 +49,10 @@ class TestSummary(unittest.TestCase):
     def test_end_summary(self):
         page_kwargs = self._copy_page_kwargs()
         del page_kwargs['metadata']['summary']
-        page_kwargs['content'] = (
-            TEST_SUMMARY + '<!-- PELICAN_END_SUMMARY -->' + TEST_CONTENT)
+        page_kwargs[
+            'content'
+        ] = f'{TEST_SUMMARY}<!-- PELICAN_END_SUMMARY -->{TEST_CONTENT}'
+
         page = Page(**page_kwargs)
         summary.extract_summary(page)
         # test both the summary and the marker removal
@@ -60,36 +62,36 @@ class TestSummary(unittest.TestCase):
     def test_begin_summary(self):
         page_kwargs = self._copy_page_kwargs()
         del page_kwargs['metadata']['summary']
-        page_kwargs['content'] = (
-            'FOOBAR<!-- PELICAN_BEGIN_SUMMARY -->' + TEST_CONTENT)
+        page_kwargs['content'] = f'FOOBAR<!-- PELICAN_BEGIN_SUMMARY -->{TEST_CONTENT}'
         page = Page(**page_kwargs)
         summary.extract_summary(page)
         # test both the summary and the marker removal
         self.assertEqual(page.summary, TEST_CONTENT)
-        self.assertEqual(page.content, 'FOOBAR' + TEST_CONTENT)
+        self.assertEqual(page.content, f'FOOBAR{TEST_CONTENT}')
 
     def test_begin_end_summary(self):
         page_kwargs = self._copy_page_kwargs()
         del page_kwargs['metadata']['summary']
-        page_kwargs['content'] = (
-                'FOOBAR<!-- PELICAN_BEGIN_SUMMARY -->' + TEST_SUMMARY +
-                '<!-- PELICAN_END_SUMMARY -->' + TEST_CONTENT)
+        page_kwargs[
+            'content'
+        ] = f'FOOBAR<!-- PELICAN_BEGIN_SUMMARY -->{TEST_SUMMARY}<!-- PELICAN_END_SUMMARY -->{TEST_CONTENT}'
+
         page = Page(**page_kwargs)
         summary.extract_summary(page)
         # test both the summary and the marker removal
         self.assertEqual(page.summary, TEST_SUMMARY)
-        self.assertEqual(page.content, 'FOOBAR' + TEST_SUMMARY + TEST_CONTENT)
+        self.assertEqual(page.content, f'FOOBAR{TEST_SUMMARY}{TEST_CONTENT}')
 
     def test_use_first_paragraph(self):
         page_kwargs = self._copy_page_kwargs()
         del page_kwargs['metadata']['summary']
         pelican.settings.DEFAULT_CONFIG['SUMMARY_USE_FIRST_PARAGRAPH'] = True
-        page_kwargs['content'] = '<p>' + TEST_SUMMARY + '</p>' + TEST_CONTENT
+        page_kwargs['content'] = f'<p>{TEST_SUMMARY}</p>{TEST_CONTENT}'
         page = Page(**page_kwargs)
         summary.extract_summary(page)
         # test both the summary and the marker removal
         self.assertEqual(page.summary, TEST_SUMMARY)
-        self.assertEqual(page.content, '<p>' + TEST_SUMMARY + '</p>' + TEST_CONTENT)
+        self.assertEqual(page.content, f'<p>{TEST_SUMMARY}</p>{TEST_CONTENT}')
 
     def test_correct_malformed_markup(self):
         page_kwargs = self._copy_page_kwargs()
@@ -98,9 +100,10 @@ class TestSummary(unittest.TestCase):
         wellformed = (
             '<article><div><h2>Title</h2>'
             '<p>Some content</p></div></article>')
-        page_kwargs['content'] = (
-            '<!-- PELICAN_BEGIN_SUMMARY -->' + malformed +
-            '<!-- PELICAN_END_SUMMARY -->')
+        page_kwargs[
+            'content'
+        ] = f'<!-- PELICAN_BEGIN_SUMMARY -->{malformed}<!-- PELICAN_END_SUMMARY -->'
+
         page = Page(**page_kwargs)
         summary.extract_summary(page)
         self.assertEqual(page.summary, wellformed)

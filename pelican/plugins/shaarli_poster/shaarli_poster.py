@@ -44,7 +44,7 @@ def get_published_articles_urls(client, pelican_settings):
     )
     response = client.request(args)
     response.raise_for_status()
-    return set(link['url'].rsplit('/', 1)[1] for link in response.json())
+    return {link['url'].rsplit('/', 1)[1] for link in response.json()}
 
 def publish_new_article(client, pelican_settings, article):
     description, tags = get_desc_and_tags(article, pelican_settings)
@@ -100,7 +100,7 @@ def main():
 
 def build_article_generator(settings, content_path, output_path=None):
     context = settings.copy()
-    context['generated_content'] = dict()
+    context['generated_content'] = {}
     context['static_links'] = set()
     article_generator = ArticlesGenerator(
         context=context, settings=settings,
@@ -122,7 +122,7 @@ def php_crc32(a):
     crc = 0xffffffff
     for x in a:
         crc ^= x << 24;
-        for k in range(8):
+        for _ in range(8):
             crc = (crc << 1) ^ 0x04c11db7 if crc & 0x80000000 else crc << 1
     crc = ~crc
     crc &= 0xffffffff

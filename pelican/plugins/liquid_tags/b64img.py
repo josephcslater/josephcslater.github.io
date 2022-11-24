@@ -43,14 +43,14 @@ ReTitleAlt = re.compile("""(?:"|')(?P<title>[^"']+)?(?:"|')\s+(?:"|')(?P<alt>[^"
 def _get_file(src):
     """ Return content from local or remote file. """
     try:
-        if '://' in src or src[0:2] == '//':  # Most likely this is remote file
+        if '://' in src or src[:2] == '//':  # Most likely this is remote file
             response = urllib2.urlopen(src)
             return response.read()
         else:
             with open(src, 'rb') as fh:
                 return fh.read()
     except Exception as e:
-        raise RuntimeError('Error generating base64image: {}'.format(e))
+        raise RuntimeError(f'Error generating base64image: {e}')
 
 
 def base64image(src):
@@ -62,9 +62,7 @@ def base64image(src):
 def b64img(preprocessor, tag, markup):
     attrs = None
 
-    # Parse the markup string
-    match = ReImg.search(markup)
-    if match:
+    if match := ReImg.search(markup):
         attrs = dict([(key, val.strip())
                       for (key, val) in six.iteritems(match.groupdict()) if val])
     else:
@@ -73,13 +71,12 @@ def b64img(preprocessor, tag, markup):
 
     # Check if alt text is present -- if so, split it from title
     if 'title' in attrs:
-        match = ReTitleAlt.search(attrs['title'])
-        if match:
+        if match := ReTitleAlt.search(attrs['title']):
             attrs.update(match.groupdict())
         if not attrs.get('alt'):
             attrs['alt'] = attrs['title']
 
-    attrs['src'] = 'data:;base64,{}'.format(base64image(attrs['src']))
+    attrs['src'] = f"data:;base64,{base64image(attrs['src'])}"
 
     # Return the formatted text
     return "<img {0}>".format(' '.join('{0}="{1}"'.format(key, val)

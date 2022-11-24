@@ -46,9 +46,11 @@ class GitContentAdapter(object):
         Get all commits involving this filename
         :returns: List of commits newest to oldest
         '''
-        if not self.is_managed_by_git():
-            return []
-        return self.git.get_commits(self.content.source_path, self.follow)
+        return (
+            self.git.get_commits(self.content.source_path, self.follow)
+            if self.is_managed_by_git()
+            else []
+        )
 
     @memoized
     def get_oldest_commit(self):

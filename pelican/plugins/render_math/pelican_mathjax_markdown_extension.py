@@ -78,19 +78,20 @@ class PelicanMathJaxCorrectDisplayMath(markdown.treeprocessors.Treeprocessor):
         math_tag_class = self.pelican_mathjax_extension.getConfig('math_tag_class')
 
         for parent in root:
-            div_math = []
             children = list(parent)
 
-            for div in parent.findall('div'):
-                if div.get('class') == math_tag_class:
-                    div_math.append(children.index(div))
+            div_math = [
+                children.index(div)
+                for div in parent.findall('div')
+                if div.get('class') == math_tag_class
+            ]
 
             # Do not process further if no displayed math has been found
             if not div_math:
                 continue
 
             insert_idx = list(root).index(parent)
-            self.correct_html(root, children, div_math, insert_idx, parent.text) 
+            self.correct_html(root, children, div_math, insert_idx, parent.text)
             root.remove(parent)  # Parent must be removed last for correct insertion index
 
         return root

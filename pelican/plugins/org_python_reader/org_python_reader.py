@@ -69,8 +69,9 @@ class OrgReader(BaseReader):
             return {}
         expr_metadata = re.compile(r'^#\+([a-zA-Z]+):(.*)')
         return {
-            expr_metadata.match(line).group(1).lower()
-            : expr_metadata.match(line).group(2).strip()
+            expr_metadata.match(line)[1]
+            .lower(): expr_metadata.match(line)[2]
+            .strip()
             for line in text_lines
         }
 

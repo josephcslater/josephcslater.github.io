@@ -23,7 +23,7 @@ class TestPdfGeneration(unittest.TestCase):
             'LOCALE': locale.normalize('en_US'),
         }
         if override:
-            settings.update(override)
+            settings |= override
 
         self.settings = read_settings(override=settings)
         pelican = Pelican(settings=self.settings)
@@ -34,7 +34,6 @@ class TestPdfGeneration(unittest.TestCase):
             logging.warn('Relative links in the form of ' +
                          '|filename|images/test.png are not yet handled by ' +
                          ' the pdf generator')
-            pass
 
     def tearDown(self):
         rmtree(self.temp_path)

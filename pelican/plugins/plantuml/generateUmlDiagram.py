@@ -14,7 +14,7 @@ def generate_uml_image(path, plantuml_code, imgformat):
     tf.write('\n@enduml'.encode('utf8'))
     tf.flush()
 
-    logger.debug("[plantuml] Temporary PlantUML source at "+(tf.name))
+    logger.debug(f"[plantuml] Temporary PlantUML source at {tf.name}")
 
     if imgformat == 'png':
         imgext = ".png"
@@ -37,22 +37,21 @@ def generate_uml_image(path, plantuml_code, imgformat):
         p = Popen(cmdline, stdout=PIPE, stderr=PIPE)
         out, err = p.communicate()
     except Exception as exc:
-        raise Exception('Failed to run plantuml: %s' % exc)
+        raise Exception(f'Failed to run plantuml: {exc}')
     else:
-        if p.returncode == 0:
-            # diagram was correctly generated, we can remove the temporary file (if not debugging)
-            if not logger.isEnabledFor(logging.DEBUG):
-                os.remove(tf.name)
-            # renaming output image using an hash code, just to not pollute
-            # output directory with a growing number of images
-            name = os.path.join(path, os.path.basename(name))
-            newname = os.path.join(path, "%08x" % (adler32(plantuml_code.encode()) & 0xffffffff))+imgext
-
-            if os.path.exists(newname):
-                os.remove(newname)
-
-            os.rename(name, newname)
-            return os.path.basename(newname)
-        else:
+        if p.returncode != 0:
             # the temporary file is still available as aid understanding errors
-            raise RuntimeError('Error calling plantuml: %s' % err)
+            raise RuntimeError(f'Error calling plantuml: {err}')
+        # diagram was correctly generated, we can remove the temporary file (if not debugging)
+        if not logger.isEnabledFor(logging.DEBUG):
+            os.remove(tf.name)
+        # renaming output image using an hash code, just to not pollute
+        # output directory with a growing number of images
+        name = os.path.join(path, os.path.basename(name))
+        newname = os.path.join(path, "%08x" % (adler32(plantuml_code.encode()) & 0xffffffff))+imgext
+
+        if os.path.exists(newname):
+            os.remove(newname)
+
+        os.rename(name, newname)
+        return os.path.basename(newname)

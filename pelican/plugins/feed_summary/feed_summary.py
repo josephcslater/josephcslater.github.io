@@ -26,18 +26,22 @@ class FeedSummaryWriter(Writer):
     def _add_item_to_the_feed(self, feed, item):
         if self.settings['FEED_USE_SUMMARY']:
             title = Markup(item.title).striptags()
-            link = '%s/%s' % (self.site_url, item.url)
+            link = f'{self.site_url}/{item.url}'
             feed.add_item(
                 title=title,
                 link=link,
-                unique_id='tag:%s,%s:%s' % (urlparse(link).netloc,
-                                            item.date.date(),
-                                            urlparse(link).path.lstrip('/')),
-                description=item.summary if hasattr(item, 'summary') else item.get_content(self.site_url),
+                unique_id=f"tag:{urlparse(link).netloc},{item.date.date()}:{urlparse(link).path.lstrip('/')}",
+                description=item.summary
+                if hasattr(item, 'summary')
+                else item.get_content(self.site_url),
                 categories=item.tags if hasattr(item, 'tags') else None,
                 author_name=getattr(item, 'author', ''),
-                pubdate=set_date_tzinfo(item.modified if hasattr(item, 'modified') else item.date,
-                    self.settings.get('TIMEZONE', None)))
+                pubdate=set_date_tzinfo(
+                    item.modified if hasattr(item, 'modified') else item.date,
+                    self.settings.get('TIMEZONE', None),
+                ),
+            )
+
         else:
             super(FeedSummaryWriter, self)._add_item_to_the_feed(feed, item)
 

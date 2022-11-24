@@ -3,6 +3,7 @@
 Author: Bernhard Scheirle
 """
 
+
 from __future__ import unicode_literals
 
 import logging
@@ -17,7 +18,7 @@ try:
     from . identicon import identicon
     _identiconImported = True
 except ImportError as e:
-    logger.warning(_log + "identicon deactivated: " + str(e))
+    logger.warning(f"{_log}identicon deactivated: {str(e)}")
     _identiconImported = False
 
 # Global Variables
@@ -32,9 +33,9 @@ _missingAvatars = []
 
 def _ready():
     if not _initialized:
-        logger.warning(_log + "Module not initialized. use init")
+        logger.warning(f"{_log}Module not initialized. use init")
     if not _identicon_data:
-        logger.debug(_log + "No identicon data set")
+        logger.debug(f"{_log}No identicon data set")
     return _identiconImported and _initialized and _identicon_data
 
 
@@ -74,9 +75,9 @@ def getAvatarPath(comment_id, metadata):
     author = tuple()
     for data in _identicon_data:
         if data in metadata:
-            string = "{}".format(metadata[data])
+            string = f"{metadata[data]}"
             md5.update(string.encode('utf-8'))
-            author += tuple([string])
+            author += (string, )
         else:
             logger.warning(_log + data +
                            " is missing in comment: " + comment_id)
@@ -88,17 +89,17 @@ def getAvatarPath(comment_id, metadata):
 
     code = md5.hexdigest()
 
-    if not code in _missingAvatars:
+    if code not in _missingAvatars:
         _missingAvatars.append(code)
 
-    return os.path.join(_identicon_output_path, '%s.png' % code)
+    return os.path.join(_identicon_output_path, f'{code}.png')
 
 
 def generateAndSaveMissingAvatars():
     _createIdenticonOutputFolder()
     global _missingAvatars
     for code in _missingAvatars:
-        avatar_path = '%s.png' % code
+        avatar_path = f'{code}.png'
         avatar = identicon.render_identicon(int(code, 16), _identicon_size)
         avatar_save_path = os.path.join(_identicon_save_path, avatar_path)
         avatar.save(avatar_save_path, 'PNG')

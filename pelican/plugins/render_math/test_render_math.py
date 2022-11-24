@@ -41,7 +41,7 @@ class RenderMathTest(unittest.TestCase):
 
 def _build_article_generator(settings, output_path):
     context = settings.copy()
-    context['generated_content'] = dict()
+    context['generated_content'] = {}
     context['static_links'] = set()
     article_generator = ArticlesGenerator(
         context=context, settings=settings,

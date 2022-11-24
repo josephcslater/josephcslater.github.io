@@ -26,9 +26,7 @@ def aggregate_multi_part(generator):
         if 'parts' in article.metadata:
             multi_part[article.metadata['parts']].append(article)
 
-    for part_id in multi_part:
-        parts = multi_part[part_id]
-
+    for parts in multi_part.values():
         # Sort by date
         parts.sort(key=lambda x: x.metadata['date'])
 

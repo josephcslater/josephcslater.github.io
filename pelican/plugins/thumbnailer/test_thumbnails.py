@@ -47,7 +47,7 @@ class ThumbnailerFilenameTest(TestCase):
         self.assertEqual('sample_image_square.jpg', new_name)
 
     def testRootWithSlash(self):
-        r = Resizer('square', '100', self.img_path + '/')
+        r = Resizer('square', '100', f'{self.img_path}/')
         new_name = r.get_thumbnail_name(self.path('sample_image.jpg'))
         self.assertEqual('sample_image_square.jpg', new_name)
 

@@ -54,33 +54,26 @@ except NameError:
 def process_settings(pelicanobj):
     """Sets user specified MathJax settings (see README for more details)"""
 
-    mathjax_settings = {}
+    mathjax_settings = {
+        'auto_insert': True,
+        'align': 'center',
+        'indent': '0em',
+        'show_menu': 'true',
+        'process_escapes': 'true',
+        'latex_preview': 'TeX',
+        'color': 'inherit',
+        'linebreak_automatic': 'false',
+        'tex_extensions': '',
+        'responsive': 'false',
+        'responsive_break': '768',
+        'mathjax_font': 'default',
+        'process_summary': BeautifulSoup is not None,
+        'message_style': 'normal',
+        'font_list': ['STIX', 'TeX'],
+        'equation_numbering': 'none',
+        'source': "'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML'",
+    }
 
-    # NOTE TO FUTURE DEVELOPERS: Look at the README and what is happening in
-    # this function if any additional changes to the mathjax settings need to
-    # be incorporated. Also, please inline comment what the variables
-    # will be used for
-
-    # Default settings
-    mathjax_settings['auto_insert'] = True  # if set to true, it will insert mathjax script automatically into content without needing to alter the template.
-    mathjax_settings['align'] = 'center'  # controls alignment of of displayed equations (values can be: left, right, center)
-    mathjax_settings['indent'] = '0em'  # if above is not set to 'center', then this setting acts as an indent
-    mathjax_settings['show_menu'] = 'true'  # controls whether to attach mathjax contextual menu
-    mathjax_settings['process_escapes'] = 'true'  # controls whether escapes are processed
-    mathjax_settings['latex_preview'] = 'TeX'  # controls what user sees while waiting for LaTex to render
-    mathjax_settings['color'] = 'inherit'  # controls color math is rendered in
-    mathjax_settings['linebreak_automatic'] = 'false'  # Set to false by default for performance reasons (see http://docs.mathjax.org/en/latest/output.html#automatic-line-breaking)
-    mathjax_settings['tex_extensions'] = ''  # latex extensions that can be embedded inside mathjax (see http://docs.mathjax.org/en/latest/tex.html#tex-and-latex-extensions)
-    mathjax_settings['responsive'] = 'false'  # Tries to make displayed math responsive
-    mathjax_settings['responsive_break'] = '768'  # The break point at which it math is responsively aligned (in pixels)
-    mathjax_settings['mathjax_font'] = 'default'  # forces mathjax to use the specified font.
-    mathjax_settings['process_summary'] = BeautifulSoup is not None  # will fix up summaries if math is cut off. Requires beautiful soup
-    mathjax_settings['message_style'] = 'normal'  # This value controls the verbosity of the messages in the lower left-hand corner. Set it to "none" to eliminate all messages
-    mathjax_settings['font_list'] = ['STIX', 'TeX'] # Include in order of preference among TeX, STIX-Web, Asana-Math, Neo-Euler, Gyre-Pagella, Gyre-Termes and Latin-Modern
-    mathjax_settings['equation_numbering'] = 'none' # AMS, auto, none
-
-    # Source for MathJax
-    mathjax_settings['source'] = "'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML'"
 
     # Get the user specified settings
     try:
@@ -103,7 +96,7 @@ def process_settings(pelicanobj):
             if not typeVal:
                 continue
 
-            if value == 'left' or value == 'right' or value == 'center':
+            if value in ['left', 'right', 'center']:
                 mathjax_settings[key] = value
             else:
                 mathjax_settings[key] = 'center'
@@ -207,7 +200,7 @@ def process_summary(article):
         if len(last_math_text) > 3 and last_math_text[-3:] == '...':
             content_parsed = BeautifulSoup(article._content, 'html.parser')
             full_text = content_parsed.find_all(class_='math')[len(math)-1].get_text()
-            math[-1].string = "%s ..." % full_text
+            math[-1].string = f"{full_text} ..."
             summary = summary_parsed.decode()
 
         # clear memoization cache
@@ -265,10 +258,11 @@ def mathjax_for_markdown(pelicanobj, mathjax_script, mathjax_settings):
     related content"""
 
     # Create the configuration for the markdown template
-    config = {}
-    config['mathjax_script'] = mathjax_script
-    config['math_tag_class'] = 'math'
-    config['auto_insert'] = mathjax_settings['auto_insert']
+    config = {
+        'mathjax_script': mathjax_script,
+        'math_tag_class': 'math',
+        'auto_insert': mathjax_settings['auto_insert'],
+    }
 
     # Instantiate markdown extension and append it to the current extensions
     try:
@@ -284,7 +278,10 @@ def mathjax_for_markdown(pelicanobj, mathjax_script, mathjax_settings):
 def mathjax_for_rst(pelicanobj, mathjax_script, mathjax_settings):
     """Setup math for RST"""
     docutils_settings = pelicanobj.settings.get('DOCUTILS_SETTINGS', {})
-    docutils_settings.setdefault('math_output', 'MathJax %s' % mathjax_settings['source'])
+    docutils_settings.setdefault(
+        'math_output', f"MathJax {mathjax_settings['source']}"
+    )
+
     pelicanobj.settings['DOCUTILS_SETTINGS'] = docutils_settings
     rst_add_mathjax.mathjax_script = mathjax_script
 

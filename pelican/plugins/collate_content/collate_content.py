@@ -48,7 +48,7 @@ def group_content(generator, content_type):
             if filtering_active and category not in category_filter:
                 continue
             category = substitute_category_name(category)
-            collations['%s_%s' % (category, content_type)].append(content)
+            collations[f'{category}_{content_type}'].append(content)
     generator.context['collations'] = collations
 
 

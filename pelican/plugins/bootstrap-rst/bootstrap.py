@@ -29,27 +29,27 @@ class HTMLTranslator(PelicanHTMLTranslator):
     """
 
     def visit_h1(self, node):
-        self.body.append('<h1>%s</h1>' % node.children[0])
+        self.body.append(f'<h1>{node.children[0]}</h1>')
         raise nodes.SkipNode
 
     def visit_h2(self, node):
-        self.body.append('<h2>%s</h2>' % node.children[0])
+        self.body.append(f'<h2>{node.children[0]}</h2>')
         raise nodes.SkipNode
 
     def visit_h3(self, node):
-        self.body.append('<h3>%s</h3>' % node.children[0])
+        self.body.append(f'<h3>{node.children[0]}</h3>')
         raise nodes.SkipNode
 
     def visit_h4(self, node):
-        self.body.append('<h4>%s</h4>' % node.children[0])
+        self.body.append(f'<h4>{node.children[0]}</h4>')
         raise nodes.SkipNode
 
     def visit_h5(self, node):
-        self.body.append('<h5>%s</h5>' % node.children[0])
+        self.body.append(f'<h5>{node.children[0]}</h5>')
         raise nodes.SkipNode
 
     def visit_h6(self, node):
-        self.body.append('<h6>%s</h6>' % node.children[0])
+        self.body.append(f'<h6>{node.children[0]}</h6>')
         raise nodes.SkipNode
 
     def visit_label_default(self, node):
@@ -109,16 +109,14 @@ class HTMLTranslator(PelicanHTMLTranslator):
             if node_class in ['primary', 'success', 'warning'
                               'info', 'link', 'danger', 'outline']:
                 flag = True
-            btn_class = btn_classes.get(node_class, None)
-            if btn_class:
-                classes += btn_class + ' '
+            if btn_class := btn_classes.get(node_class, None):
+                classes += f'{btn_class} '
         if flag == False:
             classes += 'btn-default'
 
         target = node['target']
         properties = ''
 
-        # Disabled
         if 'disabled' in node['classes']:
             if target:
                 properties += ' disabled="disabled"'
@@ -276,7 +274,7 @@ class HTMLTranslator(PelicanHTMLTranslator):
         self.html_body.extend(self.body_prefix[1:] + self.body_pre_docinfo
                               + self.docinfo + self.body
                               + self.body_suffix[:-1])
-        assert not self.context, 'len(context) = %s' % len(self.context)
+        assert not self.context, f'len(context) = {len(self.context)}'
 
 
 # -----------------------------------------------------------------------------
@@ -290,9 +288,8 @@ class RSTReader(RstReader):
         extra_params = {'initial_header_level': '2',
                         'syntax_highlight': 'short',
                         'input_encoding': 'utf-8'}
-        user_params = self.settings.get('DOCUTILS_SETTINGS')
-        if user_params:
-            extra_params.update(user_params)
+        if user_params := self.settings.get('DOCUTILS_SETTINGS'):
+            extra_params |= user_params
 
         pub = Publisher(destination_class=StringOutput)
         pub.set_components('standalone', 'restructuredtext', 'html')

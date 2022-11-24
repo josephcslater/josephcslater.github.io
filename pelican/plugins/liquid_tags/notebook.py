@@ -47,6 +47,7 @@ this will insert the appropriate CSS.  All efforts have been made to ensure
 that this CSS will not override formats within the blog theme, but there may
 still be some conflicts.
 """
+
 import warnings
 import re
 import os
@@ -63,7 +64,7 @@ try:
 except:
     pass
 
-if not IPYTHON_VERSION >= 1:
+if IPYTHON_VERSION < 1:
     raise ValueError("IPython version 1.0+ required for notebook tag")
 
 if IPYTHON_VERSION > 1:
@@ -212,10 +213,7 @@ class SliceIndex(Integer):
     default_value = None
 
     def validate(self, obj, value):
-        if value is None:
-            return value
-        else:
-            return super(SliceIndex, self).validate(obj, value)
+        return value if value is None else super(SliceIndex, self).validate(obj, value)
 
 
 class SubCell(Preprocessor):
@@ -260,27 +258,17 @@ FORMAT = re.compile(r"""^(\s+)?(?P<src>\S+)(\s+)?((cells\[)(?P<start>-?[0-9]*):(
 
 @LiquidTags.register('notebook')
 def notebook(preprocessor, tag, markup):
-    match = FORMAT.search(markup)
-    if match:
-        argdict = match.groupdict()
-        src = argdict['src']
-        start = argdict['start']
-        end = argdict['end']
-        language = argdict['language']
-    else:
+    if not (match := FORMAT.search(markup)):
         raise ValueError("Error processing input, "
                          "expected syntax: {0}".format(SYNTAX))
 
-    if start:
-        start = int(start)
-    else:
-        start = 0
-
-    if end:
-        end = int(end)
-    else:
-        end = None
-
+    argdict = match.groupdict()
+    src = argdict['src']
+    start = argdict['start']
+    end = argdict['end']
+    language = argdict['language']
+    start = int(start) if start else 0
+    end = int(end) if end else None
     language_applied_highlighter = partial(custom_highlighter, language=language)
 
     nb_dir =  preprocessor.configs.getConfig('NOTEBOOK_DIR')
@@ -302,9 +290,8 @@ def notebook(preprocessor, tag, markup):
     elif IPYTHON_VERSION == 2:
         if os.path.exists('pelicanhtml_2.tpl'):
             template_file = 'pelicanhtml_2'
-    else:
-        if os.path.exists('pelicanhtml_1.tpl'):
-            template_file = 'pelicanhtml_1'
+    elif os.path.exists('pelicanhtml_1.tpl'):
+        template_file = 'pelicanhtml_1'
 
     if IPYTHON_VERSION >= 2:
         subcell_kwarg = dict(preprocessors=[SubCell])

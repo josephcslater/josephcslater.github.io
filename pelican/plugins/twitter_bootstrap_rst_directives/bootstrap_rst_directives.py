@@ -68,9 +68,8 @@ class CleanRSTReader(RstReader):
         extra_params = {'initial_header_level': '2',
                         'syntax_highlight': 'short',
                         'input_encoding': 'utf-8'}
-        user_params = self.settings.get('DOCUTILS_SETTINGS')
-        if user_params:
-            extra_params.update(user_params)
+        if user_params := self.settings.get('DOCUTILS_SETTINGS'):
+            extra_params |= user_params
 
         pub = docutils.core.Publisher(
             destination_class=docutils.io.StringOutput)
@@ -151,7 +150,7 @@ def glyph_role(name, rawtext, text, lineno, inliner,
     """
 
     target = options.get('target', None)
-    glyph_name = 'glyphicon-{}'.format(text)
+    glyph_name = f'glyphicon-{text}'
 
     if target:
         target = utils.unescape(target)
@@ -196,7 +195,7 @@ class Label(rst.Directive):
 
     def run(self):
         # First argument is the name of the glyph
-        label_name = 'label-{}'.format(self.custom_class)
+        label_name = f'label-{self.custom_class}'
         # get the label content
         text = '\n'.join(self.content)
         # Create a new container element (div)
@@ -271,7 +270,7 @@ class Panel(rst.Directive):
 
     def run(self):
         # First argument is the name of the glyph
-        panel_name = 'panel-{}'.format(self.custom_class)
+        panel_name = f'panel-{self.custom_class}'
         # get the label title
         title_text = self.options.get('title', self.custom_class.title())
         # get the label content
@@ -355,7 +354,7 @@ class Alert(rst.Directive):
 
     def run(self):
         # First argument is the name of the glyph
-        alert_name = 'alert-{}'.format(self.custom_class)
+        alert_name = f'alert-{self.custom_class}'
         # get the label content
         text = '\n'.join(self.content)
         # Create a new container element (div)
@@ -446,11 +445,10 @@ class Media(rst.Directive):
         self.options['uri'] = image_reference
 
         reference_node = None
-        messages = []
         if 'target' in self.options:
             block = rst.states.escape2null(
                 self.options['target']).splitlines()
-            block = [line for line in block]
+            block = list(block)
             target_type, data = self.state.parse_target(
                 block, self.block_text, self.lineno)
             if target_type == 'refuri':
@@ -461,15 +459,15 @@ class Media(rst.Directive):
                     name=whitespace_normalize_name(data))
                 container_node.indirect_reference_name = data
                 self.state.document.note_refname(container_node)
-            else:                           # malformed target
-                messages.append(data)       # data is a system message
+            else:                   # malformed target
+                messages = [data]
             del self.options['target']
         else:
             container_node = nodes.container()
 
         # get image position
         position = self.options.get('position', 'left')
-        position_class = 'pull-{}'.format(position)
+        position_class = f'pull-{position}'
 
         container_node.set_class(position_class)
 

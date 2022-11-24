@@ -38,7 +38,7 @@ class Alert(Directive):
         node['classes'] = ['alert']
         node['classes'] += self.options.get('class', [])
         if 'type' in self.options:
-            node['classes'] += ['alert-%s' % node['type']]
+            node['classes'] += [f"alert-{node['type']}"]
         node.dismissable = False
         if 'dismissable' in self.options:
             node['classes'] += ['alert-dismissable']
@@ -62,7 +62,7 @@ class Callout(Directive):
         node = callout(self.block_text, **self.options)
         node['classes'] = ['bs-callout']
         if len(self.arguments):
-            type = 'bs-callout-' + self.arguments[0]
+            type = f'bs-callout-{self.arguments[0]}'
         else:
             type = 'bs-callout-info'
         node['classes'] += [type]
@@ -417,7 +417,7 @@ class ListTable(Table):
         col_widths = self.get_column_widths(num_cols)
         return num_cols, col_widths
 
-    def build_table_from_list(Self, table_data, col_widths, header_rows, stub_columns):
+    def build_table_from_list(self, table_data, col_widths, header_rows, stub_columns):
         table = nodes.table()
         tgroup = nodes.tgroup(cols=len(col_widths))
         table += tgroup

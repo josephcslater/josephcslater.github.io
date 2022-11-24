@@ -39,9 +39,7 @@ ReTitleAlt = re.compile("""(?:"|')(?P<title>[^"']+)?(?:"|')\s+(?:"|')(?P<alt>[^"
 def img(preprocessor, tag, markup):
     attrs = None
 
-    # Parse the markup string
-    match = ReImg.search(markup)
-    if match:
+    if match := ReImg.search(markup):
         attrs = dict([(key, val.strip())
                       for (key, val) in six.iteritems(match.groupdict()) if val])
     else:
@@ -50,8 +48,7 @@ def img(preprocessor, tag, markup):
 
     # Check if alt text is present -- if so, split it from title
     if 'title' in attrs:
-        match = ReTitleAlt.search(attrs['title'])
-        if match:
+        if match := ReTitleAlt.search(attrs['title']):
             attrs.update(match.groupdict())
         if not attrs.get('alt'):
             attrs['alt'] = attrs['title']

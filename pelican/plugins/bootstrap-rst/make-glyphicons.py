@@ -221,4 +221,4 @@ for i, glyph in enumerate(glyphs):
         print("      .. list:: list-unstyled")
         print("")
     name = glyph[33:-9]
-    print("         * |%s| : %s" % (name,name))
+    print(f"         * |{name}| : {name}")

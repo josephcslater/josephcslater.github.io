@@ -26,7 +26,7 @@ def _build_article_generator(content_path, output_path):
     settings = get_settings(filenames={})
     settings['PATH'] = content_path
     context = settings.copy()
-    context['generated_content'] = dict()
+    context['generated_content'] = {}
     context['static_links'] = set()
     article_generator = ArticlesGenerator(
         context=context, settings=settings,

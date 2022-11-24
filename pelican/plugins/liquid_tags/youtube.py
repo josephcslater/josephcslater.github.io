@@ -38,8 +38,7 @@ def youtube(preprocessor, tag, markup):
     height = 390
     youtube_id = None
 
-    match = YOUTUBE.search(markup)
-    if match:
+    if match := YOUTUBE.search(markup):
         groups = match.groups()
         youtube_id = groups[0]
         width = groups[2] or width

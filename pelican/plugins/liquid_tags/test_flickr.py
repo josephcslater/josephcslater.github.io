@@ -67,7 +67,7 @@ def test_source_url(input, expected):
 @patch('liquid_tags.flickr.urlopen')
 def test_generage_html(mock_urlopen):
     # mock the return to deliver the flickr.json file instead
-    with open(TEST_DATA_DIR + '/flickr.json', 'rb') as f:
+    with open(f'{TEST_DATA_DIR}/flickr.json', 'rb') as f:
         mock_urlopen.return_value.read.return_value = f.read()
 
         attrs = dict(

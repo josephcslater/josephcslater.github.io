@@ -29,7 +29,7 @@ def _level_str(level_nums, level_max):
         return ret
 
     for n in level_nums:
-        ret += str(n) + '.'
+        ret += f'{str(n)}.'
 
     return ret[:-1]
 

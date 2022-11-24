@@ -19,19 +19,20 @@ from pelican import signals
 
 def add_members(generator, metadata):
 
-    if 'members' in metadata.keys():
-        # Dealing with differences on metadata for md and rst content
-        if type(metadata['members']) == list:
-            members = metadata['members']
-        else:
-            members = metadata['members'].splitlines()
+    if 'members' not in metadata.keys():
+        return
+    # Dealing with differences on metadata for md and rst content
+    if type(metadata['members']) == list:
+        members = metadata['members']
+    else:
+        members = metadata['members'].splitlines()
 
-        metadata['members'] = OrderedDict()
-        keys = map(unicode.strip, members[0].split(','))
-        for member in members[1:]:
-            values = map(unicode.strip, member.split(','))
-            member_dict = dict(zip(keys, values))
-            metadata['members'][member_dict['nome']] = member_dict
+    metadata['members'] = OrderedDict()
+    keys = map(unicode.strip, members[0].split(','))
+    for member in members[1:]:
+        values = map(unicode.strip, member.split(','))
+        member_dict = dict(zip(keys, values))
+        metadata['members'][member_dict['nome']] = member_dict
 
 
 def register():

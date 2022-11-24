@@ -42,10 +42,9 @@ def video(preprocessor, tag, markup):
     height = None
     poster = None
 
-    match = VIDEO.search(markup)
-    if match:
+    if match := VIDEO.search(markup):
         groups = match.groups()
-        videos = [g for g in groups[0:6:2] if g]
+        videos = [g for g in groups[:6:2] if g]
         width = groups[6]
         height = groups[7]
         poster = groups[9]

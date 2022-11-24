@@ -52,7 +52,7 @@ class Tipue_Search_JSON_Generator(object):
 
         page_url = '.'
         if page.url:
-            page_url = page.url if self.relative_urls else (self.siteurl + '/' + page.url)
+            page_url = page.url if self.relative_urls else f'{self.siteurl}/{page.url}'
 
         node = {'title': page_title,
                 'text': page_text,

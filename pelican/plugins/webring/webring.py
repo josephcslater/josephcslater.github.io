@@ -57,8 +57,7 @@ def fetch_feeds(generators):
 
     fetched_articles = []
     for feed_url in settings[WEBRING_FEED_URLS_STR]:
-        feed_html = get_feed_html(feed_url)
-        if feed_html:
+        if feed_html := get_feed_html(feed_url):
             fetched_articles.extend(
                 get_feed_articles(feed_html, feed_url, settings)
             )
@@ -163,6 +162,6 @@ def get_entry_summary(entry, settings):
                 summary += ' '
             else:
                 break
-        summary = summary[:len(summary)-1] + "..."
+        summary = f"{summary[:-1]}..."
 
     return summary

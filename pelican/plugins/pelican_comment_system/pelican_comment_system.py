@@ -91,7 +91,7 @@ def initialize(article_generator):
 def warn_on_slug_collision(items):
     slugs = {}
     for comment in items:
-        if not comment.slug in slugs:
+        if comment.slug not in slugs:
             slugs[comment.slug] = [comment]
         else:
             slugs[comment.slug].append(comment)
@@ -120,7 +120,7 @@ def write_feed_all(gen, writer):
     _all_comments.reverse()
 
     for com in _all_comments:
-        com.title = com.article.title + " - " + com.title
+        com.title = f"{com.article.title} - {com.title}"
         com.override_url = com.article.url + com.url
 
     writer.write_feed(_all_comments, context, path)
@@ -155,8 +155,8 @@ def add_static_comments(gen, content):
 
     # Modify the local context, so we get proper values for the feed
     context = copy.copy(gen.context)
-    context['SITEURL'] += "/" + content.url
-    context['SITENAME'] += " - Comments: " + content.title
+    context['SITEURL'] += f"/{content.url}"
+    context['SITENAME'] += f" - Comments: {content.title}"
     context['SITESUBTITLE'] = ""
 
     folder = os.path.join(
@@ -228,7 +228,7 @@ def pelican_finalized(pelican):
     if pelican.settings['PELICAN_COMMENT_SYSTEM'] is not True:
         return
     global _all_comments
-    print('Processed %s comment(s)' % len(_all_comments))
+    print(f'Processed {len(_all_comments)} comment(s)')
 
 
 def register():

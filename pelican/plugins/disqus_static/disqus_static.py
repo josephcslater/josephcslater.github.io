@@ -25,10 +25,7 @@ def disqus_static(generator):
     threads = Paginator(disqus.threads.list, 
                         forum=generator.settings['DISQUS_SITENAME'])
     # build a {thread_id: title} dict
-    thread_dict = {}
-    for thread in threads:
-        thread_dict[thread['id']] = thread['title']
-
+    thread_dict = {thread['id']: thread['title'] for thread in threads}
     # now retrieve the posts
     posts = Paginator(disqus.posts.list, 
                       forum=generator.settings['DISQUS_SITENAME'])
@@ -51,11 +48,12 @@ def disqus_static(generator):
     for article in generator.articles:
         if article.title in post_dict:
             article.disqus_comments = post_dict[article.title]
-            article.disqus_comment_count = sum([
-                postcounter(post) for post in post_dict[article.title]])
+            article.disqus_comment_count = sum(
+                postcounter(post) for post in post_dict[article.title]
+            )
 
 def postcounter(node):
-    return 1 + sum([postcounter(n) for n in node['children']])
+    return 1 + sum(postcounter(n) for n in node['children'])
 
 def build_post_dict(post_dict, child_dict, thread_dict, post):
     if post['thread'] not in thread_dict.keys():

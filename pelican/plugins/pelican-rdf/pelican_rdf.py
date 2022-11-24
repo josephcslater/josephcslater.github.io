@@ -84,7 +84,7 @@ class VocabularyGenerator(CachingGenerator):
             self.generate_vocabulary_context(f, self.path)
     
     def dereference(self, uri, local_file):
-        logger.debug("Dereferencing "+uri+" into "+local_file)
+        logger.debug(f"Dereferencing {uri} into {local_file}")
         headers={"Accept":"application/rdf+xml"}
         r = requests.get(uri, headers=headers)
         with open(self._local_vocabulary_path+local_file, 'w') as f:
@@ -92,7 +92,7 @@ class VocabularyGenerator(CachingGenerator):
     
     def generate_remote_context(self):
         for uri in self.settings["VOC_URIS"]:
-            logger.debug("Generating context for remote "+uri)
+            logger.debug(f"Generating context for remote {uri}")
             local_name = uri.split("/")[-1]+".rdf"
             self.dereference(uri, local_name)
             self.generate_vocabulary_context(
@@ -125,7 +125,7 @@ class RdfReader(BaseReader):
 
     def read(self, source_path):
         """Parse content and metadata of an rdf file"""
-        logger.debug("Loading graph described in "+source_path)
+        logger.debug(f"Loading graph described in {source_path}")
         graph = rdflib.Graph()
         graph.load(source_path)
         meta = {}
@@ -145,7 +145,7 @@ class RdfReader(BaseReader):
                 # vocabulary context, referenced by the query name as its key.
                 # Multiple results are stored in a list.
                 for result in result_set:
-                    if not query_key in meta.keys():
+                    if query_key not in meta:
                         meta[query_key]=result.asdict()
                     elif type(meta[query_key]) == list:
                         meta[query_key].append(result.asdict())

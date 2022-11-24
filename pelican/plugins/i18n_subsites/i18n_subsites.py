@@ -195,12 +195,14 @@ class GeneratorInspector(object):
         self.generator = generator
         self.generators_info.update(generator.settings.get(
             'I18N_GENERATORS_INFO', {}))
-        for cls in generator.__class__.__mro__:
-            if cls in self.generators_info:
-                self.info = self.generators_info[cls]
-                break
-        else:
-            self.info = {}
+        self.info = next(
+            (
+                self.generators_info[cls]
+                for cls in generator.__class__.__mro__
+                if cls in self.generators_info
+            ),
+            {},
+        )
 
     def translations_lists(self):
         '''Iterator over lists of content translations'''
@@ -214,8 +216,7 @@ class GeneratorInspector(object):
 
     def hiding_function(self):
         '''Function for transforming content to a hidden version'''
-        hiding_func = self.info.get('hiding_func', lambda x: x)
-        return hiding_func
+        return self.info.get('hiding_func', lambda x: x)
 
     def untranslated_policy(self, default):
         '''Get the policy for untranslated content'''
@@ -296,10 +297,10 @@ def install_templates_translations(generator):
             try:
                 translations = gettext.translation(domain, localedir, langs)
             except (IOError, OSError):
-                _LOGGER.error((
-                    "Cannot find translations for language '{}' in '{}' with "
-                    "domain '{}'. Installing NullTranslations.").format(
-                        langs[0], localedir, domain))
+                _LOGGER.error(
+                    f"Cannot find translations for language '{langs[0]}' in '{localedir}' with domain '{domain}'. Installing NullTranslations."
+                )
+
                 translations = gettext.NullTranslations()
         newstyle = generator.settings.get('I18N_GETTEXT_NEWSTYLE', True)
         generator.env.install_gettext_translations(translations, newstyle)
@@ -431,8 +432,10 @@ def create_next_subsite(pelican_obj):
             cls = get_pelican_cls(settings)
 
             new_pelican_obj = cls(settings)
-            _LOGGER.debug(("Generating i18n subsite for language '{}' "
-                           "using class {}").format(lang, cls))
+            _LOGGER.debug(
+                f"Generating i18n subsite for language '{lang}' using class {cls}"
+            )
+
             new_pelican_obj.run()
 
 
@@ -451,10 +454,10 @@ def register():
     '''Register the plugin only if required signals are available'''
     for sig_name in _SIGNAL_HANDLERS_DB.keys():
         if not hasattr(signals, sig_name):
-            _LOGGER.error((
-                'The i18n_subsites plugin requires the {} '
-                'signal available for sure in Pelican 3.4.0 and later, '
-                'plugin will not be used.').format(sig_name))
+            _LOGGER.error(
+                f'The i18n_subsites plugin requires the {sig_name} signal available for sure in Pelican 3.4.0 and later, plugin will not be used.'
+            )
+
             return
 
     for sig_name, handler in _SIGNAL_HANDLERS_DB.items():

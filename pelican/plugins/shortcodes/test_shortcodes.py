@@ -31,5 +31,5 @@ def test_expand_shortcodes():
         KeyError,
     }
     with pytest.raises(KeyError):
-        for short_code, exp in expected_errors.items():
+        for short_code in expected_errors:
             assert expand_shortcodes(text.format(short_code), shortcode_map)

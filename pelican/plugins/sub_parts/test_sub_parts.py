@@ -26,7 +26,7 @@ class TestSubParts(unittest.TestCase):
         settings['PLUGINS'] = [sub_parts]
         settings['CACHE_CONTENT'] = False
         context = settings.copy()
-        context['generated_content'] = dict()
+        context['generated_content'] = {}
         context['static_links'] = set()
         cls.generator = ArticlesGenerator(
             context=context, settings=settings,
@@ -92,8 +92,7 @@ class TestSubParts(unittest.TestCase):
         for a in self.all_articles:
             if '--' in a.slug:
                 self.assertTrue(hasattr(a, 'subtitle'))
-                self.assertEqual(a.title,
-                                 a.subtitle + ', ' + a.subpart_of.title)
+                self.assertEqual(a.title, f'{a.subtitle}, {a.subpart_of.title}')
 
 
 class TestSubPartsPhotos(unittest.TestCase):
@@ -110,7 +109,7 @@ class TestSubPartsPhotos(unittest.TestCase):
         settings['PLUGINS'] = [sub_parts]
         settings['CACHE_CONTENT'] = False
         context = settings.copy()
-        context['generated_content'] = dict()
+        context['generated_content'] = {}
         context['static_links'] = set()
         cls.generator = ArticlesGenerator(
             context=context, settings=settings,

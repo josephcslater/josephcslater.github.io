@@ -23,7 +23,7 @@ def patch_subparts(generator):
             parent.subparts.append(article)
             article.subpart_of = parent
             article.subtitle = article.title
-            article.title = article.title + ", " + parent.title
+            article.title = f"{article.title}, {parent.title}"
             generator.dates.remove(article)
             generator.articles.remove(article)
             if article.category:
@@ -57,8 +57,7 @@ def write_subparts(generator, writer):
             override_output=hasattr(article, 'override_save_as'),
             relative_urls=generator.settings['RELATIVE_URLS'])
     if len(generator.subparts) > 0:
-        print('sub_part: processed {} sub-parts.'.format(
-            len(generator.subparts)))
+        print(f'sub_part: processed {len(generator.subparts)} sub-parts.')
 
 
 def register():

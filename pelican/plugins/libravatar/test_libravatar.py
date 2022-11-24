@@ -36,7 +36,7 @@ LIBRAVATAR_BASE_URL = 'http://cdn.libravatar.org/avatar/'
 class TestLibravatarURL (unittest.TestCase):
     """Class for testing the URL output of the Libravatar plugin"""
 
-    def setUp (self, override = None):
+    def setUp(self, override = None):
         self.output_path = mkdtemp (prefix = 'pelicantests.')
         self.content_path = mkdtemp (prefix = 'pelicantests.')
         theme_path = os.path.join (os.path.dirname (os.path.abspath (__file__)),
@@ -49,7 +49,7 @@ class TestLibravatarURL (unittest.TestCase):
             'CACHE_CONTENT': False
         }
         if override:
-            settings.update (override)
+            settings |= override
 
         with open (os.path.join (self.content_path, 'test.md'), 'w') as test_md_file:
             test_md_file.write ('Title: Test\nDate: 2019-09-05\nEmail: ' + AUTHOR_EMAIL + '\n\n')
@@ -62,13 +62,13 @@ class TestLibravatarURL (unittest.TestCase):
         rmtree (self.output_path)
         rmtree (self.content_path)
 
-    def test_url (self, options = ''):
+    def test_url(self, options = ''):
         with open (os.path.join (self.output_path, 'test.html'), 'r') as test_html_file:
-            found = False
-            for line in test_html_file.readlines ():
-                if re.search (LIBRAVATAR_BASE_URL + MD5_HASH + options, line):
-                    found = True
-                    break
+            found = any(
+                re.search(LIBRAVATAR_BASE_URL + MD5_HASH + options, line)
+                for line in test_html_file
+            )
+
             assert found
 
 class TestLibravatarMissing (TestLibravatarURL):

@@ -34,8 +34,7 @@ REGEX = re.compile(r'([\S]+)(\s+(\d*\.?\d*))?')
 def speakerdeck(preprocessor, tag, markup):
     ratio = 1.33333333333333
     id = None
-    match = REGEX.search(markup)
-    if match:
+    if match := REGEX.search(markup):
         groups = match.groups()
         id = groups[0]
         ratio = groups[2] or ratio

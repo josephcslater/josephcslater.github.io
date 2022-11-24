@@ -13,9 +13,7 @@ def addLiquidTags(gen):
             LT_HELP[param] = helptext
 
     if LiquidTags not in gen.settings['MARKDOWN']:
-        configs = dict()
-        for key,value in LT_CONFIG.items():
-            configs[key]=value
+        configs = dict(LT_CONFIG.items())
         for key,value in gen.settings.items():
             if key in LT_CONFIG:
                 configs[key]=value
