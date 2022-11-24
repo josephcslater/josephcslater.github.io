@@ -1,0 +1,92 @@
+My Journey to Python
+######################
+
+:date: 2015-Jun-08 23:21 EDT
+:tags: Python, Scipy, Numpy, Octave, Matlab
+:category: Programming
+:slug: moving-to-python
+:author: Joseph C. Slater
+:summary: Why I'm moving to Python after 25 years of Matlab
+
+Back in 1989, when I first entered graduate school, I knew a handful
+of languages to some modest degree. For the sake of computations, I
+knew Basic and Fortran. During that first year I was assigned a
+project that required substantial programing (for my skill set at the
+time). This project was almost complete with about an hour to go
+before the deadline. Unfortunately, this was the days of floppy drives
+(it was not a personally owned PC). I accidentally stepped on the
+switch on a power strip and damaged the files beyond my capability to
+recover them. With about an hour to go a fellow student, Jeff Umland-
+now of JPL, suggested that perhaps I should heed his advice and use
+Matlab. *The project would be simple* in Matlab according to him. There
+was certainly no way I could complete the project in Fortran so with
+him responding to my shouted out questions I started using Matlab, and
+I finished with time to spare. That was the last time I started a
+project using Fortran. Fortran has its place, but it has been clear to
+me ever since that for most problems facing me, time of development
+far exceeded time of program execution. So, the cost of using an
+interpreted language was well worth the price in time when development
+time was greatly reduced.
+
+Unfortunately, this can build some bad habits that I am still working
+through. Nevertheless, I continued to learn Matlab_ and later wrote the
+`Engineering Vibration Toolbox`_ in Matlab_. I immediately noticed that
+in Matlab each function is the name of a file, an once that file is in
+the path, you can have a clash of names. Over the years many of my
+programs have been broken because of the shared name space, which
+continues to grow. Names such as *addpath*, *spectrum*, *plot3*,
+etc. have been replace by Mathworks m-files. Further, when I
+distribute a code, I have to be concerned about their
+clashes. Fortunately I was savvy enough to effectively create my own
+name space for the `Engineering Vibration Toolbox`_ to name each and
+every file **vtb#_#.m**, hoping that my starting them with *vtb* they
+would remain safe. That seems to have stood the test of time.
+
+So, although the names stood the test of time, and I noticed many of
+my programs for personal use did not. I've become further
+disenfranchised by the lack of ability for me to truly own my own
+codes. Without a Matlab license, until *Octave* came around, your
+M-files were your own, but ot little value if you didn't continue to
+pay the MathWorks. I appreciate the effort that they put into writing
+Matlab, but I put time into my code as well, and I cannot afford to be
+tied to them.
+
+As you can guess, I later switched to Octave_. Ironically, what I
+liked the best about Octave initially was that it wasn't a Matlab_
+clone. As time has moved on, the author, John Eaton, has acquiesced to
+public pleading and moved further and further towards Matlab_
+compatibility[#]_.
+
+I still like Octave_ and have great respect for the developer, but I
+noticed Python_ and that it seemed to really be taking programming to
+another level. The add-on packages are extensive. The language isn't
+designed to be purely for computation/data manipulation, but in many
+respects, it's better, IMHO. Instead of rehashing, I'll redirect you to
+the opinions of `Pyzo
+<http://www.pyzo.org/python_vs_matlab.html>`_, `Hoyt Koepke
+<https://www.stat.washington.edu/~hoytak/blog/whypython.html>`_, and
+`Phillip M. Feldman
+<http://phillipmfeldman.org/Python/Advantages_of_Python_Over_Matlab.html>`_. I
+personally love the readability of the code. It just looks good, and
+that prevents mistakes. I've attempted Object Oriented Programming in
+Matlab_ (reinvented it myself) for a purpose. After looking at Python_,
+I wish I never had. Matlab_, and by analogy Octave_, are somewhat
+limiting languages compared to Python_. They have served me well.
+I will likely use them again in the future. However, Python_ has empowered
+me to generate more capable code than I ever could in Matlab_ due to
+Matlab's limitations.
+
+Oh, and I made this website in Python_, using Pelican_, and writing
+the source files in ReST_.
+
+.. [#] Ironically, early on he expressed clear reluctance on my part
+       to convert to the standards of the then substantially differing
+       Octave help system. I think he missed when I came to agree with
+       him about that and other things!
+
+.. _Octave : http://www.octave.org
+.. _Matlab : http://www.mathworks.com
+.. _Engineering Vibration Toolbox : http://www.vtoolbox.com
+.. _Python : http://www.python.org
+.. _Pelican: http://getpelican.com/
+.. _ReST : http://docutils.sourceforge.net/rst.html
