@@ -39,8 +39,7 @@ def vimeo(preprocessor, tag, markup):
     height = 390
     vimeo_id = None
 
-    match = VIMEO.search(markup)
-    if match:
+    if match := VIMEO.search(markup):
         groups = match.groups()
         vimeo_id = groups[0]
         width = groups[2] or width

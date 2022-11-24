@@ -26,7 +26,7 @@ def initialize (pelicanobj):
     pelicanobj.settings.setdefault ('LIBRAVATAR_SIZE', None)
 
 
-def add_libravatar (generator, metadata):
+def add_libravatar(generator, metadata):
     """Article generator connector for the Libravatar plugin"""
     missing = generator.settings.get ('LIBRAVATAR_MISSING')
     size = generator.settings.get ('LIBRAVATAR_SIZE')
@@ -45,17 +45,17 @@ def add_libravatar (generator, metadata):
         ## (the ascii encoding is necessary for Python3)
         email = metadata ['email'].lower ().encode ('ascii')
         md5 = hashlib.md5 (email).hexdigest ()
-        url = 'http://cdn.libravatar.org/avatar/' + md5
+        url = f'http://cdn.libravatar.org/avatar/{md5}'
 
         ## Add eventual "missing picture" option
         if missing or size:
-            url = url + '?'
-            if missing:
-                url = url + 'd=' + missing
-                if size:
-                    url = url + '&'
+            url = f'{url}?'
+        if missing:
+            url = f'{url}d={missing}'
             if size:
-                url = url + 's=' + str (size)
+                url = f'{url}&'
+        if size:
+            url = f'{url}s={str(size)}'
 
         ## Add URL to the article's metadata
         metadata ['author_libravatar'] = url

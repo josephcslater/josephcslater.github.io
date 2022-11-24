@@ -63,7 +63,7 @@ class TestGzipCache(unittest.TestCase):
             with open(a_html_filename, 'w') as f:
                 f.write('A' * 24)  # under this length, compressing is useless and create_gzip_file will not create any file
             gzip_cache.create_gzip_file(a_html_filename, False)
-            self.assertTrue(os.path.exists(a_html_filename + '.gz'))
+            self.assertTrue(os.path.exists(f'{a_html_filename}.gz'))
 
     def test_creates_same_gzip_file(self):
         # Should create the same gzip file from the same contents.
@@ -75,7 +75,7 @@ class TestGzipCache(unittest.TestCase):
             _, a_html_filename = tempfile.mkstemp(suffix='.html', dir=tempdir)
             with open(a_html_filename, 'w') as f:
                 f.write('A' * 24)  # under this length, compressing is useless and create_gzip_file will not create any file
-            a_gz_filename = a_html_filename + '.gz'
+            a_gz_filename = f'{a_html_filename}.gz'
             gzip_cache.create_gzip_file(a_html_filename, False)
             gzip_hash = get_md5(a_gz_filename)
             time.sleep(1)
@@ -91,7 +91,7 @@ class TestGzipCache(unittest.TestCase):
         with temporary_folder() as tempdir:
             _, a_html_filename = tempfile.mkstemp(suffix='.html', dir=tempdir)
             gzip_cache.create_gzip_file(a_html_filename, True)
-            self.assertFalse(os.path.exists(a_html_filename + '.gz'))
+            self.assertFalse(os.path.exists(f'{a_html_filename}.gz'))
 
 def get_md5(filepath):
     with open(filepath, 'rb') as fh:

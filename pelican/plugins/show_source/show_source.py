@@ -23,8 +23,10 @@ def link_source_files(generator):
         if getattr(generator, attr, None) is not None]
     # Work on each item
     for post in posts[0]:
-        if not 'SHOW_SOURCE_ON_SIDEBAR' in generator.settings and \
-            not 'SHOW_SOURCE_IN_SECTION' in generator.settings:
+        if (
+            'SHOW_SOURCE_ON_SIDEBAR' not in generator.settings
+            and 'SHOW_SOURCE_IN_SECTION' not in generator.settings
+        ):
             return
         # Only try this when specified in metadata or SHOW_SOURCE_ALL_POSTS
         # override is present in settings
@@ -32,8 +34,9 @@ def link_source_files(generator):
             'show_source' in post.metadata:
             # Source file name can be optionally set in config
             show_source_filename = generator.settings.get(
-                'SHOW_SOURCE_FILENAME', '{}.txt'.format(post.slug)
-                )
+                'SHOW_SOURCE_FILENAME', f'{post.slug}.txt'
+            )
+
             try:
                 # Get the full path to the original source file
                 source_out = os.path.join(
@@ -52,9 +55,7 @@ def link_source_files(generator):
             except Exception:
                 return
             # Format post source dict & populate
-            out = dict()
-            out['copy_raw_from'] = post.source_path
-            out['copy_raw_to'] = copy_to
+            out = {'copy_raw_from': post.source_path, 'copy_raw_to': copy_to}
             logger.debug('Linked %s to %s', post.source_path, copy_to)
             source_files.append(out)
             # Also add the source path to the post as an attribute for tpls

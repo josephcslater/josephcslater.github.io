@@ -48,8 +48,7 @@ class CreoleReader(readers.BaseReader):
         return u''
 
     def _no_highlight(self, text):
-        html = u'\n<pre><code>{}</code></pre>\n'.format(text)
-        return html
+        return f'\n<pre><code>{text}</code></pre>\n'
 
     def _get_lexer(self, source_type, code):
         try:
@@ -58,10 +57,13 @@ class CreoleReader(readers.BaseReader):
             return lexers.guess_lexer(code)
 
     def _get_formatter(self):
-        formatter = HtmlFormatter(lineos = True, encoding='utf-8',
-                                  style='colorful', outencoding='utf-8',
-                                  cssclass='pygments')
-        return formatter
+        return HtmlFormatter(
+            lineos=True,
+            encoding='utf-8',
+            style='colorful',
+            outencoding='utf-8',
+            cssclass='pygments',
+        )
 
     def _parse_code_macro(self, ext, text):
         if not PYGMENTS:
@@ -69,10 +71,7 @@ class CreoleReader(readers.BaseReader):
 
         try:
             source_type = ''
-            if '.' in ext:
-                source_type = ext.strip().split('.')[1]
-            else:
-                source_type = ext.strip()
+            source_type = ext.strip().split('.')[1] if '.' in ext else ext.strip()
         except IndexError:
             source_type = ''
         lexer = self._get_lexer(source_type, text)

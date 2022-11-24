@@ -122,7 +122,7 @@ def generate_ical_file(generator):
     ical.add('version', '2.0')
 
     DEFAULT_LANG = generator.settings['DEFAULT_LANG']
-    curr_events = events if not localized_events else localized_events[DEFAULT_LANG]
+    curr_events = localized_events[DEFAULT_LANG] if localized_events else events
 
     for e in curr_events:
         ie = icalendar.Event(
@@ -153,19 +153,22 @@ def generate_localized_events(generator):
             if "lang" in e.metadata:
                 localized_events[e.metadata["lang"]].append(e)
             else:
-                log.debug("event %s contains no lang attribute" % (e.metadata["title"],))
+                log.debug(f'event {e.metadata["title"]} contains no lang attribute')
 
 
 def generate_events_list(generator):
     """Populate the event_list variable to be used in jinja templates"""
 
-    if not localized_events:
-        generator.context['events_list'] = sorted(events, reverse = True,
-                                                  key=lambda ev: (ev.dtstart, ev.dtend))
-    else:
-        generator.context['events_list'] = {k: sorted(v, reverse = True,
-                                                      key=lambda ev: (ev.dtstart, ev.dtend))
-                                            for k, v in localized_events.items()}
+    generator.context['events_list'] = (
+        {
+            k: sorted(v, reverse=True, key=lambda ev: (ev.dtstart, ev.dtend))
+            for k, v in localized_events.items()
+        }
+        if localized_events
+        else sorted(
+            events, reverse=True, key=lambda ev: (ev.dtstart, ev.dtend)
+        )
+    )
 
 def initialize_events(article_generator):
     """

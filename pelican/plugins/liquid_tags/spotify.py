@@ -31,8 +31,7 @@ SPOTIFY = re.compile(r'(\w+)(\s+(\d+)\s(\d+))?')
 def spotify(preprocessor, tag, markup):
     spotify_id = None
 
-    match = SPOTIFY.search(markup)
-    if match:
+    if match := SPOTIFY.search(markup):
         groups = match.groups()
         spotify_id = groups[0]
 

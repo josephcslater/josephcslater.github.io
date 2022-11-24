@@ -96,10 +96,7 @@ class _GitWrapperCommon(object):
 
         :returns: Sequence of commit objects. Newest to oldest
         '''
-        if follow:
-            return self.get_commits_following(path)
-        else:
-            return self._get_commits(path)
+        return self.get_commits_following(path) if follow else self._get_commits(path)
 
 
 class _GitWrapperLegacy(_GitWrapperCommon):

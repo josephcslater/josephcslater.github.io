@@ -32,11 +32,7 @@ def text_stats(text, wc):
     stcs = [s.split(" ") for s in text.split(". ")]
     stcs = [s for s in stcs if len(s) >= 2]
 
-    if wc:
-        words = wc
-    else:
-        words = sum(len(s) for s in stcs)
-
+    words = wc or sum(len(s) for s in stcs)
     sbls = sum(syllables(w) for s in stcs for w in s)
 
     return len(stcs), words, sbls

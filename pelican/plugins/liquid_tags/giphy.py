@@ -34,7 +34,7 @@ GIPHY = re.compile(r'''(?P<gif_id>[\S+]+)(?:\s+(['"]{0,1})(?P<alt>.+)(\\2))?''')
 
 def get_gif(api_key, gif_id):
     '''Returns dict with gif informations from the API.'''
-    url = 'http://api.giphy.com/v1/gifs/{}?api_key={}'.format(gif_id, api_key)
+    url = f'http://api.giphy.com/v1/gifs/{gif_id}?api_key={api_key}'
     r = urlopen(url)
 
     return json.loads(r.read().decode('utf-8'))
@@ -45,12 +45,13 @@ def create_html(api_key, attrs):
     gif = get_gif(api_key, attrs['gif_id'])
 
     if 'alt' not in attrs.keys():
-        attrs['alt'] = 'source: {}'.format(gif['data']['source'])
+        attrs['alt'] = f"source: {gif['data']['source']}"
 
-    html_out = '<a href="{}">'.format(gif['data']['url'])
-    html_out += '<img src="{}" alt="{}">'.format(
-        gif['data']['images']['original']['url'],
-        attrs['alt'])
+    html_out = (
+        f"""<a href="{gif['data']['url']}">"""
+        + f"""<img src="{gif['data']['images']['original']['url']}" alt="{attrs['alt']}">"""
+    )
+
     html_out += '</a>'
 
     return html_out
@@ -68,8 +69,7 @@ def main(api_key, markup):
              for (key, value) in match.groupdict().items() if value])
 
     else:
-        raise ValueError('Error processing input. '
-                         'Expected syntax: {}'.format(SYNTAX))
+        raise ValueError(f'Error processing input. Expected syntax: {SYNTAX}')
 
     return create_html(api_key, attrs)
 

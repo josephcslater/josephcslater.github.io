@@ -21,9 +21,7 @@ def process_settings(pelicanobj):
     """Sets user specified settings (see README for more details)"""
 
     # Default settings
-    inline_settings = {}
-    inline_settings['config'] = {'[]':('', 'pelican-inline')}
-
+    inline_settings = {'config': {'[]': ('', 'pelican-inline')}}
     # Get the user specified settings
     try:
         settings = pelicanobj.settings['MD_INLINE']

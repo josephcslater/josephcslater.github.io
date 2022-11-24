@@ -64,23 +64,16 @@ class OrgEmacsReader(readers.BaseReader):
 
     def read(self, filename):
         assert 'ORG_READER_EMACS_LOCATION' in self.settings, \
-            "No ORG_READER_EMACS_LOCATION specified in settings"
+                "No ORG_READER_EMACS_LOCATION specified in settings"
         LOG.info("Reading Org file {0}".format(filename))
         cmd = [self.settings['ORG_READER_EMACS_LOCATION']]
         cmd.extend(self.EMACS_ARGS)
 
         if 'ORG_READER_EMACS_SETTINGS' in self.settings:
-            cmd.append('-l')
-            cmd.append(self.settings['ORG_READER_EMACS_SETTINGS'])
-
+            cmd.extend(('-l', self.settings['ORG_READER_EMACS_SETTINGS']))
         backend = self.settings.get('ORG_READER_BACKEND', "'html")
 
-        cmd.append('-l')
-        cmd.append(ELISP)
-
-        cmd.append('--eval')
-        cmd.append(self.ELISP_EXEC.format(filename, backend))
-
+        cmd.extend(('-l', ELISP, '--eval', self.ELISP_EXEC.format(filename, backend)))
         LOG.debug("OrgEmacsReader: running command `{0}`".format(cmd))
 
         json_result = subprocess.check_output(cmd, universal_newlines=True)
@@ -105,9 +98,10 @@ class OrgEmacsReader(readers.BaseReader):
             if not metadata[key]:
                 metadata.pop(key)
 
-        parsed = {}
-        for key, value in metadata.items():
-            parsed[key] = self.process_metadata(key, value)
+        parsed = {
+            key: self.process_metadata(key, value)
+            for key, value in metadata.items()
+        }
 
         content = json_output['post']
 

@@ -55,7 +55,7 @@ class PdfGenerator(Generator):
                                    raw_html=True)
 
     def _create_pdf(self, obj, output_path):
-        filename = obj.slug + '.pdf'
+        filename = f'{obj.slug}.pdf'
         output_pdf = os.path.join(output_path, filename)
         mdreader = MarkdownReader(self.settings)
         _, ext = os.path.splitext(obj.source_path)
@@ -78,7 +78,7 @@ class PdfGenerator(Generator):
                 if k not in self.supported_md_fields:
                     del meta[k]
 
-            header += '\n'.join([':%s: %s' % (k, meta[k]) for k in meta])
+            header += '\n'.join([f':{k}: {meta[k]}' for k in meta])
             header += '\n\n.. raw:: html\n\n\t'
             text = text.replace('\n', '\n\t')
 
@@ -88,10 +88,10 @@ class PdfGenerator(Generator):
             text = text.encode('ascii', 'xmlcharrefreplace').decode()
         else:
             # We don't support this format
-            logger.warn('Ignoring unsupported file ' + obj.source_path)
+            logger.warn(f'Ignoring unsupported file {obj.source_path}')
             return
 
-        logger.info(' [ok] writing %s' % output_pdf)
+        logger.info(f' [ok] writing {output_pdf}')
         self.pdfcreator.createPdf(text=(header+text),
                                   output=output_pdf)
 

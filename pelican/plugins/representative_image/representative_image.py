@@ -29,8 +29,7 @@ def images_extraction(instance):
         # If there are no image in summary, look for it in the content body
         if not representativeImage:
             soup = BeautifulSoup(instance._content, 'html.parser')
-            imageTag = soup.find('img')
-            if imageTag:
+            if imageTag := soup.find('img'):
                 representativeImage = imageTag['src']
 
         # Set the attribute to content instance

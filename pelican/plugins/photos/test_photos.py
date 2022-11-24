@@ -28,7 +28,7 @@ class TestPhotos(unittest.TestCase):
         cls.settings['AUTHOR'] = 'Bob Anonymous'
         photos.initialized(cls)
         context = cls.settings.copy()
-        context['generated_content'] = dict()
+        context['generated_content'] = {}
         context['static_links'] = set()
         cls.generator = ArticlesGenerator(
             context=context, settings=cls.settings,
@@ -49,20 +49,19 @@ class TestPhotos(unittest.TestCase):
             if 'image' in a.metadata:
                 self.assertTrue(
                     hasattr(a, 'photo_image'),
-                    msg="{} not recognized.".format(a.metadata['image']))
+                    msg=f"{a.metadata['image']} not recognized.",
+                )
 
     def test_gallery(self):
         for a in self.generator.articles:
             if 'gallety' in a.metadata:
                 self.assertTrue(
                     hasattr(a, 'photo_gallery'),
-                    msg="{} not recognized.".format(a.metadata['gallery']))
+                    msg=f"{a.metadata['gallery']} not recognized.",
+                )
 
     def get_article(self, slug):
-        for a in self.generator.articles:
-            if slug == a.slug:
-                return a
-        return None
+        return next((a for a in self.generator.articles if slug == a.slug), None)
 
     def test_photo_article_image(self):
         self.assertEqual(self.get_article('photo').photo_image,

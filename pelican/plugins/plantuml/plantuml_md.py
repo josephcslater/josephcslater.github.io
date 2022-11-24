@@ -48,17 +48,15 @@ class PlantUMLBlockProcessor(markdown.blockprocessors.BlockProcessor):
 
         # Parse configuration params
         m = self.RE.search(block)
-        format  = m.group('format')  if m.group('format')  else self.config['format']
-        classes = m.group('classes') if m.group('classes') else self.config['classes']
-        alt     = m.group('alt')     if m.group('alt')     else self.config['alt']
+        format = m.group('format') or self.config['format']
+        classes = m.group('classes') or self.config['classes']
+        alt = m.group('alt') or self.config['alt']
 
-        # Read blocks until end marker found
         while blocks and not self.RE_END.search(block):
             block = blocks.pop(0)
             text = text + '\n' + block
-        else:
-            if not blocks:
-                raise RuntimeError("[plantuml] UML block not closed, text is:\n"+text)
+        if not blocks:
+            raise RuntimeError("[plantuml] UML block not closed, text is:\n"+text)
 
         # Remove block header and footer
         text = re.sub(self.RE, "", re.sub(self.RE_END, "", text))

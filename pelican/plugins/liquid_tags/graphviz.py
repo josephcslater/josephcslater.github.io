@@ -106,9 +106,7 @@ def run_graphviz(program, code, options=[], format='png'):
 def graphviz_parser(preprocessor, tag, markup):
     """ Simple Graphviz parser """
 
-    # Parse the markup string
-    m = DOT_BLOCK_RE.search(markup)
-    if m:
+    if m := DOT_BLOCK_RE.search(markup):
         # Get program and DOT code
         code = m.group('code')
         program = m.group('program').strip()

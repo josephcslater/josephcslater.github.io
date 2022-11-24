@@ -72,8 +72,7 @@ def include_code(preprocessor, tag, markup):
     lang = None
     src = None
 
-    match = FORMAT.search(markup)
-    if match:
+    if match := FORMAT.search(markup):
         argdict = match.groupdict()
         title = argdict['title'] or ""
         lang = argdict['lang']
@@ -118,9 +117,9 @@ def include_code(preprocessor, tag, markup):
     close_tag = "</figure>"
     if not hide_all:
         if not hide_filename:
-            title += " %s" % os.path.basename(src)
+            title += f" {os.path.basename(src)}"
             if lines:
-                title += " [Lines %s]" % lines
+                title += f" [Lines {lines}]"
             title = title.strip()
 
             open_tag += "<span>{title}</span> ".format(title=title)
@@ -135,25 +134,28 @@ def include_code(preprocessor, tag, markup):
     open_tag = preprocessor.configs.htmlStash.store(open_tag)
     close_tag = preprocessor.configs.htmlStash.store(close_tag)
 
-    if lang:
-        lang_include = ':::' + lang + '\n    '
-    else:
-        lang_include = ''
-
-    if sys.version_info[0] < 3:
-        source = (open_tag
-                  + '\n\n    '
-                  + lang_include
-                  + '\n    '.join(code.decode(codec).split('\n')) + '\n\n'
-                  + close_tag + '\n')
-    else:
-        source = (open_tag
-                  + '\n\n    '
-                  + lang_include
-                  + '\n    '.join(code.split('\n')) + '\n\n'
-                  + close_tag + '\n')
-
-    return source
+    lang_include = f':::{lang}' + '\n    ' if lang else ''
+    return (
+        (
+            open_tag
+            + '\n\n    '
+            + lang_include
+            + '\n    '.join(code.decode(codec).split('\n'))
+            + '\n\n'
+            + close_tag
+            + '\n'
+        )
+        if sys.version_info[0] < 3
+        else (
+            open_tag
+            + '\n\n    '
+            + lang_include
+            + '\n    '.join(code.split('\n'))
+            + '\n\n'
+            + close_tag
+            + '\n'
+        )
+    )
 
 
 #----------------------------------------------------------------------

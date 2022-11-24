@@ -17,9 +17,7 @@ class TestNotebookTagRegex(unittest.TestCase):
 
     def get_argdict(self, markup):
 
-        match = notebook.FORMAT.search(markup)
-
-        if match:
+        if match := notebook.FORMAT.search(markup):
             argdict = match.groupdict()
 
             src = argdict['src']
@@ -69,7 +67,7 @@ class TestNotebookTagRegex(unittest.TestCase):
 
     def test_notebook_tag_with_symbol_in_name_language(self):
         for short_name in [u'c++', u'cpp-objdump', u'c++-objdumb', u'cxx-objdump']:
-            markup = u'path/to/thing.ipynb language[{}]'.format(short_name)
+            markup = f'path/to/thing.ipynb language[{short_name}]'
             src, start, end, language = self.get_argdict(markup)
 
             self.assertEqual(src, u'path/to/thing.ipynb')

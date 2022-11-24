@@ -12,15 +12,15 @@ from pelican.rstdirectives import Pygments
 def fetch(gid, filename, typ):
     if not os.path.exists('.gists'):
         os.mkdir('.gists')
-    key = os.path.join('.gists', ("%s/%s/%s" % (typ, gid, filename)).replace('/', ';'))
+    key = os.path.join('.gists', f"{typ}/{gid}/{filename}".replace('/', ';'))
     if os.path.isfile(key):
         print('LOAD-CACHED:', key)
         return io.open(key, encoding='utf8').read()
     else:
         if typ == 'gist':
-            url = 'https://gist.githubusercontent.com/%s/raw/%s' % (gid, filename)
+            url = f'https://gist.githubusercontent.com/{gid}/raw/{filename}'
         elif typ == 'github':
-            url = 'https://raw.githubusercontent.com/%s/%s' % (gid, filename)
+            url = f'https://raw.githubusercontent.com/{gid}/{filename}'
         else:
             raise RuntimeError(typ)
         print('FETCHING:', url)

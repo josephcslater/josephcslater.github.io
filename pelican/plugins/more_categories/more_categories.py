@@ -17,7 +17,7 @@ class Category(URLWrapper):
     @property
     def _name(self):
         if self.parent:
-            return self.parent._name + '/' + self.shortname
+            return f'{self.parent._name}/{self.shortname}'
         return self.shortname
 
     @_name.setter
@@ -43,14 +43,12 @@ class Category(URLWrapper):
             self._slug = slugify(self.shortname, regex_subs=subs)
             print(self._slug)
             if self.parent:
-                self._slug = self.parent.slug + '/' + self._slug
+                self._slug = f'{self.parent.slug}/{self._slug}'
         return self._slug
 
     @property
     def ancestors(self):
-        if self.parent:
-            return self.parent.ancestors + [self]
-        return [self]
+        return self.parent.ancestors + [self] if self.parent else [self]
 
     def as_dict(self):
         d = super(Category, self).as_dict()

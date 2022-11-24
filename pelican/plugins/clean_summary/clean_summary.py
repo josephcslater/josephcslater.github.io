@@ -20,19 +20,19 @@ def init(pelican):
 
 
 def clean_summary(instance):
-    if type(instance) == Article:
-        summary = instance.summary
-        summary = BeautifulSoup(instance.summary, 'html.parser')
-        images = summary.findAll('img')
-        if (len(images) > maximum_images):
-            for image in images[maximum_images:]:
-                image.extract()
-        if len(images) < 1 and minimum_one: #try to find one
-            content = BeautifulSoup(instance.content, 'html.parser')
-            first_image = content.find('img')
-            if first_image:
-                summary.insert(0, first_image)
-        instance._summary = text_type(summary)
+    if type(instance) != Article:
+        return
+    summary = instance.summary
+    summary = BeautifulSoup(instance.summary, 'html.parser')
+    images = summary.findAll('img')
+    if (len(images) > maximum_images):
+        for image in images[maximum_images:]:
+            image.extract()
+    if len(images) < 1 and minimum_one: #try to find one
+        content = BeautifulSoup(instance.content, 'html.parser')
+        if first_image := content.find('img'):
+            summary.insert(0, first_image)
+    instance._summary = text_type(summary)
 
 
 def run_plugin(generators):

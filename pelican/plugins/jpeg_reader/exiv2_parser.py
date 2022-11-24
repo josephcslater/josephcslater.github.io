@@ -19,28 +19,23 @@ class Exiv2Parser:
         process = subprocess.Popen(commands, stdout=subprocess.PIPE)
         output = util.to_str(process.communicate()[0])
         match = re.search(r'exiv2 ([\d.]+) (\w+)', output)
-        if match is not None:
-            return match.groups()
-        return None
+        return match.groups() if match is not None else None
 
     @classmethod
     def get_values(cls, file_path: str) -> dict:
         keywords = cls.__get_keys(file_path)
-        result = dict()
+        result = {}
         for key in keywords:
             commands = ['exiv2', '-K', key.keyword, '-P', 't', 'print', file_path]
             process = subprocess.Popen(commands, stdout=subprocess.PIPE)
             output = util.to_str(process.communicate()[0]).rstrip('\n')
             # Check if the key is a list or scalar
-            if key.count > 1:
-                result[key.keyword] = output.split('\n')  # Assume the output is like keywords, one per line
-            else:
-                result[key.keyword] = output  # Assume the whole input is the value
+            result[key.keyword] = output.split('\n') if key.count > 1 else output
         return result
 
     @classmethod
     def __get_keys(cls, file_path: str) -> List[Keyword]:
-        found_keywords = dict()
+        found_keywords = {}
         commands = ['exiv2', '-P', 'ky', 'print', file_path]
         process = subprocess.Popen(commands, stdout=subprocess.PIPE)
         output = util.to_str(process.communicate()[0])

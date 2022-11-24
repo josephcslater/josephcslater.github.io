@@ -15,7 +15,12 @@ class W3CValidateTest(unittest.TestCase):
         with self.assertLogs('w3c_validate.wc3_validate', level='INFO') as logs:
             validate_files(PelicanMock({'OUTPUT_PATH': TEST_CONTENT_DIR}))
 
-        self.assertEqual(logs.output, ['INFO:w3c_validate.wc3_validate:Validating: {}/getpelican.html'.format(TEST_CONTENT_DIR)])
+        self.assertEqual(
+            logs.output,
+            [
+                f'INFO:w3c_validate.wc3_validate:Validating: {TEST_CONTENT_DIR}/getpelican.html'
+            ],
+        )
 
 
 class PelicanMock:

@@ -28,13 +28,7 @@ class TestUnityWebgl(TestCase):
 
         res = publish_string('.. unitywebgl:: testgame', writer_name='html', settings_overrides={'output_encoding': 'unicode'})
 
-        passed = True
-
-        for line in html:
-            if line not in res:
-                passed = False
-                break
-
+        passed = all(line in res for line in html)
         assert passed
 
 
@@ -60,11 +54,5 @@ class TestUnityWebgl(TestCase):
 
         res = publish_string(d, writer_name='html', settings_overrides={'output_encoding': 'unicode'})
 
-        passed = True
-
-        for line in html:
-            if line not in res:
-                passed = False
-                break
-
+        passed = all(line in res for line in html)
         assert passed

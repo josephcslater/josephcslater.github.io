@@ -36,7 +36,7 @@ class Comment(Content):
         # Strip the extension from the filename.
         name = os.path.splitext(name)[0]
         self.avatar = avatars.getAvatarPath(name, metadata)
-        self.title = "Posted by:  {}".format(metadata['author'])
+        self.title = f"Posted by:  {metadata['author']}"
 
     def addReply(self, comment):
         self.replies.append(comment)
@@ -45,10 +45,9 @@ class Comment(Content):
         for reply in self.replies:
             if reply.slug == slug:
                 return reply
-            else:
-                deepReply = reply.getReply(slug)
-                if deepReply is not None:
-                    return deepReply
+            deepReply = reply.getReply(slug)
+            if deepReply is not None:
+                return deepReply
         return None
 
     def __lt__(self, other):
@@ -60,7 +59,5 @@ class Comment(Content):
         self.replies = sorted(self.replies)
 
     def countReplies(self):
-        amount = 0
-        for r in self.replies:
-            amount += r.countReplies()
+        amount = sum(r.countReplies() for r in self.replies)
         return amount + len(self.replies)

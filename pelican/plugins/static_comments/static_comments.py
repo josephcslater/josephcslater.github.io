@@ -23,7 +23,7 @@ def add_static_comments(gen, metadata):
     if gen.settings['STATIC_COMMENTS'] != True:
         return
 
-    if not 'slug' in metadata:
+    if 'slug' not in metadata:
         logger.warning("static_comments: "
                 "cant't locate comments file without slug tag in the article")
         return

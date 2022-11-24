@@ -23,26 +23,28 @@ def iter3(seq):
 
 
 def get_translation(article, prefered_language):
-    if not article:
-        return None
-    for translation in article.translations:
-        if translation.lang == prefered_language:
-            return translation
-    return article
+    return (
+        next(
+            (
+                translation
+                for translation in article.translations
+                if translation.lang == prefered_language
+            ),
+            article,
+        )
+        if article
+        else None
+    )
 
 
 def set_neighbors(articles, next_name, prev_name):
     for nxt, cur, prv in iter3(articles):
-        exec("cur.{} = nxt".format(next_name))
-        exec("cur.{} = prv".format(prev_name))
+        exec(f"cur.{next_name} = nxt")
+        exec(f"cur.{prev_name} = prv")
 
-        for translation in cur.translations:
-            exec(
-                "translation.{} = get_translation(nxt, translation.lang)"
-                .format(next_name))
-            exec(
-                "translation.{} = get_translation(prv, translation.lang)"
-                .format(prev_name))
+        for _ in cur.translations:
+            exec(f"translation.{next_name} = get_translation(nxt, translation.lang)")
+            exec(f"translation.{prev_name} = get_translation(prv, translation.lang)")
 
 
 def neighbors(generator):
@@ -57,8 +59,8 @@ def neighbors(generator):
         for subcategory, articles in generator.subcategories:
             articles.sort(key=lambda x: x.date, reverse=True)
             index = subcategory.name.count('/')
-            next_name = 'next_article_in_subcategory{}'.format(index)
-            prev_name = 'prev_article_in_subcategory{}'.format(index)
+            next_name = f'next_article_in_subcategory{index}'
+            prev_name = f'prev_article_in_subcategory{index}'
             set_neighbors(articles, next_name, prev_name)
 
 

@@ -22,7 +22,7 @@ def cross_post(reddit, submission, subs):
     for sub in subreddits:
         if sub == '':
             continue
-        log.debug("Posting in %s" % sub)
+        log.debug(f"Posting in {sub}")
         subreddit = reddit.subreddit(sub)
         subreddit.subscribe() # must be subscribed to crosspost
         submission.crosspost(subreddit)
@@ -37,14 +37,14 @@ def make_posts(generator, metadata, url):
         log.info("Reddit plugin not enabled")
         return
     if metadata.get('status') == "draft": # people don't want to post drafts
-        log.debug("ignoring draft %s" % title)
+        log.debug(f"ignoring draft {title}")
         return
 
     collection = generator.settings['REDDIT_POSTER_COLLECT_SUB']
     sub = reddit.subreddit(collection)
     results = sub.search(title)
-    if len([result for result in results]) > 0:
-        log.debug("ignoring %s because it is already on sub %s " % (title, collection))
+    if list(results):
+        log.debug(f"ignoring {title} because it is already on sub {collection} ")
         # post already was made to this sub
         return
     try:
@@ -75,7 +75,8 @@ def content_written(generator, content):
     """
     create a url and call make posts (which has less information)
     """
-    url = "%s/%s" % (generator.settings.get('SITEURL', 'http://localhost:8000'), content.url)
+    url = f"{generator.settings.get('SITEURL', 'http://localhost:8000')}/{content.url}"
+
     make_posts(generator, content.metadata, url)
 
 def register():

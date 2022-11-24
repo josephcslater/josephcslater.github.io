@@ -33,9 +33,12 @@ logger = logging.getLogger(__name__)
 
 def get_writer(sender):
 
+
+
+
     class PlimWriter(Writer):
         def write_file(self, name, template, context, relative_urls=False,
-                       paginated=None, override_output=False, **kwargs):
+                               paginated=None, override_output=False, **kwargs):
             """Render the template and write the file.
             :param name: name of the file to output
             :param template: template to use to generate the content
@@ -125,7 +128,7 @@ def get_writer(sender):
                 # generated pages, and write
                 for page_num in range(list(paginators.values())[0].num_pages):
                     paginated_kwargs = kwargs.copy()
-                    for key in paginators.keys():
+                    for key in paginators:
                         paginator = paginators[key]
                         previous_page = paginator.page(page_num) \
                             if page_num > 0 else None
@@ -133,10 +136,14 @@ def get_writer(sender):
                         next_page = paginator.page(page_num + 2) \
                             if page_num + 1 < paginator.num_pages else None
                         paginated_kwargs.update(
-                            {'%s_paginator' % key: paginator,
-                             '%s_page' % key: page,
-                             '%s_previous_page' % key: previous_page,
-                             '%s_next_page' % key: next_page})
+                            {
+                                f'{key}_paginator': paginator,
+                                f'{key}_page': page,
+                                f'{key}_previous_page': previous_page,
+                                f'{key}_next_page': next_page,
+                            }
+                        )
+
 
                     localcontext = _get_localcontext(context, page.save_as,
                         paginated_kwargs, relative_urls)
@@ -148,6 +155,7 @@ def get_writer(sender):
                     relative_urls)
                 _write_file(template, localcontext, self.output_path, name,
                             override_output)
+
 
     return PlimWriter
 

@@ -34,22 +34,27 @@ def initsignal(pelicanobj):
     global RMD, FIG_PATH
     try:
         startr()
-        
+
         idx = KNITR.opts_knit.names.index('set')
-        path = pelicanobj.settings.get('PATH','%s/content' % settings.DEFAULT_CONFIG.get('PATH'))
+        path = pelicanobj.settings.get(
+            'PATH', f"{settings.DEFAULT_CONFIG.get('PATH')}/content"
+        )
+
         logger.debug("RMD_READER PATH = %s", path)
         KNITR.opts_knit[idx](**{'base.dir': path})
-        
-        knitroptsknit = pelicanobj.settings.get('RMD_READER_KNITR_OPTS_KNIT', None)
-        if knitroptsknit:
+
+        if knitroptsknit := pelicanobj.settings.get(
+            'RMD_READER_KNITR_OPTS_KNIT', None
+        ):
             KNITR.opts_knit[idx](**{str(k): v for k,v in knitroptsknit.items()})
-        
+
         idx = KNITR.opts_chunk.names.index('set')
-        knitroptschunk = pelicanobj.settings.get('RMD_READER_KNITR_OPTS_CHUNK', None)
-        if knitroptschunk:
+        if knitroptschunk := pelicanobj.settings.get(
+            'RMD_READER_KNITR_OPTS_CHUNK', None
+        ):
             FIG_PATH = knitroptschunk['fig.path'] if 'fig.path' in knitroptschunk else 'figure/'
             KNITR.opts_chunk[idx](**{str(k): v for k,v in knitroptschunk.items()})
-        
+
         RMD = True
     except ImportError as ex:
         RMD = False
@@ -85,18 +90,26 @@ class RmdReader(readers.BaseReader):
         filename = filename.replace('\\', '\\\\')
         # parse Rmd file - generate md file
         md_filename = filename.replace('.Rmd', '.aux').replace('.rmd', '.aux')
-        if RENAME_PLOT == 'chunklabel' or RENAME_PLOT == 'directory':
-            if RENAME_PLOT == 'chunklabel':
-                chunk_label = os.path.splitext(os.path.basename(filename))[0]
-                logger.debug('Chunk label: %s', chunk_label)
-            elif RENAME_PLOT == 'directory':
-                chunk_label = 'unnamed-chunk'
-                PATH = self.settings.get('PATH','%s/content' % settings.DEFAULT_CONFIG.get('PATH'))
-                src_name = os.path.splitext(os.path.relpath(filename, PATH))[0]
-                idx = KNITR.opts_chunk.names.index('set')
-                knitroptschunk = { 'fig.path': '%s-' % os.path.join(FIG_PATH, src_name) }
-                KNITR.opts_chunk[idx](**{str(k): v for k,v in knitroptschunk.items()})
-                logger.debug('Figures path: %s, chunk label: %s', knitroptschunk['fig.path'], chunk_label)
+        if RENAME_PLOT == 'chunklabel':
+            chunk_label = os.path.splitext(os.path.basename(filename))[0]
+            logger.debug('Chunk label: %s', chunk_label)
+            R_OBJECTS.r('''
+opts_knit$set(unnamed.chunk.label="{unnamed_chunk_label}")
+render_markdown()
+hook_plot <- knit_hooks$get('plot')
+knit_hooks$set(plot=function(x, options) hook_plot(paste0("{{static}}/", x), options))
+            '''.format(unnamed_chunk_label=chunk_label))
+        elif RENAME_PLOT == 'directory':
+            chunk_label = 'unnamed-chunk'
+            PATH = self.settings.get(
+                'PATH', f"{settings.DEFAULT_CONFIG.get('PATH')}/content"
+            )
+
+            src_name = os.path.splitext(os.path.relpath(filename, PATH))[0]
+            idx = KNITR.opts_chunk.names.index('set')
+            knitroptschunk = {'fig.path': f'{os.path.join(FIG_PATH, src_name)}-'}
+            KNITR.opts_chunk[idx](**{str(k): v for k,v in knitroptschunk.items()})
+            logger.debug('Figures path: %s, chunk label: %s', knitroptschunk['fig.path'], chunk_label)
             R_OBJECTS.r('''
 opts_knit$set(unnamed.chunk.label="{unnamed_chunk_label}")
 render_markdown()

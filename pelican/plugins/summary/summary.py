@@ -43,13 +43,8 @@ def extract_summary(instance):
     remove_markers = True
 
     content = instance._update_content(instance._content, instance.settings['SITEURL'])
-    begin_summary = -1
-    end_summary = -1
-    if begin_marker:
-        begin_summary = content.find(begin_marker)
-    if end_marker:
-        end_summary = content.find(end_marker)
-
+    begin_summary = content.find(begin_marker) if begin_marker else -1
+    end_summary = content.find(end_marker) if end_marker else -1
     if begin_summary == -1 and end_summary == -1 and use_first_paragraph:
         begin_marker, end_marker = '<p>', '</p>'
         remove_markers = False
@@ -61,11 +56,7 @@ def extract_summary(instance):
         return
 
     # skip over the begin marker, if present
-    if begin_summary == -1:
-        begin_summary = 0
-    else:
-        begin_summary = begin_summary + len(begin_marker)
-
+    begin_summary = 0 if begin_summary == -1 else begin_summary + len(begin_marker)
     if end_summary == -1:
         end_summary = None
 

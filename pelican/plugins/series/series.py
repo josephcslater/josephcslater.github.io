@@ -53,17 +53,14 @@ def aggregate_series(generator):
         enumerated_articles = enumerate(ordered_articles)
 
         for index, article in enumerated_articles:
-            article.series = dict()
-            article.series['name'] = series_name
-            article.series['index'] = index + 1
-            article.series['all'] = ordered_articles
-            article.series['all_previous'] = ordered_articles[0: index]
-            article.series['all_next'] = ordered_articles[index + 1:]
-
-            if index > 0:
-                article.series['previous'] = ordered_articles[index - 1]
-            else:
-                article.series['previous'] = None
+            article.series = {
+                'name': series_name,
+                'index': index + 1,
+                'all': ordered_articles,
+                'all_previous': ordered_articles[:index],
+                'all_next': ordered_articles[index + 1 :],
+                'previous': ordered_articles[index - 1] if index > 0 else None,
+            }
 
             try:
                 article.series['next'] = ordered_articles[index + 1]

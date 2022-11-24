@@ -45,7 +45,7 @@ def get_info(photo_id, api_key):
         'nojsoncallback': '1'
     })
 
-    r = urlopen('https://api.flickr.com/services/rest/?' + query)
+    r = urlopen(f'https://api.flickr.com/services/rest/?{query}')
     info = json.loads(r.read().decode('utf-8'))
 
     if info['stat'] == 'fail':
@@ -56,15 +56,14 @@ def get_info(photo_id, api_key):
 
 def source_url(farm, server, id, secret, size):
     ''' Url for direct jpg use. '''
-    if size == 'small':
-        img_size = 'n'
-    elif size == 'medium':
-        img_size = 'c'
-    elif size == 'large':
+    if size == 'large':
         img_size = 'b'
 
-    return 'https://farm{}.staticflickr.com/{}/{}_{}_{}.jpg'.format(
-        farm, server, id, secret, img_size)
+    elif size == 'medium':
+        img_size = 'c'
+    elif size == 'small':
+        img_size = 'n'
+    return f'https://farm{farm}.staticflickr.com/{server}/{id}_{secret}_{img_size}.jpg'
 
 
 def generate_html(attrs, api_key):
@@ -99,14 +98,12 @@ def flickr(preprocessor, tag, markup):
     # parse markup and extract data
     attrs = None
 
-    match = PARSE_SYNTAX.search(markup)
-    if match:
+    if match := PARSE_SYNTAX.search(markup):
         attrs = dict(
             [(key, value.strip())
              for (key, value) in match.groupdict().items() if value])
     else:
-        raise ValueError('Error processing input. '
-                         'Expected syntax: {}'.format(SYNTAX))
+        raise ValueError(f'Error processing input. Expected syntax: {SYNTAX}')
 
     return generate_html(attrs, api_key)
 

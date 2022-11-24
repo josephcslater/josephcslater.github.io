@@ -40,8 +40,7 @@ def extract_toc(content):
             tag = BeautifulSoup(str(toc), 'html.parser')
             tag.div['class'] = 'toc'
             tag.div['id'] = ''
-            p = tag.find('p', class_='topic-title first')
-            if p:
+            if p := tag.find('p', class_='topic-title first'):
                 p.extract()
             toc = tag
 

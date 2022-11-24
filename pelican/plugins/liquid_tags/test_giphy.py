@@ -28,7 +28,7 @@ TEST_DATA_DIR = os.path.join(PLUGIN_DIR, 'test_data')
 ])
 @patch('liquid_tags.giphy.urlopen')
 def test_create_html(mock_urlopen, input, expected):
-    with open(TEST_DATA_DIR + '/giphy.json', 'rb') as f:
+    with open(f'{TEST_DATA_DIR}/giphy.json', 'rb') as f:
         mock_urlopen.return_value.read.return_value = f.read()
 
         assert giphy.create_html('test_api_key', input) == expected

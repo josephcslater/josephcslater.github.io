@@ -21,17 +21,15 @@ def add_author_image(author, generator):
     if 'AUTHOR_AVATARS' in generator.settings.keys():
         avatar = generator.settings['AUTHOR_AVATARS'] + '/' + hashsum
         for ext in EXTENSIONS:
-            if exists('%s%s.%s' % (static, avatar, ext)):
-                author.avatar = '%s/%s.%s' % \
-                    (generator.settings['THEME_STATIC_DIR'], avatar, ext)
+            if exists(f'{static}{avatar}.{ext}'):
+                author.avatar = f"{generator.settings['THEME_STATIC_DIR']}/{avatar}.{ext}"
                 break
 
     if 'AUTHOR_IMAGES' in generator.settings.keys():
         image = generator.settings['AUTHOR_IMAGES'] + '/' + hashsum
         for ext in EXTENSIONS:
-            if exists('%s%s.%s' % (static, image, ext)):
-                author.image = '%s/%s.%s' % \
-                    (generator.settings['THEME_STATIC_DIR'], image, ext)
+            if exists(f'{static}{image}.{ext}'):
+                author.image = f"{generator.settings['THEME_STATIC_DIR']}/{image}.{ext}"
                 break
 
 

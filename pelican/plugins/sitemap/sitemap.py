@@ -49,7 +49,7 @@ XML_FOOTER = """
 def format_date(date):
     if date.tzinfo:
         tz = date.strftime('%z')
-        tz = tz[:-2] + ':' + tz[-2:]
+        tz = f'{tz[:-2]}:{tz[-2:]}'
     else:
         tz = "-00:00"
     return date.strftime("%Y-%m-%dT%H:%M:%S") + tz
@@ -102,9 +102,6 @@ class SitemapGenerator(object):
                 return
 
             valid_keys = ('articles', 'indexes', 'pages')
-            valid_chfreqs = ('always', 'hourly', 'daily', 'weekly', 'monthly',
-                    'yearly', 'never')
-
             if isinstance(pris, dict):
                 # We use items for Py3k compat. .iteritems() otherwise
                 for k, v in pris.items():
@@ -114,12 +111,15 @@ class SitemapGenerator(object):
                         warning("sitemap plugin: setting SITEMAP['priorities']"
                                 "['{0}'] on {1}".format(k, default))
                         pris[k] = default
-                self.priorities.update(pris)
+                self.priorities |= pris
             elif pris is not None:
                 warning("sitemap plugin: SITEMAP['priorities'] must be a dict")
                 warning("sitemap plugin: using the default values")
 
             if isinstance(chfreqs, dict):
+                valid_chfreqs = ('always', 'hourly', 'daily', 'weekly', 'monthly',
+                        'yearly', 'never')
+
                 # .items() for py3k compat.
                 for k, v in chfreqs.items():
                     if k in valid_keys and v not in valid_chfreqs:
@@ -128,7 +128,7 @@ class SitemapGenerator(object):
                         warning("sitemap plugin: setting SITEMAP['changefreqs']"
                                 "['{0}'] on '{1}'".format(k, default))
                         chfreqs[k] = default
-                self.changefreqs.update(chfreqs)
+                self.changefreqs |= chfreqs
             elif chfreqs is not None:
                 warning("sitemap plugin: SITEMAP['changefreqs'] must be a dict")
                 warning("sitemap plugin: using the default values")
@@ -137,7 +137,7 @@ class SitemapGenerator(object):
 
         if getattr(page, 'status', 'published') != 'published':
             return
-           
+
         if getattr(page, 'private', 'False') == 'True':
             return
 
@@ -153,7 +153,7 @@ class SitemapGenerator(object):
         try:
             lastdate = self.get_date_modified(page, lastdate)
         except ValueError:
-            warning("sitemap plugin: " + page.save_as + " has invalid modification date,")
+            warning(f"sitemap plugin: {page.save_as} has invalid modification date,")
             warning("sitemap plugin: using date value as lastmod.")
         lastmod = format_date(lastdate)
 
@@ -171,23 +171,18 @@ class SitemapGenerator(object):
 
         #Exclude URLs from the sitemap:
         if self.format == 'xml':
-            flag = False
-            for regstr in self.sitemapExclude:
-                if re.match(regstr, pageurl):
-                    flag = True
-                    break
+            flag = any(re.match(regstr, pageurl) for regstr in self.sitemapExclude)
             if not flag:
                 fd.write(XML_URL.format(self.siteurl, pageurl, lastmod, chfreq, pri))
         else:
-            fd.write(self.siteurl + '/' + pageurl + '\n')
+            fd.write(f'{self.siteurl}/{pageurl}' + '\n')
 
     def get_date_modified(self, page, default):
-        if hasattr(page, 'modified'):
-            if isinstance(page.modified, datetime):
-                return page.modified
-            return get_date(page.modified)
-        else:
+        if not hasattr(page, 'modified'):
             return default
+        if isinstance(page.modified, datetime):
+            return page.modified
+        return get_date(page.modified)
 
     def set_url_wrappers_modification_date(self, wrappers):
         for (wrapper, articles) in wrappers:

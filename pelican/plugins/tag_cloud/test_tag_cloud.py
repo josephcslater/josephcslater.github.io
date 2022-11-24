@@ -27,7 +27,7 @@ class TestTagCloudGeneration(unittest.TestCase):
         tag_cloud.set_default_settings(cls._settings)
 
         context = cls._settings.copy()
-        context['generated_content'] = dict()
+        context['generated_content'] = {}
         context['static_links'] = set()
         cls.generator = ArticlesGenerator(
             context=context, settings=cls._settings,

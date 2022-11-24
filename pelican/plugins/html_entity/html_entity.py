@@ -32,10 +32,10 @@ def entity_role(typ, rawtext, text, lineno, inliner, options={}, content=[]):
     text = utils.unescape(text)
     entity_code = text
     try:
-        entity_code = "#{}".format(six.u(int(entity_code)))
+        entity_code = f"#{six.u(int(entity_code))}"
     except ValueError:
         pass
-    entity_code = "&{};".format(entity_code)
+    entity_code = f"&{entity_code};"
     return [html_entity(text, entity_code)], []
 
 

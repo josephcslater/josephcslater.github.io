@@ -92,7 +92,7 @@ def get_diag(code, command):
         f.close()
 
         format = _draw_mode.lower()
-        draw_name = diag_name + '.' + format
+        draw_name = f'{diag_name}.{format}'
 
         saved_argv = sys.argv
         argv = [diag_name, '-T', format, '-o', draw_name]
@@ -104,7 +104,7 @@ def get_diag(code, command):
         command.main(argv)
 
         # Read image data from file
-        file_name = diag_name + '.' + _publish_mode.lower()
+        file_name = f'{diag_name}.{_publish_mode.lower()}'
 
         with io.open(file_name, 'rb') as f:
             data = f.read()
@@ -112,7 +112,7 @@ def get_diag(code, command):
 
     finally:
         for file in os.listdir(tmpdir):
-            os.unlink(tmpdir + "/" + file)
+            os.unlink(f"{tmpdir}/{file}")
 
         # os.rmdir will fail -> use shutil
         shutil.rmtree(tmpdir)
@@ -149,24 +149,20 @@ def diag(code, command):
         import rackdiag.command
         return get_diag(code, rackdiag.command)
 
-    else:                                           # not found
-        print("No such command %s" % command)
+    else:                                       # not found
+        print(f"No such command {command}")
         return None
 
 
 @LiquidTags.register("blockdiag")
 def blockdiag_parser(preprocessor, tag, markup):
     """ Blockdiag parser """
-    m = DOT_BLOCK_RE.search(markup)
-    if m:
+    if m := DOT_BLOCK_RE.search(markup):
         # Get diagram type and code
         diagram = m.group('diagram').strip()
         code = markup
 
-        # Run command
-        output = diag(code, diagram)
-
-        if output:
+        if output := diag(code, diagram):
             # Return Base64 encoded image
             return '<span class="blockdiag" style="align: center;"><img src="data:image/png;base64,%s"></span>' % base64.b64encode(output)
     else:

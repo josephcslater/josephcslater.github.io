@@ -43,35 +43,30 @@ class Matrix2D(list):
             self[i] = 1.
 
     def __str__(self):
-        return '[%s]' % ', '.join('%3.2f' % v for v in self)
+        return f"[{', '.join('%3.2f' % v for v in self)}]"
 
     def __mul__(self, other):
         r = []
-        if isinstance(other, Matrix2D):
-            for y in range(3):
-                for x in range(3):
-                    v = 0.0
-                    for i in range(3):
-                        v += (self[i * 3 + x] * other[y * 3 + i])
-                    r.append(v)
-        else:
+        if not isinstance(other, Matrix2D):
             raise NotImplementedError
+        for y in range(3):
+            for x in range(3):
+                v = 0.0
+                for i in range(3):
+                    v += (self[i * 3 + x] * other[y * 3 + i])
+                r.append(v)
         return Matrix2D(r)
 
     def for_PIL(self):
-        return self[0:6]
+        return self[:6]
 
     @classmethod
-    def translate(kls, x, y):
-        return kls([1.0, 0.0, float(x),
-                    0.0, 1.0, float(y),
-                    0.0, 0.0, 1.0])
+    def translate(cls, x, y):
+        return cls([1.0, 0.0, float(x), 0.0, 1.0, float(y), 0.0, 0.0, 1.0])
 
     @classmethod
-    def scale(kls, x, y):
-        return kls([float(x), 0.0, 0.0,
-                    0.0, float(y), 0.0,
-                    0.0, 0.0, 1.0])
+    def scale(cls, x, y):
+        return cls([float(x), 0.0, 0.0, 0.0, float(y), 0.0, 0.0, 0.0, 1.0])
 
     """
     # need `import math`
@@ -88,16 +83,17 @@ class Matrix2D(list):
     """
 
     @classmethod
-    def rotateSquare(kls, theta, pivot=None):
+    def rotateSquare(cls, theta, pivot=None):
         theta = theta % 4
         c = [1., 0., -1., 0.][theta]
         s = [0., 1., 0., -1.][theta]
 
-        matR = kls([c, -s, 0., s, c, 0., 0., 0., 1.])
-        if not pivot:
-            return matR
-        return kls.translate(-pivot[0], -pivot[1]) * matR * \
-            kls.translate(*pivot)
+        matR = cls([c, -s, 0., s, c, 0., 0., 0., 1.])
+        return (
+            cls.translate(-pivot[0], -pivot[1]) * matR * cls.translate(*pivot)
+            if pivot
+            else matR
+        )
 
 
 class IdenticonRendererBase(object):
@@ -229,9 +225,9 @@ class DonRenderer(IdenticonRendererBase):
         foreColor = (red << 3, green << 3, blue << 3)
 
         return (middleType, middleInvert, 0),\
-               (cornerType, cornerInvert, cornerTurn),\
-               (sideType, sideInvert, sideTurn),\
-            foreColor, ImageColor.getrgb('white')
+                   (cornerType, cornerInvert, cornerTurn),\
+                   (sideType, sideInvert, sideTurn),\
+                foreColor, ImageColor.getrgb('white')
 
 
 def render_identicon(code, size, renderer=None):

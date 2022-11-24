@@ -122,42 +122,38 @@ def run_pygal(data, options=[], format='svg'):
     else:
         print('undefined or unknown chart type')
 
-    if chart is not None:
-        chart.title = data.get('title', None)
-        # Do labels (if present)
-        label_data = data.get('x-labels', None)
-        if isinstance(label_data, list):
-            # use list
-            chart.x_labels = label_data
-        elif isinstance(label_data, dict):
-            # use a range
-            range_from = label_data.get('from', 0)
-            range_to = label_data.get('to', 0)
-            chart.x_labels = map(str, range(range_from, range_to))
-        # insert data
-        for data_set in data.get('data', []):
-            title = data_set.get('title', None)
-            values = data_set.get('values', None)
-            chart.add(title, values)
+    if chart is None:
+        return None
+    chart.title = data.get('title', None)
+    # Do labels (if present)
+    label_data = data.get('x-labels', None)
+    if isinstance(label_data, list):
+        # use list
+        chart.x_labels = label_data
+    elif isinstance(label_data, dict):
+        # use a range
+        range_from = label_data.get('from', 0)
+        range_to = label_data.get('to', 0)
+        chart.x_labels = map(str, range(range_from, range_to))
+    # insert data
+    for data_set in data.get('data', []):
+        title = data_set.get('title', None)
+        values = data_set.get('values', None)
+        chart.add(title, values)
         # now render
-        result = chart.render_data_uri()
-    else:
-        result = None
-    return result
+    return chart.render_data_uri()
 
 @LiquidTags.register('pygal')
 def pygal_parser(preprocessor, tag, markup):
     """ Simple pygal parser """
     # Find JSON payload
     data = loads(markup)
-    if tag == 'pygal' and data is not None:
-        # Run generation of chart
-        output = run_pygal(data)
-        # Return embedded SVG image
-        return '<div class="pygal" style="text-align: center;"><embed type="image/svg+xml" src=%s style="max-width:1000px"/></div>' % output
-
-    else:
+    if tag != 'pygal' or data is None:
         raise ValueError('Error processing input. \nExpected syntax: {0}'.format(SYNTAX))
+    # Run generation of chart
+    output = run_pygal(data)
+    # Return embedded SVG image
+    return '<div class="pygal" style="text-align: center;"><embed type="image/svg+xml" src=%s style="max-width:1000px"/></div>' % output
 
 #----------------------------------------------------------------------
 # This import allows image tag to be a Pelican plugin

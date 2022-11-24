@@ -49,19 +49,21 @@ def filetime_from_hg(content):
     #    date: first commit time, update: fs time
     path = content.source_path
     root = repo.root()
-    filelog = repo.log(revrange='.:0', files=[path,],
-                       follow=content.settings.get('HG_FILETIME_FOLLOW', False))
-    if filelog:
+    if filelog := repo.log(
+        revrange='.:0',
+        files=[
+            path,
+        ],
+        follow=content.settings.get('HG_FILETIME_FOLLOW', False),
+    ):
         # has commited
         content.date = set_date_tzinfo(filelog[-1][6], tz_name)
         if path in [os.path.join(root, mfile) for flag, mfile in repo.status(modified=True)]:
             # file is modified in the wd
             content.modified = datetime_from_timestamp(
                 os.stat(path).st_ctime, content)
-        else:
-            # file is not changed
-            if len(filelog) > 1:
-                content.modified = set_date_tzinfo(filelog[0][6], tz_name)
+        elif len(filelog) > 1:
+            content.modified = set_date_tzinfo(filelog[0][6], tz_name)
     else:
         # file is not managed by hg
         content.date = datetime_from_timestamp(os.stat(path).st_ctime, content)

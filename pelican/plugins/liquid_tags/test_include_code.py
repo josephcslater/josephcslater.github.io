@@ -62,7 +62,7 @@ class Object:
 
 class preprocessor:
     @classmethod
-    def func(*x, safe=False):
+    def func(cls, safe=False):
         return ''.join([str(s) for s in x])
 
     def __init__(self):

@@ -27,45 +27,46 @@ def getSettings(generator):
 
 def parse_links(instance):
 
-    if instance._content is not None:
-        content = instance._content
+    if instance._content is None:
+        return
+    content = instance._content
 
-        if '<a' in content:
-            text = BeautifulSoup(
-                content, "html.parser", parse_only=SoupStrainer("a"))
-            for link in text.find_all("a", href=re.compile("(.+?)>")):
-                old_tag = link.decode()
-                url = link.get('href')
-                m = re.search(r"(.+?)>", url).groups()
-                name = m[0]
-                if name in interlinks:
-                    hi = url.replace(name + ">", interlinks[name])
-                    link['href'] = hi
+    if '<a' in content:
+        text = BeautifulSoup(
+            content, "html.parser", parse_only=SoupStrainer("a"))
+        for link in text.find_all("a", href=re.compile("(.+?)>")):
+            old_tag = link.decode()
+            url = link.get('href')
+            m = re.search(r"(.+?)>", url).groups()
+            name = m[0]
+            if name in interlinks:
+                hi = url.replace(f"{name}>", interlinks[name])
+                link['href'] = hi
 
-                content = content.replace(old_tag, link.decode())
+            content = content.replace(old_tag, link.decode())
 
-        if '<img' in content:
-            text = BeautifulSoup(
-                content, "html.parser", parse_only=SoupStrainer("img"))
-            for img in text.find_all('img', src=re.compile("(.+?)>")):
-                old_tag = img.decode()
-                url = img.get('src')
-                m = re.search(r"(.+?)>", url).groups()
-                name = m[0]
-                if name in interlinks:
-                    hi = url.replace(name+">", interlinks[name])
-                    img['src'] = hi
+    if '<img' in content:
+        text = BeautifulSoup(
+            content, "html.parser", parse_only=SoupStrainer("img"))
+        for img in text.find_all('img', src=re.compile("(.+?)>")):
+            old_tag = img.decode()
+            url = img.get('src')
+            m = re.search(r"(.+?)>", url).groups()
+            name = m[0]
+            if name in interlinks:
+                hi = url.replace(f"{name}>", interlinks[name])
+                img['src'] = hi
 
-                # generated output has no trailing slash; match for replacement
-                repaired_old_tag = old_tag.replace("/>", ">")
+            # generated output has no trailing slash; match for replacement
+            repaired_old_tag = old_tag.replace("/>", ">")
 
-                content = content.replace(
-                    repaired_old_tag,
-                    img.decode()
-                )
+            content = content.replace(
+                repaired_old_tag,
+                img.decode()
+            )
 
 
-        instance._content = content
+    instance._content = content
 
 
 def register():

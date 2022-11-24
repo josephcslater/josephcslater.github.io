@@ -24,10 +24,10 @@ class SubCategory(URLWrapper):
         self.slug = slugify(self.shortname, settings.get('SLUG_SUBSTITUIONS', ()))
         if isinstance(self.parent, SubCategory):
             self.savepath = os.path.join(self.parent.savepath, self.slug)
-            self.fullurl = '{}/{}'.format(self.parent.fullurl, self.slug)
+            self.fullurl = f'{self.parent.fullurl}/{self.slug}'
         else: #parent is a category
             self.savepath = os.path.join(self.parent.slug, self.slug)
-            self.fullurl = '{}/{}'.format(self.parent.slug, self.slug)
+            self.fullurl = f'{self.parent.slug}/{self.slug}'
         
     def as_dict(self):
         d = self.__dict__
@@ -65,7 +65,7 @@ def get_subcategories(generator, metadata):
     sub_list = []
     parent = category.name
     for subcategory in category_list:
-        subcategory = parent + '/' + subcategory.strip()
+        subcategory = f'{parent}/{subcategory.strip()}'
         sub_list.append(subcategory)
         parent = subcategory
     metadata['subcategories'] = sub_list
@@ -76,18 +76,18 @@ def create_subcategories(generator):
         parent = article.category
         actual_subcategories = []
         for subcategory in article.subcategories:
-            #following line returns a list of items, tuples in this case
-            sub_cat = [item for item in generator.subcategories 
-                    if item[0].name == subcategory]
-            if sub_cat:
+            if sub_cat := [
+                item
+                for item in generator.subcategories
+                if item[0].name == subcategory
+            ]:
                 sub_cat[0][1].append(article)
                 parent = sub_cat[0][0]
-                actual_subcategories.append(parent)
             else:
                 new_sub = SubCategory(subcategory, parent, generator.settings)
                 generator.subcategories.append((new_sub, [article,]))
                 parent = new_sub
-                actual_subcategories.append(parent)
+            actual_subcategories.append(parent)
         article.subcategories = actual_subcategories
         """Add subpath and suburl to the article metadata. This allows the
         the last subcategory's fullurl and savepath to be used when definining

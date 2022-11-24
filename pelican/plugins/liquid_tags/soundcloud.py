@@ -47,20 +47,18 @@ SOUNDCLOUD_API_URL = "https://soundcloud.com/oembed"
 
 def get_widget(track_url):
     r = urlopen(
-        SOUNDCLOUD_API_URL, data="format=json&url={}".format(track_url).encode("utf-8")
+        SOUNDCLOUD_API_URL, data=f"format=json&url={track_url}".encode("utf-8")
     )
+
 
     return json.loads(r.read().decode("utf-8"))["html"]
 
 
 def match_it(markup):
-    match = PARSE_SYNTAX.search(markup)
-    if match:
+    if match := PARSE_SYNTAX.search(markup):
         return match.groupdict()
     else:
-        raise ValueError(
-            "Error processing input. " "Expected syntax: {}".format(SYNTAX)
-        )
+        raise ValueError(f"Error processing input. Expected syntax: {SYNTAX}")
 
 
 @LiquidTags.register("soundcloud")

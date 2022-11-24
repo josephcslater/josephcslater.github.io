@@ -57,10 +57,7 @@ Works on both instances and classes.
         args, varargs, varkw, defaults = inspect.getargspec(func)
         if not args or args[0] not in ('self', 'cls', 'klass'):
             # Static function/method
-            if is_class:
-                replacement = staticmethod(func)
-            else:
-                replacement = func
+            replacement = staticmethod(func) if is_class else func
         elif args[0] == 'self':
             if is_class:
                 replacement = func
@@ -83,6 +80,7 @@ Works on both instances and classes.
                     pass
         setattr(obj, func.__name__, replacement)
         return replacement
+
     return decorator
 
 if __name__ == '__main__':

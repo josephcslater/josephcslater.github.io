@@ -23,10 +23,17 @@ def add_gallery_post(generator):
 
             articlegallerypath=os.path.join(gallerycontentpath, album)
 
-            if(os.path.isdir(articlegallerypath)):
-                for i in os.listdir(articlegallerypath):
-                    if not i.startswith('.') and os.path.isfile(os.path.join(os.path.join(gallerycontentpath, album), i)):
-                        galleryimages.append(i)
+            if (os.path.isdir(articlegallerypath)):
+                galleryimages.extend(
+                    i
+                    for i in os.listdir(articlegallerypath)
+                    if not i.startswith('.')
+                    and os.path.isfile(
+                        os.path.join(
+                            os.path.join(gallerycontentpath, album), i
+                        )
+                    )
+                )
 
             article.album = album
             article.galleryimages = sorted(galleryimages)
@@ -42,10 +49,17 @@ def add_gallery_page(generator):
 
             pagegallerypath=os.path.join(gallerycontentpath, album)
 
-            if(os.path.isdir(pagegallerypath)):
-                for i in os.listdir(pagegallerypath):
-                    if not i.startswith('.') and os.path.isfile(os.path.join(os.path.join(gallerycontentpath, album), i)):
-                        galleryimages.append(i)
+            if (os.path.isdir(pagegallerypath)):
+                galleryimages.extend(
+                    i
+                    for i in os.listdir(pagegallerypath)
+                    if not i.startswith('.')
+                    and os.path.isfile(
+                        os.path.join(
+                            os.path.join(gallerycontentpath, album), i
+                        )
+                    )
+                )
 
             page.album = album
             page.galleryimages = sorted(galleryimages)
@@ -56,7 +70,7 @@ def generate_gallery_page(generator):
 
     for page in generator.pages:
         if page.metadata.get('template') == 'gallery':
-            gallery = dict()
+            gallery = {}
 
             for a in os.listdir(gallerycontentpath):
                 if not a.startswith('.') and os.path.isdir(os.path.join(gallerycontentpath, a)):
