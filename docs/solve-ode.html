@@ -37,6 +37,8 @@
     <link href="http://josephcslater.github.io/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://josephcslater.github.io/theme/css/style.css" type="text/css"/>
 
+        <link href="http://josephcslater.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Inside the Ivory Tower ATOM Feed"/>
 
 
 </head>
@@ -136,20 +138,20 @@ g(t)=u_s(t)
 <p>is the unit step function (Heaviside Function) and <span class="math">\(x(0) = 4\)</span> and
 <span class="math">\(\dot{x}(0)=7\)</span>.</p>
 <pre class="code python literal-block">
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
- <span class="kn">from</span> <span class="nn">sympy.integrals.transforms</span> <span class="kn">import</span> <span class="n">laplace_transform</span>
- <span class="kn">from</span> <span class="nn">sympy.integrals.transforms</span> <span class="kn">import</span> <span class="n">inverse_laplace_transform</span>
- <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
- <span class="kn">import</span> <span class="nn">sympy</span> <span class="kn">as</span> <span class="nn">sympy</span>
- <span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">G</span>
- <span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span><span class="w">
+</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sympy.integrals.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">laplace_transform</span><span class="w">
+</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sympy.integrals.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">inverse_laplace_transform</span><span class="w">
+</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span><span class="w">
+</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sympy</span><span class="w">
+</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sympy.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">G</span><span class="w">
+</span> <span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre>
 <pre class="code python literal-block">
 <span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">'x g X'</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">Function</span><span class="p">)</span>
 </pre>
 <pre class="code python literal-block">
-<span class="n">x0</span> <span class="o">=</span> <span class="mi">4</span>
- <span class="n">v0</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">4</span><span class="w">
+</span> <span class="n">v0</span> <span class="o">=</span> <span class="mi">7</span>
 </pre>
 <pre class="code python literal-block">
 <span class="n">g</span> <span class="o">=</span> <span class="n">Heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1">#This is just the step function</span>
@@ -227,7 +229,7 @@ application don't match expected behavior consistent with other codes.[1]_</p>
 so we need to avoid using this result. (we should have gotten 1) Valid
 as of 0.7.6.1</p>
 <pre class="code python literal-block">
-<span class="k">print</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre>
 <pre class="literal-block">
 0.7.6.1
@@ -237,10 +239,10 @@ of the Dirac Delta correctly. Short of that, we manually insert the
 Laplace Transform of <span class="math">\(g(t)\)</span> and <span class="math">\(\dot{g}(t)\)</span> where
 <span class="math">\(g(t)=u(t)\)</span>.</p>
 <pre class="code python literal-block">
-<span class="c1">#eom  = Eq(3*(s**2 * X(s)-s*x0-v0)+30 * (s*X(s)-x0)+ 63 * X(s), laplace_transform( 4 * diff(g,t) + 6 * g, t, s, noconds = True))</span>
+<span class="c1">#eom  = Eq(3*(s**2 * X(s)-s*x0-v0)+30 * (s*X(s)-x0)+ 63 * X(s), laplace_transform( 4 * diff(g,t) + 6 * g, t, s, noconds = True))</span><span class="w">
 
- <span class="n">eom</span>  <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="n">s</span><span class="o">*</span><span class="n">x0</span><span class="o">-</span><span class="n">v0</span><span class="p">)</span><span class="o">+</span><span class="mi">30</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">+</span> <span class="mi">63</span> <span class="o">*</span> <span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">1</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
- <span class="n">eom</span>
+</span> <span class="n">eom</span>  <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="n">s</span><span class="o">*</span><span class="n">x0</span><span class="o">-</span><span class="n">v0</span><span class="p">)</span><span class="o">+</span><span class="mi">30</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">+</span> <span class="mi">63</span> <span class="o">*</span> <span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">1</span><span class="o">/</span><span class="n">s</span><span class="p">)</span><span class="w">
+</span> <span class="n">eom</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -248,8 +250,8 @@ Laplace Transform of <span class="math">\(g(t)\)</span> and <span class="math">\
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="n">Xofs</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">eom</span><span class="p">,</span><span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-<span class="n">Xofs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Xofs</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">eom</span><span class="p">,</span><span class="n">X</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="w">
+</span><span class="n">Xofs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -257,8 +259,8 @@ Laplace Transform of <span class="math">\(g(t)\)</span> and <span class="math">\
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="n">soln</span> <span class="o">=</span> <span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">Xofs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
-<span class="n">soln</span>
+<span class="n">soln</span> <span class="o">=</span> <span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">Xofs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">)</span><span class="w">
+</span><span class="n">soln</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -266,8 +268,8 @@ Laplace Transform of <span class="math">\(g(t)\)</span> and <span class="math">\
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="n">soln_simp</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">soln</span><span class="p">)</span>
-<span class="n">soln_simp</span>
+<span class="n">soln_simp</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">soln</span><span class="p">)</span><span class="w">
+</span><span class="n">soln_simp</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -284,7 +286,7 @@ Laplace Transform of <span class="math">\(g(t)\)</span> and <span class="math">\
 </div>
 <p>Note that <span class="math">\(\theta(t)\)</span> is SymPy's notation for a step function.
 This simply means the answer can't be used before <span class="math">\(t=0\)</span>.</p>
-<table class="docutils footnote" frame="void" id="id1" rules="none">
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td>This has been fixed in later revisions.</td></tr>
@@ -417,25 +419,25 @@ This simply means the answer can't be used before <span class="math">\(t=0\)</sp
       <a href="http://josephcslater.github.io/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
-    </li>
-    <li class="list-group-item tag-2">
       <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>

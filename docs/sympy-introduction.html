@@ -37,6 +37,8 @@
     <link href="http://josephcslater.github.io/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://josephcslater.github.io/theme/css/style.css" type="text/css"/>
 
+        <link href="http://josephcslater.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Inside the Ivory Tower ATOM Feed"/>
 
 
 </head>
@@ -127,24 +129,24 @@ notebook</a>
 is available on my <a class="reference external" href="https://github.com/josephcslater/iPythonExamples">github iPythonExamples
 repository</a>.</p>
 <pre class="code python literal-block">
-<span class="c1"># import symbolic capability to Python</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># import symbolic capability to Python</span><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 </pre>
 <pre class="code python literal-block">
-<span class="c1"># print things all pretty</span>
-<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">init_printing</span><span class="p">()</span>
+<span class="c1"># print things all pretty</span><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy.abc</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span><span class="w">
+</span><span class="n">init_printing</span><span class="p">()</span>
 </pre>
 <p>Consider solving the problem</p>
 <p><span class="math">\(y = \frac{x^2\sqrt{3x-2}}{(x+1)^2}\)</span>, find <span class="math">\(\frac{dy}{dx}\)</span></p>
 <pre class="code python literal-block">
-<span class="c1"># Need to define variables as symbolic for sympy to use them.</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Need to define variables as symbolic for sympy to use them.</span><span class="w">
+</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre>
 <pre class="code python literal-block">
-<span class="c1"># Define y</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">y</span> <span class="c1"># This causes it to output formatted nicely. The print command formats it as computer code</span>
+<span class="c1"># Define y</span><span class="w">
+</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="w">
+</span><span class="n">y</span> <span class="c1"># This causes it to output formatted nicely. The print command formats it as computer code</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -152,9 +154,9 @@ repository</a>.</p>
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="c1"># Taking the natural log of this:</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">ln</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">a</span> <span class="c1"># Keep in mind that the left hand side is ln(y)</span>
+<span class="c1"># Taking the natural log of this:</span><span class="w">
+</span><span class="n">a</span> <span class="o">=</span> <span class="n">ln</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span><span class="n">a</span> <span class="c1"># Keep in mind that the left hand side is ln(y)</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -162,9 +164,9 @@ repository</a>.</p>
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="c1"># Taking its derivative with respect to x</span>
-<span class="c1"># So, we took the log of the right side, then the derivative</span>
-<span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># Taking its derivative with respect to x</span><span class="w">
+</span><span class="c1"># So, we took the log of the right side, then the derivative</span><span class="w">
+</span><span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -172,8 +174,8 @@ repository</a>.</p>
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="c1"># That is kind of messy. Let the computer simplify it</span>
-<span class="n">simplify</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+<span class="c1"># That is kind of messy. Let the computer simplify it</span><span class="w">
+</span><span class="n">simplify</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -181,8 +183,8 @@ repository</a>.</p>
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="c1"># We could have done this all at once</span>
-<span class="n">simplify</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">ln</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">x</span><span class="p">))</span>
+<span class="c1"># We could have done this all at once</span><span class="w">
+</span><span class="n">simplify</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">ln</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">x</span><span class="p">))</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -249,15 +251,15 @@ True
 <img alt="plot" src="images/output_17_0.png" style="width: 50%;" />
 </div>
 <pre class="code python literal-block">
-<span class="c1"># To change colors</span>
-<span class="c1"># show = False delays the plot until we can set all of the parameters</span>
-<span class="c1"># legend turns on the legend and uses the labels we have later.</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">((</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="n">show</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="s1">'blue'</span>
-<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">'$</span><span class="se">\\</span><span class="s1">frac{dy}{dx}$'</span>
-<span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="s1">'green'</span>
-<span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">'$y$'</span>
-<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># To change colors</span><span class="w">
+</span><span class="c1"># show = False delays the plot until we can set all of the parameters</span><span class="w">
+</span><span class="c1"># legend turns on the legend and uses the labels we have later.</span><span class="w">
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">((</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="w">
+</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="s1">'blue'</span><span class="w">
+</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">'$</span><span class="se">\\</span><span class="s1">frac</span><span class="si">{dy}{dx}</span><span class="s1">$'</span><span class="w">
+</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="s1">'green'</span><span class="w">
+</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s1">'$y$'</span><span class="w">
+</span><span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre>
 <div class="figure align-center" id="figure2">
 <img alt="plot" src="images/output_18_0.png" style="width: 50%;" />
@@ -398,25 +400,25 @@ True
       <a href="http://josephcslater.github.io/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
-    </li>
-    <li class="list-group-item tag-2">
       <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>

@@ -2,6 +2,30 @@
 """Pelican configuration for 'Inside the Ivory Tower'."""
 import os
 
+from pelican import signals
+
+
+def _restore_short_plugin_names(pelican_object):
+    """Compatibility shim for themes (e.g. pelican-bootstrap3) that check
+    for legacy short plugin names such as 'tag_cloud' in PLUGINS. Modern
+    namespace-package plugins are recorded under their full dotted path
+    (e.g. 'pelican.plugins.tag_cloud'), so add the short aliases back.
+    """
+    plugin_names = pelican_object.settings.get('PLUGINS', [])
+    short_names = [name.rsplit('.', 1)[-1] for name in plugin_names if '.' in name]
+    pelican_object.settings['PLUGINS'] = plugin_names + [
+        name for name in short_names if name not in plugin_names
+    ]
+
+
+class PluginNameCompat:
+    """A minimal in-line plugin; see _restore_short_plugin_names above."""
+
+    @staticmethod
+    def register():
+        signals.initialized.connect(_restore_short_plugin_names)
+
+
 AUTHOR = 'Joseph C. Slater'
 SITENAME = 'Inside the Ivory Tower'
 SITEURL = 'http://josephcslater.github.io'
@@ -63,7 +87,7 @@ TAGS_URL = 'tags.html'
 # (pelican-render-math, pelican-tag-cloud, pelican-i18n-subsites) and are
 # auto-discovered via the pelican.plugins namespace, so no PLUGIN_PATHS
 # is required.
-PLUGINS = ['render_math', 'tag_cloud', 'i18n_subsites']
+PLUGINS = ['render_math', 'tag_cloud', 'i18n_subsites', PluginNameCompat]
 JINJA_ENVIRONMENT = {
     'extensions': ['jinja2.ext.i18n'],
 }

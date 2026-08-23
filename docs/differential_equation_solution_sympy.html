@@ -37,6 +37,8 @@
     <link href="http://josephcslater.github.io/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://josephcslater.github.io/theme/css/style.css" type="text/css"/>
 
+        <link href="http://josephcslater.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Inside the Ivory Tower ATOM Feed"/>
 
 
 </head>
@@ -128,26 +130,26 @@ equations given by</p>
 <p>where <span class="math">\(u(t)\)</span> is the step function and <span class="math">\(x(0)=5\)</span> and
 <span class="math">\(y(0) = 10\)</span>.</p>
 <pre class="code python literal-block">
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span><span class="w">
 
-<span class="c1"># import symbolic capability to Python- namespace is a better idea in a more general code.</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span class="c1"># import symbolic capability to Python- namespace is a better idea in a more general code.</span><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span><span class="w">
 
-<span class="c1"># print things all pretty</span>
-<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">init_printing</span><span class="p">()</span>
+</span><span class="c1"># print things all pretty</span><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy.abc</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span><span class="w">
+</span><span class="n">init_printing</span><span class="p">()</span>
 </pre>
 <p>Need to define variables as symbolic for sympy to use them.</p>
 <pre class="code python literal-block">
-<span class="n">t</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t C1 C2&quot;</span><span class="p">)</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span>  <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Function</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t C1 C2&quot;</span><span class="p">)</span><span class="w">
+</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span>  <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Function</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre>
 <p>First we must define the governing equations as equalities or
 expressions. We have the option, I will do one each way for the sake of
 illustration, as opposed to simplicity.</p>
 <pre class="code python literal-block">
-<span class="n">eq1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-<span class="n">eq1</span>
+<span class="n">eq1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="w">
+</span><span class="n">eq1</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -157,13 +159,13 @@ illustration, as opposed to simplicity.</p>
 <p>I'd like to use the Heaviside function. It doesn't work, but I'm showing
 how I tried anyway.</p>
 <pre class="code python literal-block">
-<span class="kn">import</span> <span class="nn">sympy.functions.special.delta_functions</span> <span class="kn">as</span> <span class="nn">sfuncs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy.functions.special.delta_functions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sfuncs</span>
 </pre>
 <pre class="code python literal-block">
-<span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">),</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">sfuncs</span><span class="o">.</span><span class="n">Heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-<span class="c1"># Note: Heaviside doesn't work for me in the solver, so I've left it here as &quot;proper&quot; but dokn't use it.</span>
-<span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">),</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">eq2</span>
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">),</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">sfuncs</span><span class="o">.</span><span class="n">Heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="w">
+</span><span class="c1"># Note: Heaviside doesn't work for me in the solver, so I've left it here as &quot;proper&quot; but dokn't use it.</span><span class="w">
+</span><span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">),</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span><span class="w">
+</span><span class="n">eq2</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -173,8 +175,8 @@ how I tried anyway.</p>
 <p>Solving the differential equations. The <tt class="docutils literal">ics =</tt>... should apply the
 initial conditions. Doesn't work. Perhaps some day.</p>
 <pre class="code python literal-block">
-<span class="n">soln</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">((</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">),</span> <span class="n">ics</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
-<span class="n">soln</span>
+<span class="n">soln</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">((</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">),</span> <span class="n">ics</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span><span class="w">
+</span><span class="n">soln</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -186,8 +188,8 @@ values for <tt class="docutils literal">x</tt> and <tt class="docutils literal">
 need <tt class="docutils literal">y(0)</tt> substituted, while the second doesn't need <tt class="docutils literal">x(0)</tt>
 substituted. I found this out after and did that for brevity.</p>
 <pre class="code python literal-block">
-<span class="n">constants</span> <span class="o">=</span> <span class="n">solve</span><span class="p">((</span><span class="n">soln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mi">5</span><span class="p">),</span> <span class="n">soln</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mi">10</span><span class="p">)),{</span><span class="n">C1</span><span class="p">,</span><span class="n">C2</span><span class="p">})</span>
-<span class="n">constants</span>
+<span class="n">constants</span> <span class="o">=</span> <span class="n">solve</span><span class="p">((</span><span class="n">soln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mi">5</span><span class="p">),</span> <span class="n">soln</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mi">10</span><span class="p">)),{</span><span class="n">C1</span><span class="p">,</span><span class="n">C2</span><span class="p">})</span><span class="w">
+</span><span class="n">constants</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -198,8 +200,8 @@ substituted. I found this out after and did that for brevity.</p>
 pull out the right side of the solution. You can look at <tt class="docutils literal">soln[0]</tt> to
 see what I mean, or try <tt class="docutils literal">help(soln[0])</tt> and read the results.</p>
 <pre class="code python literal-block">
-<span class="n">xsoln</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">soln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">constants</span><span class="p">))</span>
-<span class="n">xsoln</span>
+<span class="n">xsoln</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">soln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">constants</span><span class="p">))</span><span class="w">
+</span><span class="n">xsoln</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -207,8 +209,8 @@ see what I mean, or try <tt class="docutils literal">help(soln[0])</tt> and read
 \end{equation*}
 </div>
 <pre class="code python literal-block">
-<span class="n">ysoln</span> <span class="o">=</span> <span class="n">soln</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">constants</span><span class="p">)</span>
-<span class="n">ysoln</span>
+<span class="n">ysoln</span> <span class="o">=</span> <span class="n">soln</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">constants</span><span class="p">)</span><span class="w">
+</span><span class="n">ysoln</span>
 </pre>
 <div class="math">
 \begin{equation*}
@@ -386,25 +388,25 @@ y{\left (t \right )} = \left(- \frac{172 \sqrt{11}}{11} \sin{\left (\frac{\sqrt{
       <a href="http://josephcslater.github.io/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
-    </li>
-    <li class="list-group-item tag-2">
       <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>

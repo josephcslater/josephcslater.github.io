@@ -36,6 +36,8 @@
     <link href="http://josephcslater.github.io/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://josephcslater.github.io/theme/css/style.css" type="text/css"/>
 
+        <link href="http://josephcslater.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Inside the Ivory Tower ATOM Feed"/>
 
 
 </head>
@@ -148,11 +150,11 @@ T(s)=\frac{1}{4s+1}
 multiply the transfer function by five and use a unit step function,
 allowing us to use the Matlab <tt class="docutils literal">step</tt> function.</p>
 <pre class="code python literal-block">
-<span class="n">sys1</span><span class="o">=</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">sys2</span> <span class="o">=</span> <span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">step</span><span class="p">(</span><span class="n">sys1</span><span class="p">);</span>
-<span class="n">hold</span> <span class="n">on</span><span class="p">;</span>
-<span class="n">step</span><span class="p">(</span><span class="n">sys2</span><span class="p">)</span>
+<span class="n">sys1</span><span class="o">=</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span><span class="w">
+</span><span class="n">sys2</span> <span class="o">=</span> <span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span><span class="w">
+</span><span class="n">step</span><span class="p">(</span><span class="n">sys1</span><span class="p">);</span><span class="w">
+</span><span class="n">hold</span> <span class="n">on</span><span class="p">;</span><span class="w">
+</span><span class="n">step</span><span class="p">(</span><span class="n">sys2</span><span class="p">)</span>
 </pre>
 <img alt="Gear figure" src="images/output_2_0.png" />
 <pre class="literal-block">
@@ -175,13 +177,13 @@ Continuous-time transfer function.
 </pre>
 <p>Alternatively, using <tt class="docutils literal">lsim</tt>.</p>
 <pre class="code python literal-block">
-<span class="n">sys1</span><span class="o">=</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">sys2</span> <span class="o">=</span> <span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="o">.</span><span class="mo">01</span><span class="p">:</span><span class="mi">40</span><span class="p">;</span>
-<span class="n">u</span><span class="o">=</span><span class="n">t</span><span class="o">*</span><span class="mi">0</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="n">lsim</span><span class="p">(</span><span class="n">sys1</span><span class="p">,</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
-<span class="n">hold</span> <span class="n">on</span><span class="p">;</span>
-<span class="n">lsim</span><span class="p">(</span><span class="n">sys2</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="n">sys1</span><span class="o">=</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span><span class="w">
+</span><span class="n">sys2</span> <span class="o">=</span> <span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">1</span><span class="p">])</span><span class="w">
+</span><span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="mf">.01</span><span class="p">:</span><span class="mi">40</span><span class="p">;</span><span class="w">
+</span><span class="n">u</span><span class="o">=</span><span class="n">t</span><span class="o">*</span><span class="mi">0</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span><span class="n">lsim</span><span class="p">(</span><span class="n">sys1</span><span class="p">,</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span><span class="w">
+</span><span class="n">hold</span> <span class="n">on</span><span class="p">;</span><span class="w">
+</span><span class="n">lsim</span><span class="p">(</span><span class="n">sys2</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre>
 <img alt="My hand drawn free body diagrams and equations." src="images/output_4_0.png" />
 <pre class="literal-block">
@@ -335,25 +337,25 @@ you should see in the <em>sys1</em> transfer function.</p>
       <a href="http://josephcslater.github.io/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
-    </li>
-    <li class="list-group-item tag-2">
       <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>

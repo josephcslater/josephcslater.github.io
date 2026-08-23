@@ -35,6 +35,8 @@
     <link href="http://josephcslater.github.io/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://josephcslater.github.io/theme/css/style.css" type="text/css"/>
 
+        <link href="http://josephcslater.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Inside the Ivory Tower ATOM Feed"/>
 
 
 </head>
@@ -126,18 +128,18 @@ list (in the thousands). Each search isn't that long, but nobody in my
 team wanted to do all of the searches. It seemed rather barbaric that
 it couldn't be automated. So, after a bit of work, I found that it
 took precisely 4 lines of code in Python.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># findmissing.py</span>
-<span class="kn">import</span> <span class="nn">pandas</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># findmissing.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
 <span class="n">list1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;list1.csv&#39;</span><span class="p">)</span> <span class="c1"># my member database. I care</span>
              <span class="c1"># that they have registered on list2</span>
 <span class="n">list2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;list2.csv&#39;</span><span class="p">)</span> <span class="c1"># list of everyone who has</span>
@@ -147,8 +149,8 @@ took precisely 4 lines of code in Python.</p>
              <span class="c1"># of people in my member list who have not signed up</span>
 <span class="n">delinquent</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Phone&#39;</span><span class="p">,</span> <span class="s1">&#39;Last Name&#39;</span><span class="p">,</span> <span class="s1">&#39;First Name&#39;</span><span class="p">]))</span> <span class="c1"># print</span>
              <span class="c1"># the useful information</span>
-</pre></div>
-</td></tr></table><p>As you can anticipate, a lot is happening in a very small
+</pre></div></td></tr></table></div>
+<p>As you can anticipate, a lot is happening in a very small
 space. However, it's pretty easy if you parse is step by
 step. Admittedly, the last line would be simpler if I did it in
 multiple steps. On the other hand, at least I didn't execute all of
@@ -162,7 +164,7 @@ use another name, but you need to adapt my later instructions.</p>
 <div class="section" id="step-1">
 <h2>Step 1</h2>
 <p>We start with the line:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
 </pre></div>
 <p>This imports <a class="reference external" href="http://pandas.pydata.org">pandas</a>,
 the <a class="reference external" href="http://www.python.org">Python</a> Data Analysis Library. This enables us to import datafiles
@@ -234,7 +236,7 @@ results of <tt class="docutils literal">isin</tt>.</p>
 <em>True</em> otherwise. So, we now have a list that states when it is true
 that a member hasn't signed up.</p>
 </div>
-<div class="section" id="id1">
+<div class="section" id="step-5-1">
 <h2>Step 5</h2>
 <p>Now all I need to do is pull out of <tt class="docutils literal">list1</tt> the information for
 those people who are not registered (the result of the prior step).</p>
@@ -317,25 +319,25 @@ note.</p>
       <a href="http://josephcslater.github.io/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
-    </li>
-    <li class="list-group-item tag-2">
       <a href="http://josephcslater.github.io/tag/programming.html">Programming</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
-    </li>
-    <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/numpy.html">Numpy</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+      <a href="http://josephcslater.github.io/tag/matlab.html">Matlab</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="http://josephcslater.github.io/tag/octave.html">Octave</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/sympy.html">SymPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/scipy.html">SciPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="http://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://josephcslater.github.io/tag/differential-equations.html">Differential Equations</a>
