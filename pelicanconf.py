@@ -28,7 +28,7 @@ class PluginNameCompat:
 
 AUTHOR = 'Joseph C. Slater'
 SITENAME = 'Inside the Ivory Tower'
-SITEURL = 'http://josephcslater.github.io'
+SITEURL = 'https://josephcslater.github.io'
 
 PATH = 'content'
 BANNER = 'images/Alumni_Hall_1889_Sun.jpg'
@@ -44,7 +44,7 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 DISPLAY_TAGS_ON_SIDEBAR = True
-GITHUB_URL = 'http://github.com/josephcslater'
+GITHUB_URL = 'https://github.com/josephcslater'
 GITHUB_USER = 'josephcslater'
 GITHUB_REPO_COUNT = 50
 GITHUB_SHOW_USER_LINK = True
@@ -59,7 +59,7 @@ FIGURE_NUMBERS = True
 
 # Blogroll
 LINKS = (
-    ('Pelican', 'http://getpelican.com/'),
+    ('Pelican', 'https://getpelican.com/'),
     ('Website', 'https://josephcslater.github.io/josephcslater/'),
     ('Vibration Testing', 'https://github.com/Vibration-Testing'),
     ('Engineering Vibration Toolbox', 'https://github.com/vibrationtoolbox'),
@@ -67,8 +67,8 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    ('LinkedIn', 'http://www.linkedin.com/in/JosephCSlater'),
-    ('github', 'http://github.com/josephcslater'),
+    ('LinkedIn', 'https://www.linkedin.com/in/JosephCSlater'),
+    ('github', 'https://github.com/josephcslater'),
 )
 
 DEFAULT_PAGINATION = 10
