@@ -1,0 +1,7 @@
+pelican>=4.9
+markdown
+docutils
+pelican-render-math
+pelican-tag-cloud
+pelican-i18n-subsites
+ghp-import

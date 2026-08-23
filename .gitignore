@@ -1,3 +1,10 @@
 .DS_Store
-pelican/plugins/pelican-ipynb/
-pelican/themes/
+__pycache__/
+*.pyc
+*~
+.ipynb_checkpoints/
+.ropeproject/
+*.egg-info/
+.env
+srv.pid
+pelican.pid

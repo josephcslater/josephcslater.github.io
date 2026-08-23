@@ -1,15 +1,14 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
+"""Pelican configuration for 'Inside the Ivory Tower'."""
+import os
 
 AUTHOR = 'Joseph C. Slater'
 SITENAME = 'Inside the Ivory Tower'
 SITEURL = 'http://josephcslater.github.io'
-# josephcslater.github.io'
 
 PATH = 'content'
 BANNER = 'images/Alumni_Hall_1889_Sun.jpg'
-BANNER_SUBTITLE = ''  # Inside the Ivory Tower
+BANNER_SUBTITLE = ''
 TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'en'
@@ -32,32 +31,22 @@ DEFAULT_METADATA = {
     'status': 'draft',
 }
 
-# :Status: published
-
 FIGURE_NUMBERS = True
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Website', 'https://josephcslater.github.io/josephcslater/'),
-         ('Vibration Testing', 'https://github.com/Vibration-Testing'),
-         ('Engineering Vibration Toolbox',
-         'https://github.com/vibrationtoolbox'),)
-#        ('Jinja2', 'http://jinja.pocoo.org/'),
-#        ('You can modify those links in your config file', '#'),)
-
+LINKS = (
+    ('Pelican', 'http://getpelican.com/'),
+    ('Website', 'https://josephcslater.github.io/josephcslater/'),
+    ('Vibration Testing', 'https://github.com/Vibration-Testing'),
+    ('Engineering Vibration Toolbox', 'https://github.com/vibrationtoolbox'),
+)
 
 # Social widget
-SOCIAL = (('LinkedIn', 'http://www.linkedin.com/in/JosephCSlater'),
-          ('github', 'http://github.com/josephcslater'))
+SOCIAL = (
+    ('LinkedIn', 'http://www.linkedin.com/in/JosephCSlater'),
+    ('github', 'http://github.com/josephcslater'),
+)
 
-# Enables ipython notebook to work
-# https://github.com/danielfrg/pelican-ipynb
-MARKUP = ('md', 'ipynb')
-# print(MARKUP)
-PLUGIN_PATHS = './plugins'
-
-
-# ----------------------
 DEFAULT_PAGINATION = 10
 TAG_CLOUD_MAX_ITEMS = 10
 # Uncomment following line if you want document-relative URLs when developing
@@ -65,49 +54,39 @@ TAG_CLOUD_MAX_ITEMS = 10
 LOAD_CONTENT_CACHE = False
 STATIC_PATHS = ['images', 'pdfs']
 PAGE_PATHS = ['images', 'pdfs']
-FOUNDATION_FRONT_PAGE_FULL_ARTICLES = False
-FOUNDATION_ALTERNATE_FONTS = True
-FOUNDATION_TAGS_IN_MOBILE_SIDEBAR = False
-FOUNDATION_NEW_ANALYTICS = False
-FOUNDATION_ANALYTICS_DOMAIN = ''
-FOUNDATION_FOOTER_TEXT = 'Powered by '
-FOUNDATION_FOOTER_TEXT += '<a href="http://getpelican.com">Pelican</a> '
-FOUNDATION_FOOTER_TEXT += 'and <a href="http://foundation.zurb.com/">Zurb '
-FOUNDATION_FOOTER_TEXT += 'Foundation</a>.'
-# Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.'
-FOUNDATION_PYGMENT_THEME = 'fruity'
-PLUGIN_PATHS = ["/Users/jslater/websites/josephcslater/josephcslater.github.io/pelican/plugins",
-"/Users/jslater/Documents/python-dev/plugins"]
+
 ARTICLE_SAVE_AS = '{slug}.html'
 ARTICLE_URL = '{slug}.html'
-PLUGINS = ['render_math', 'tag_cloud', 'ipynb.markup', 'i18n_subsites']
+TAGS_URL = 'tags.html'
+
+# 'render_math', 'tag_cloud' and 'i18n_subsites' are installed from PyPI
+# (pelican-render-math, pelican-tag-cloud, pelican-i18n-subsites) and are
+# auto-discovered via the pelican.plugins namespace, so no PLUGIN_PATHS
+# is required.
+PLUGINS = ['render_math', 'tag_cloud', 'i18n_subsites']
 JINJA_ENVIRONMENT = {
     'extensions': ['jinja2.ext.i18n'],
 }
-TAGS_URL = 'tags.html'
-# PLUGINS = ["disqus_static"]
-# PLUGINS = ['extract_toc','render_math','disqus_static',
-#            'better_figures_and_images']
 
+DISQUS_SITENAME = 'josephcslater'
+# Never hard-code secrets in tracked source. Set these in your shell/CI
+# environment instead, e.g.:
+#   export PELICAN_DISQUS_SECRET_KEY=...
+#   export PELICAN_DISQUS_PUBLIC_KEY=...
+DISQUS_SECRET_KEY = os.environ.get('PELICAN_DISQUS_SECRET_KEY', '')
+DISQUS_PUBLIC_KEY = os.environ.get('PELICAN_DISQUS_PUBLIC_KEY', '')
 
-# PLUGINS = ['render_math', 'ipynb.liquid', 'tag_cloud']
+# Theme lives in a separate checkout of the pelican-themes collection.
+# Override with the PELICAN_THEME_DIR environment variable if your
+# checkout lives elsewhere.
+THEME = os.environ.get(
+    'PELICAN_THEME_DIR',
+    os.path.expanduser('~/Documents/python-dev/pelican-themes/pelican-bootstrap3'),
+)
 
-
-DISQUS_SITENAME = "josephcslater"
-
-DISQUS_SECRET_KEY = '0T8aMj8es19RuBKVVPVzzslKIdiCVWLPxZxOgexWCKfGTUMjQhaZYtd7yB6Rc2zn'
-DISQUS_PUBLIC_KEY = 'y3C9OMSQLs5ovXENFwfUY3tLuI1GLBfmMteLjoeQpX9eICfXcoRyUJq8JZPjN336'
-
-# DISQUS_SHORTNAME = 'josephcslater'
-# MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/index.html'
-# THEME = "/Users/jslater/Documents/pelican-themes/foundation-default-colours"
-# THEME = "/Users/jslater/Documents/pelican-themes/pure"
-THEME = "/Users/jslater/Documents/python-dev/pelican-themes/pelican-bootstrap3"
-
-# BOOTSTRAP_THEME =
-# SITELOGO = 'images/JosephSlater8-11-cropped.jpg'
 SITELOGO_SIZE = '60'
-ABOUT_ME = 'Professor and Dean '
-ABOUT_ME += 'at Tennessee Technological University. This blog contains '
-ABOUT_ME += 'numerous, often unrelated, thoughts. I hope they may be of some '
-ABOUT_ME += 'value to you.'
+ABOUT_ME = (
+    'Professor and Dean at Tennessee Technological University. This blog '
+    'contains numerous, often unrelated, thoughts. I hope they may be of '
+    'some value to you.'
+)
