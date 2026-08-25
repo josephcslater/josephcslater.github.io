@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>How to Make a PDF Accessible Under the 2024 ADA Title II Rule (WCAG 2.1 AA, Section 508, PDF-UA) - Inside the Ivory Tower</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="https://josephcslater.github.io/pdf-accessibility-instructions.html">
+
+        <meta name="author" content="Joseph C. Slater" />
+        <meta name="keywords" content="LaTeX,LuaLaTeX,PDF,Accessibility,Section 508,ADA,ADA Title II,WCAG,PDF-UA,Screen Readers,Microsoft Word,Adobe Acrobat" />
+        <meta name="description" content="A step-by-step guide to producing an accessible (tagged) PDF from LaTeX using LuaLaTeX&#39;s native tagging support, plus options for Word and Adobe Acrobat, aligned with the 2024 ADA Title II rule&#39;s WCAG 2.1 AA requirements." />
+
+        <meta property="og:site_name" content="Inside the Ivory Tower" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="How to Make a PDF Accessible Under the 2024 ADA Title II Rule (WCAG 2.1 AA, Section 508, PDF-UA)"/>
+        <meta property="og:url" content="https://josephcslater.github.io/pdf-accessibility-instructions.html"/>
+        <meta property="og:description" content="A step-by-step guide to producing an accessible (tagged) PDF from LaTeX using LuaLaTeX&#39;s native tagging support, plus options for Word and Adobe Acrobat, aligned with the 2024 ADA Title II rule&#39;s WCAG 2.1 AA requirements."/>
+        <meta property="article:published_time" content="2026-08-25" />
+            <meta property="article:section" content="LaTeX" />
+            <meta property="article:tag" content="LaTeX" />
+            <meta property="article:tag" content="LuaLaTeX" />
+            <meta property="article:tag" content="PDF" />
+            <meta property="article:tag" content="Accessibility" />
+            <meta property="article:tag" content="Section 508" />
+            <meta property="article:tag" content="ADA" />
+            <meta property="article:tag" content="ADA Title II" />
+            <meta property="article:tag" content="WCAG" />
+            <meta property="article:tag" content="PDF-UA" />
+            <meta property="article:tag" content="Screen Readers" />
+            <meta property="article:tag" content="Microsoft Word" />
+            <meta property="article:tag" content="Adobe Acrobat" />
+            <meta property="article:author" content="Joseph C. Slater" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://josephcslater.github.io/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://josephcslater.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://josephcslater.github.io/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://josephcslater.github.io/theme/css/style.css" type="text/css"/>
+
+        <link href="https://josephcslater.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Inside the Ivory Tower ATOM Feed"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://josephcslater.github.io/" class="navbar-brand">
+Inside the Ivory Tower            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://josephcslater.github.io/category/higher-education.html">Higher education</a>
+                        </li>
+                        <li class="active">
+                            <a href="https://josephcslater.github.io/category/latex.html">Latex</a>
+                        </li>
+                        <li >
+                            <a href="https://josephcslater.github.io/category/leadership.html">Leadership</a>
+                        </li>
+                        <li >
+                            <a href="https://josephcslater.github.io/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="https://josephcslater.github.io/category/research.html">Research</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://josephcslater.github.io/pdf-accessibility-instructions.html"
+                       rel="bookmark"
+                       title="Permalink to How to Make a PDF Accessible Under the 2024 ADA Title II Rule (WCAG 2.1 AA, Section 508, PDF-UA)">
+                        How to Make a PDF Accessible Under the 2024 ADA Title II Rule (WCAG 2.1 AA, Section 508, PDF-UA)
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2026-08-25T09:00:00-04:00"> Tue 25 August 2026</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://josephcslater.github.io/tag/latex.html">LaTeX</a>
+        /
+	<a href="https://josephcslater.github.io/tag/lualatex.html">LuaLaTeX</a>
+        /
+	<a href="https://josephcslater.github.io/tag/pdf.html">PDF</a>
+        /
+	<a href="https://josephcslater.github.io/tag/accessibility.html">Accessibility</a>
+        /
+	<a href="https://josephcslater.github.io/tag/section-508.html">Section 508</a>
+        /
+	<a href="https://josephcslater.github.io/tag/ada.html">ADA</a>
+        /
+	<a href="https://josephcslater.github.io/tag/ada-title-ii.html">ADA Title II</a>
+        /
+	<a href="https://josephcslater.github.io/tag/wcag.html">WCAG</a>
+        /
+	<a href="https://josephcslater.github.io/tag/pdf-ua.html">PDF-UA</a>
+        /
+	<a href="https://josephcslater.github.io/tag/screen-readers.html">Screen Readers</a>
+        /
+	<a href="https://josephcslater.github.io/tag/microsoft-word.html">Microsoft Word</a>
+        /
+	<a href="https://josephcslater.github.io/tag/adobe-acrobat.html">Adobe Acrobat</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>This guide documents, step by step, how an accessible (tagged) PDF was produced
+from a LaTeX document (a multi-page CV with tables, lists, and section
+headings), plus the general options available if you are not using LaTeX, or
+are working without help from an AI assistant. It is written so a person with
+no prior accessibility-tagging experience can follow it end to end.</p>
+<hr>
+<h2>1. What "accessible PDF" actually means</h2>
+<p>A PDF is accessible when it has a <strong>tag tree</strong> (also called a "structure
+tree") layered on top of the visible page content. The tag tree tells screen
+readers and other assistive technology:</p>
+<ul>
+<li>The reading order of the content (not just its visual position on the page)</li>
+<li>Which text is a heading vs. a paragraph vs. a list item vs. a table cell</li>
+<li>What images mean, via alternate ("alt") text</li>
+<li>The document's title and language, so screen readers announce them correctly</li>
+</ul>
+<p>A plain PDF produced by ordinary <code>pdflatex</code>, Microsoft Word "Print to PDF," or
+most PDF export tools has <strong>none of this</strong> — it's just shapes and glyphs on a
+page. Screen readers either fail entirely or read the content in a jumbled,
+meaningless order (e.g., reading straight across a two-column table instead of
+row by row).</p>
+<p>You can check whether a PDF is currently tagged with:</p>
+<div class="highlight"><pre><span></span><code>pdfinfo yourfile.pdf | grep -i tagged
+</code></pre></div>
+
+<p><code>Tagged: no</code> means it has no accessibility structure at all. This guide
+explains how to get to <code>Tagged: yes</code> — and, more importantly, how to check
+that the tags that were added are actually <em>correct</em> (headings tagged as
+headings, tables tagged as tables), not just present.</p>
+<hr>
+<h2>2. If your document is LaTeX: use LuaLaTeX's native tagging</h2>
+<h3>2.1 Why not the <code>pdflatex</code> + <code>tagpdf</code> package route</h3>
+<p>There are two ways to get PDF tagging out of LaTeX:</p>
+<ol>
+<li>The <strong><code>tagpdf</code> package</strong>, loaded the old-fashioned way with <code>\usepackage{tagpdf}</code>.</li>
+<li>The <strong>LaTeX kernel's built-in experimental tagging</strong>, activated via
+   <code>\DocumentMetadata{...}</code> at the very top of the file, combined with the
+   <strong>LuaLaTeX</strong> engine (not <code>pdflatex</code>, not <code>xelatex</code>).</li>
+</ol>
+<p>Option 1 is the more "obvious" one to reach for, but in practice it is
+fragile: it broke immediately and unrecoverably on a <code>letter</code>-class
+document, producing cascading "Undefined control sequence" and "Missing
+<code>\begin{document}</code>" errors. It does not reliably support common document
+classes beyond <code>article</code>.</p>
+<p>Option 2 (the kernel's native mechanism) is newer, still labeled
+experimental, but far more robust. <strong>This is the method used successfully in
+this project and is the one this guide documents.</strong></p>
+<h3>2.2 Step 1 — Add <code>\DocumentMetadata</code> as the literal first line</h3>
+<p>At the very top of your <code>.tex</code> file — <strong>before</strong> <code>\documentclass</code> — add:</p>
+<div class="highlight"><pre><span></span><code><span class="k">\DocumentMetadata</span><span class="nb">{</span>lang=en-US,testphase=<span class="nb">{</span>tagpdf,phase-III,table,tabular<span class="nb">}}</span>
+<span class="k">\documentclass</span><span class="na">[12pt]</span><span class="nb">{</span>article<span class="nb">}</span>
+</code></pre></div>
+
+<p>This line must be the first thing in the file. If anything (even a comment)
+precedes it, or if it appears after <code>\documentclass</code>, LaTeX will throw an
+error.</p>
+<p><strong>What the keys mean:</strong></p>
+<ul>
+<li><code>lang=en-US</code> — sets the document's declared language, required for
+  accessibility (screen readers use it to pick pronunciation rules).</li>
+<li><code>testphase=tagpdf</code> — turns on the basic experimental tagging engine. Alone,
+  this tags plain paragraphs, links, footnotes, and (with <code>phase-III</code>, below)
+  lists — but <strong>not</strong> section headings or tables.</li>
+<li><code>testphase=phase-III</code> — loads additional modules bundled under "Phase III"
+  of the LaTeX accessibility project, including sectioning support
+  (<code>\section</code>, <code>\subsection</code>, etc.) and list support (<code>itemize</code>,
+  <code>enumerate</code>).</li>
+<li><code>testphase=table,tabular</code> — loads modules that tag plain <code>tabular</code> and
+  <code>longtable</code> content as real PDF tables (<code>/Table</code>, <code>/TR</code> for table row,
+  <code>/TD</code> for table cell), which is essential if your document has any tables
+  (as most CVs and resumes do).</li>
+</ul>
+<p>All of these keys can be combined in one comma-separated list inside a single
+set of braces, as shown above. You do not need separate <code>\DocumentMetadata</code>
+lines.</p>
+<p><strong>How this was actually discovered</strong>: the documented key name
+<code>tagging=on</code> (which appears in some blog posts) does <strong>not exist</strong> in
+current (2024) TeX Live kernels. The real key names were found by directly
+inspecting the LaTeX kernel's own source file:</p>
+<div class="highlight"><pre><span></span><code>/usr/local/texlive/2024/texmf-dist/tex/latex/latex-lab/documentmetadata-support.ltx
+/usr/local/texlive/2024/texmf-dist/tex/latex/latex-lab/phase-III-latex-lab-testphase.ltx
+</code></pre></div>
+
+<p>If a key doesn't behave as expected, grep these files (or the equivalent
+path in your own TeX Live installation) for the string <code>testphase</code> to see
+what values are actually recognized by your installed kernel version.</p>
+<h3>2.3 Step 2 — Compile with <code>lualatex</code>, not <code>pdflatex</code></h3>
+<p>This is not optional. The tagging mechanism relies on LuaTeX engine
+features. Building the exact same file with <code>pdflatex</code> will either silently
+ignore the tagging directives or error out — it will not produce a tagged
+PDF.</p>
+<p>If your document uses BibTeX (as most CVs with a bibliography do), the full
+build sequence is:</p>
+<div class="highlight"><pre><span></span><code>lualatex<span class="w"> </span>-interaction<span class="o">=</span>nonstopmode<span class="w"> </span>yourfile.tex
+bibtex<span class="w"> </span>yourfile
+lualatex<span class="w"> </span>-interaction<span class="o">=</span>nonstopmode<span class="w"> </span>yourfile.tex
+lualatex<span class="w"> </span>-interaction<span class="o">=</span>nonstopmode<span class="w"> </span>yourfile.tex
+</code></pre></div>
+
+<p>Two <code>lualatex</code> passes after <code>bibtex</code> are needed — one to pull in the
+resolved citations, one more to fix up cross-references and page numbers that
+shifted as a result.</p>
+<h3>2.4 Step 3 — Set the document title, author, language, and "display title" flag via <code>hyperref</code></h3>
+<p>Add (or update) a <code>\hypersetup</code> call in your preamble:</p>
+<div class="highlight"><pre><span></span><code><span class="k">\usepackage</span><span class="na">[colorlinks=true]</span><span class="nb">{</span>hyperref<span class="nb">}</span>
+<span class="k">\hypersetup</span><span class="nb">{</span>
+  pdftitle=<span class="nb">{</span>Curriculum Vitae - Jane Q. Public<span class="nb">}</span>,
+  pdfauthor=<span class="nb">{</span>Jane Q. Public<span class="nb">}</span>,
+  pdflang=<span class="nb">{</span>en-US<span class="nb">}</span>,
+  pdfdisplaydoctitle=true
+<span class="nb">}</span>
+</code></pre></div>
+
+<p>Each key matters for a distinct accessibility requirement:</p>
+<ul>
+<li><code>pdftitle</code> — sets the actual document title metadata. Without this,
+  screen readers announce the filename (e.g., "cv dot pdf") instead of a
+  meaningful title.</li>
+<li><code>pdfauthor</code> — sets author metadata (good practice, not strictly required
+  for accessibility, but expected).</li>
+<li><code>pdflang</code> — sets the document-level language tag (redundant with
+  <code>\DocumentMetadata{lang=...}</code> above, but harmless and worth setting in both
+  places for older PDF readers that only look at one).</li>
+<li><code>pdfdisplaydoctitle=true</code> — this is the one people most often miss. Setting
+  <code>pdftitle</code> alone is <strong>not enough</strong>: without this flag, PDF viewers will
+  still show the <em>filename</em> in the window/tab title bar instead of the
+  document's actual title. This flag sets the PDF's
+  <code>ViewerPreferences/DisplayDocTitle</code> entry to <code>true</code>, which is a distinct,
+  separately-checked requirement under WCAG 2.4.2 ("Page Titled") and PDF/UA.</li>
+</ul>
+<p>You can verify all four took effect after building with:</p>
+<div class="highlight"><pre><span></span><code>pdfinfo<span class="w"> </span>yourfile.pdf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">&quot;title|tagged&quot;</span>
+</code></pre></div>
+
+<p>and, for the display-title flag specifically (which <code>pdfinfo</code> does not show),
+with a small Python script using the <code>pikepdf</code> library (<code>pip install
+pikepdf</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pikepdf</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;yourfile.pdf&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pdf</span><span class="o">.</span><span class="n">Root</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/ViewerPreferences&quot;</span><span class="p">))</span>
+<span class="c1"># Should print: pikepdf.Dictionary({ &quot;/DisplayDocTitle&quot;: True })</span>
+</code></pre></div>
+
+<h3>2.5 Step 4 — Add alt text to any images</h3>
+<p>Any meaningful image (a logo, a photo, a signature) needs alternate text so a
+screen reader can describe it. With <code>hyperref</code> loaded, add an <code>alt=</code> key
+directly to the <code>\includegraphics</code> call:</p>
+<div class="highlight"><pre><span></span><code><span class="k">\includegraphics</span><span class="na">[height=0.91in,alt={Handwritten signature of Jane Q. Public}]</span><span class="nb">{</span>signature.png<span class="nb">}</span>
+</code></pre></div>
+
+<p>Purely decorative images (a horizontal rule used as a page divider, for
+example) do not need alt text and should ideally be left untagged/marked as
+an artifact, but for a typical CV or letter the only image is usually a
+signature or a photo, and it should always get real alt text describing what
+it depicts, not what it looks like technically (i.e., "Handwritten signature
+of Jane Q. Public," not "PNG image, 300dpi, 1.2in tall").</p>
+<h3>2.6 Step 5 — Verify what actually got tagged (do not just trust "zero errors")</h3>
+<p>Getting a clean compile with no LaTeX errors does <strong>not</strong> guarantee correct
+tagging — the experimental modules can silently fail to tag specific
+constructs while still producing a perfectly good-looking, error-free PDF.
+This project ran into exactly that: table content was rendered but not
+tagged in an early attempt, then in a separate incident an entire table
+temporarily disappeared from the rendered page (see Section 2.7 below) with
+zero LaTeX errors reported.</p>
+<p><strong>Do not skip verification.</strong> Use <code>pikepdf</code> to open the structure tree and
+count what tag types are actually present:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pikepdf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;yourfile.pdf&quot;</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">pdf</span><span class="o">.</span><span class="n">objects</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;/S&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+        <span class="n">counts</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/S&quot;</span><span class="p">))]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</code></pre></div>
+
+<p>For a CV with headings, a bibliography-style numbered list, and a few
+tables, you should see something like:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Counter</span><span class="p">({</span>
+<span class="w">  </span><span class="s1">&#39;/text-unit&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">509</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/text&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">507</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/Lbl&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/LI&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">402</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/LBody&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">402</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;/TD&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/Sect&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/enumerate&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/TR&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/Link&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;/section&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/subsection&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/subsubsection&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/itemize&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;/Table&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/Document&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<p>The tags to specifically look for:</p>
+<table>
+<thead>
+<tr>
+<th>Tag(s)</th>
+<th>Confirms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/Sect</code>, <code>/section</code>, <code>/subsection</code></td>
+<td>Section headings are tagged as headings, not just large bold text</td>
+</tr>
+<tr>
+<td><code>/Table</code>, <code>/TR</code>, <code>/TD</code></td>
+<td>Tables are tagged as real tables, not a jumble of text</td>
+</tr>
+<tr>
+<td><code>/LI</code>, <code>/Lbl</code>, <code>/LBody</code>, <code>/itemize</code>, <code>/enumerate</code></td>
+<td>Bulleted/numbered lists are tagged as lists</td>
+</tr>
+<tr>
+<td><code>/Link</code>, <code>/GoTo</code></td>
+<td>Hyperlinks are tagged and navigable</td>
+</tr>
+</tbody>
+</table>
+<p>If any of these are missing (e.g., zero <code>/Table</code> tags despite having tables
+in the document), the corresponding content type is <strong>not</strong> actually
+accessible yet, even though the PDF opens fine and <code>Tagged: yes</code> is reported
+at the whole-document level. <code>Tagged: yes</code> only means <em>some</em> tag structure
+exists — it does not certify that every content type in the document is
+properly tagged.</p>
+<h3>2.7 A specific, real trap: custom heading styling can silently disable heading tagging</h3>
+<p>If your document customizes section heading appearance (color, small caps,
+a decorative rule under the heading, etc.) using the popular <strong><code>titlesec</code></strong>
+package, be aware: <strong><code>titlesec</code> is fundamentally incompatible with the
+kernel's experimental section-tagging patch.</strong> It completely replaces the
+internal <code>\@startsection</code>/<code>\@sect</code> machinery that the tagging patch depends
+on, so section headings will silently stop being tagged — with no error, no
+warning, just missing <code>/Sect</code> tags in the structure tree.</p>
+<p>The fix used in this project: remove <code>titlesec</code> and reimplement the same
+visual styling using the kernel's own <code>\@startsection</code> primitive directly.
+For example, to reproduce "large, small-caps, colored section headings with
+a horizontal rule underneath":</p>
+<div class="highlight"><pre><span></span><code><span class="k">\usepackage</span><span class="nb">{</span>xcolor<span class="nb">}</span>
+<span class="k">\definecolor</span><span class="nb">{</span>accent<span class="nb">}{</span>RGB<span class="nb">}{</span>27,54,93<span class="nb">}</span>
+
+<span class="k">\makeatletter</span>
+<span class="k">\renewcommand\section</span><span class="nb">{</span><span class="k">\@startsection</span><span class="nb">{</span>section<span class="nb">}{</span>1<span class="nb">}{</span>0pt<span class="nb">}</span><span class="c">%</span>
+  <span class="nb">{</span>1.4em<span class="nb">}</span><span class="c">%                                        % space before</span>
+  <span class="nb">{</span>0.6em<span class="nb">}</span><span class="c">%                                         % space after (see warning below)</span>
+  <span class="nb">{</span><span class="k">\normalfont\Large\scshape\color</span><span class="nb">{</span>accent<span class="nb">}}}</span>       <span class="c">% style of the heading text</span>
+<span class="k">\makeatother</span>
+
+<span class="c">% A separate command to draw the rule, called manually after each \section:</span>
+<span class="k">\newcommand</span><span class="nb">{</span><span class="k">\sectionrule</span><span class="nb">}{</span><span class="k">\par\vspace</span><span class="nb">{</span>-0.3em<span class="nb">}</span><span class="k">\noindent\rule</span><span class="nb">{</span><span class="k">\linewidth</span><span class="nb">}{</span>0.8pt<span class="nb">}</span><span class="k">\vspace</span><span class="nb">{</span>0.3em<span class="nb">}</span><span class="k">\par</span><span class="nb">}</span>
+</code></pre></div>
+
+<p>Then in the body of the document:</p>
+<div class="highlight"><pre><span></span><code><span class="k">\section</span><span class="nb">{</span>Education<span class="nb">}</span>
+<span class="k">\sectionrule</span>
+... table or content here ...
+</code></pre></div>
+
+<p><strong>Critical gotcha discovered the hard way</strong>: the fifth argument to
+<code>\@startsection</code> (the "space after" value) must be <strong>positive</strong>. A negative
+value is LaTeX's built-in signal for a "run-in" heading — meaning the
+paragraph immediately following the heading is typeset as a continuation of
+the <em>same line</em> as the heading, rather than starting fresh below it. This
+caused an entire table to be silently swallowed into the same horizontal
+line as a section heading, pushing it hundreds of points off the right edge
+of the page, so it visually disappeared from the rendered PDF with <strong>zero
+LaTeX errors</strong> — only an easy-to-miss "Overfull \hbox (461pt too wide)"
+warning buried in the build log. Always use a positive value here unless you
+specifically want run-in-style headings.</p>
+<p>Similarly, any custom command that inserts decorative material right after a
+heading (like the <code>\sectionrule</code> rule-drawing command above) must force
+itself onto its own paragraph with <code>\par</code> on both sides. If it doesn't, the
+very next thing in the document (a table, a paragraph, anything) can get
+merged onto the same line as the decoration, with the same silent
+off-page-content failure mode described above.</p>
+<p><strong>Lesson for any custom preamble</strong>: after enabling tagging, always visually
+render every page of the resulting PDF (not just check for "zero errors")
+and compare it side-by-side against the previous, non-tagged version, page
+by page. A silent content-disappearance bug like this will not show up in
+the compiler's error output — only in the rendered pages themselves.</p>
+<h3>2.8 Known limitation: the experimental table module can behave unpredictably</h3>
+<p>The <code>table,tabular</code> testphase modules are explicitly experimental. In this
+project, they were retested after fixing the run-in-heading bug above and
+worked correctly, producing valid <code>/Table</code>/<code>/TR</code>/<code>/TD</code> tags with no visible
+regressions — but this should not be assumed to work flawlessly for every
+possible table layout. After enabling it, always:</p>
+<ol>
+<li>Rebuild with the full multi-pass sequence (Section 2.3).</li>
+<li>Check the LaTeX build log for new or unusually large "Overfull \hbox"
+   warnings (anything reporting more than roughly 50pt of overfull content is
+   worth investigating — it often means content is being pushed off the
+   page).</li>
+<li>Visually render and inspect every page (see Section 4 below), not just
+   the ones you assume are affected.</li>
+<li>Confirm <code>/Table</code>, <code>/TR</code>, <code>/TD</code> counts in the structure tree roughly match
+   the number of actual tables and rows in your document.</li>
+</ol>
+<p>If the table module causes problems in your specific document that you
+cannot resolve, it is safe to drop <code>table,tabular</code> from the <code>testphase</code> list
+and keep just <code>tagpdf,phase-III</code> — you will still get properly tagged
+section headings, subsections, and lists, which is a substantial
+accessibility improvement even without table tagging. A partially-tagged,
+visually-correct PDF is always better than a fully-tagged PDF with missing
+content.</p>
+<hr>
+<h2>3. If you are not using LaTeX (or have no AI assistant to help)</h2>
+<p>Everything above assumes you are comfortable editing LaTeX source and
+running commands in a terminal. If that's not your situation — for example,
+you're working entirely in Microsoft Word, or you only have access to a
+plain PDF someone else gave you — here are the realistic paths, roughly
+ordered from best to most limited.</p>
+<h3>3.1 Best option: Microsoft Word's built-in accessibility tools</h3>
+<p>If you have the original document as a Word (<code>.docx</code>) file, or can recreate
+it in Word:</p>
+<ol>
+<li><strong>Set the document title</strong>: File → Info → and fill in the "Title" field
+   under Properties (not just the filename).</li>
+<li><strong>Set the document language</strong>: select all text (Ctrl/Cmd+A) → Review tab
+   → Language → Set Proofing Language → choose the correct language, click
+   "Set As Default" if asked.</li>
+<li><strong>Use real heading styles, not manual bold/large text</strong>: for every
+   section title, apply Word's built-in "Heading 1," "Heading 2," etc.
+   styles from the Home tab's Styles gallery — do not just make text bold
+   and bigger by hand. Screen readers only recognize headings tagged this
+   way.</li>
+<li><strong>Add alt text to every image</strong>: right-click the image → "Edit Alt Text"
+   (or View → Alt Text) → write a plain-language description of what the
+   image shows or means (e.g., "Signature of Jane Q. Public," not "image1.png").</li>
+<li><strong>Mark table header rows</strong>: click into the table → Table Design tab →
+   check "Header Row." This ensures the first row is announced as column
+   headers when a screen reader reads down a column, rather than being read
+   as an ordinary row of cells.</li>
+<li><strong>Run the built-in Accessibility Checker</strong>: Review tab → Check
+   Accessibility. Fix every item it flags — it will catch missing alt text,
+   missing header rows, and other structural issues you may have missed.</li>
+<li><strong>Export as a tagged PDF</strong>: File → Save As → choose PDF → click
+   "Options" → make sure the checkbox "Document structure tags for
+   accessibility" is checked before saving. This is the step people most
+   often skip; without it, Word will produce an ordinary untagged PDF even
+   if everything inside the Word document itself was done correctly.</li>
+</ol>
+<h3>3.2 If you already have an untagged PDF and no source file: Adobe Acrobat Pro</h3>
+<p>Adobe Acrobat <strong>Reader</strong> (the free version) cannot add tags. You need
+<strong>Acrobat Pro</strong> (a paid product; check whether your employer/institution has
+a license before purchasing one yourself).</p>
+<ol>
+<li>Open the PDF in Acrobat Pro.</li>
+<li>Go to Tools → Accessibility → "Autotag Document" (or "Make Accessible,"
+   depending on your Acrobat version) — this runs an automated first pass
+   that adds a baseline tag structure.</li>
+<li>Open the "Accessibility Checker" (Tools → Accessibility → Accessibility
+   Check) and work through every flagged issue one at a time — this
+   typically includes: setting the document title, setting the language,
+   adding alt text to images (Acrobat will prompt you image-by-image),
+   confirming table headers are marked, and confirming heading levels are
+   correctly nested (no skipping, e.g., an <code>H1</code> followed directly by an
+   <code>H3</code> with no <code>H2</code>).</li>
+<li>Use the "Tags" panel (View → Show/Hide → Navigation Panes → Tags) to
+   manually inspect and, if necessary, drag-and-drop reorder or retype
+   individual tags — the automated pass frequently mis-tags complex tables
+   or misses reading-order issues in multi-column layouts, and these must be
+   fixed by hand.</li>
+<li>Re-run the Accessibility Checker until it reports no remaining issues,
+   then save.</li>
+</ol>
+<h3>3.3 If you have neither Acrobat Pro nor Word: what you can still do</h3>
+<ul>
+<li>If you can get the document into <strong>any</strong> modern word processor (Google
+  Docs, LibreOffice Writer, Apple Pages), the same principles from Section
+  3.1 apply: use real heading styles, add alt text, mark table headers, set
+  the title in the document properties, and export/print to PDF using an
+  export option that explicitly mentions "tagged PDF" or "accessible PDF" if
+  one is offered. Not all of these tools support tagged PDF export equally
+  well — test the result with <code>pdfinfo</code> (<code>Tagged: yes</code>/<code>no</code>) or by opening it
+  in a screen reader if you have access to one (VoiceOver on macOS,
+  ctrl+cmd+F5, is a candidate for spot-checking).</li>
+<li>If none of the above is available to you, and you must ship a completely
+  plain, untagged PDF, at minimum still add basic document metadata (title,
+  author, language) through whatever export dialog you have — this does not
+  make the PDF accessible, but it is better than nothing, and it is
+  typically the one accessibility improvement available in even the most
+  limited export tools.</li>
+<li>As a last resort for a document you cannot edit at all, a validator tool
+  like <strong>veraPDF</strong> (free, open source, https://verapdf.org/) can at least
+  tell you precisely which PDF/UA accessibility rules the document fails, if
+  you need to document/report the gap to someone else who can fix it — but
+  veraPDF only validates, it does not repair anything.</li>
+</ul>
+<hr>
+<h2>4. Final checklist (applies whichever method you used)</h2>
+<p>Before considering a PDF "accessible" and calling the work done, confirm
+all of the following:</p>
+<ul>
+<li>[ ] <code>pdfinfo yourfile.pdf</code> reports <code>Tagged: yes</code></li>
+<li>[ ] The document has a meaningful <code>Title</code> (not the filename) — check with
+      <code>pdfinfo yourfile.pdf | grep -i title</code></li>
+<li>[ ] The <code>Lang</code> is set correctly — check with <code>pdfinfo yourfile.pdf | grep -i lang</code>,
+      or with the <code>pikepdf</code> script in Section 2.4 for the <code>DisplayDocTitle</code>
+      viewer-preference flag specifically</li>
+<li>[ ] Every meaningful image has real, descriptive alt text (not the
+      filename, not "image")</li>
+<li>[ ] Every section/subsection heading is tagged as a heading (verify with
+      the <code>pikepdf</code> structure-tree script in Section 2.6 — look for
+      <code>/Sect</code>, <code>/H1</code>-equivalent, or the heading-command-named tags)</li>
+<li>[ ] Every table is tagged as a real table (<code>/Table</code>, <code>/TR</code>, <code>/TD</code> present),
+      not just visually laid out to look like one</li>
+<li>[ ] Every bulleted or numbered list is tagged as a list (<code>/LI</code>, <code>/Lbl</code>,
+      <code>/itemize</code> or <code>/enumerate</code> present)</li>
+<li>[ ] You have visually re-rendered and compared every page of the final
+      PDF against the pre-tagging version, to catch any silent
+      content-loss regressions introduced while adding tags</li>
+<li>[ ] (If applicable) You ran the tool's built-in accessibility checker
+      (Word's Accessibility Checker, Acrobat Pro's Accessibility Check, or
+      veraPDF) and resolved every item it reported</li>
+<li>[ ] You ran an independent, dedicated PDF/UA compliance checker (see
+      Section 5) against the final PDF — not just the export tool's own
+      built-in checker — and resolved or documented every finding</li>
+</ul>
+<hr>
+<h2>5. Run an independent compliance checker before shipping</h2>
+<p>Whatever tool produced your tags — LuaLaTeX, Word, or Acrobat — its own
+"zero errors" report only means <em>that tool</em> didn't notice a problem. It is
+not a substitute for running the final PDF through a dedicated, independent
+PDF/UA and WCAG conformance checker before you consider the document done or
+send it out for official review. Several such tools exist, ranging from free
+and open source to full commercial remediation suites:</p>
+<p><strong>Free / open source</strong></p>
+<ul>
+<li><strong>veraPDF</strong> (https://verapdf.org/) — the free, open-source, industry
+  reference validator for PDF/UA and PDF/A conformance, developed for
+  European and US national libraries/archives. Command-line and GUI. This
+  is the tool already referenced elsewhere in this guide, and a reasonable
+  default first check.</li>
+<li><strong>PAC (PDF Accessibility Checker)</strong> (https://pac.pdf-accessibility.org/) —
+  free, Windows-only, produced by the PDF Association/access4all. Widely
+  used in government and publishing accessibility workflows; gives a
+  detailed, human-readable PDF/UA-matterhorn-protocol report and can
+  preview the reading order and tag tree visually.</li>
+<li><strong>PAVE (PDF Accessibility Validation Engine)</strong>
+  (https://pave-pdf.org/) — free, browser-based, from the DIAGRAM Center.
+  Useful when you don't want to install anything, and can also do light
+  in-browser remediation (adding alt text, fixing reading order) if the
+  checker finds problems.</li>
+<li><strong>Microsoft Word's built-in Accessibility Checker</strong> (free with Office,
+  <code>Review &gt; Check Accessibility</code>) — not a substitute for a real PDF/UA
+  checker, but worth running on the source document <em>before</em> exporting to
+  PDF, since it catches missing alt text, heading structure, and reading
+  order problems earlier and more cheaply than a post-export PDF check.</li>
+</ul>
+<p><strong>Commercial</strong></p>
+<ul>
+<li><strong>Adobe Acrobat Pro's Accessibility Checker</strong> (<code>Full Check</code>, included
+  with an Acrobat Pro subscription) — the most common commercial option
+  since it's paired directly with Acrobat's remediation tools (tag tree
+  editor, reading order tool, alt-text panel) for fixing whatever it finds.</li>
+<li><strong>CommonLook PDF Validator / CommonLook Office</strong>
+  (https://commonlook.com/) — commercial, widely used in enterprise and
+  government document-remediation pipelines; validates against PDF/UA,
+  WCAG, and Section 508, and integrates with a bulk remediation workflow
+  for organizations processing many documents.</li>
+<li><strong>axesPDF for Validating / axesPDF QuickFix</strong>
+  (https://www.axes4.com/) — commercial German accessibility-tools suite;
+  the validator checks PDF/UA conformance, and QuickFix pairs with it to
+  batch-repair common issues.</li>
+<li><strong>Foxit PDF Editor's Accessibility Checker</strong> — commercial, bundled with
+  Foxit's PDF editing suite if you're already using Foxit rather than
+  Acrobat.</li>
+</ul>
+<p>At minimum, run veraPDF or PAC against the final PDF — both are free — and
+resolve or explicitly document (with a stated reason) every failure before
+distributing the document or reporting it as accessible.</p>
+            </div>
+            <!-- /.entry-content -->
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'josephcslater'; // required: replace example with your forum shortname
+
+            var disqus_config = function () {
+                this.language = "en";
+
+                        this.page.identifier = '2026-08-25-pdf-accessibility-instructions';
+                        this.page.url = 'https://josephcslater.github.io/pdf-accessibility-instructions.html';
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+    <p>
+      <strong>About Joseph C. Slater</strong><br/>
+        Professor and Dean at Tennessee Technological University. This blog contains numerous, often unrelated, thoughts. I hope they may be of some value to you.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/JosephCSlater"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://github.com/josephcslater"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://josephcslater.github.io/tags.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-1">
+      <a href="https://josephcslater.github.io/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://josephcslater.github.io/tag/programming.html">Programming</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://josephcslater.github.io/tag/numpy.html">Numpy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://josephcslater.github.io/tag/scipy.html">SciPy</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://josephcslater.github.io/tag/matlab.html">Matlab</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://josephcslater.github.io/tag/jupyter.html">Jupyter</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://josephcslater.github.io/tag/octave.html">Octave</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://josephcslater.github.io/tag/sympy.html">SymPy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://josephcslater.github.io/tag/data.html">Data</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://josephcslater.github.io/tag/latex.html">LaTeX</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/josephcslater">@josephcslater</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://josephcslater.github.io/josephcslater/" target="_blank">Website</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://github.com/Vibration-Testing" target="_blank">Vibration Testing</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://github.com/vibrationtoolbox" target="_blank">Engineering Vibration Toolbox</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2026 Joseph C. Slater
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://josephcslater.github.io/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://josephcslater.github.io/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://josephcslater.github.io/theme/js/respond.min.js"></script>
+
+
+    <script src="https://josephcslater.github.io/theme/js/bodypadding.js"></script>
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = 'https://josephcslater.github.io/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'josephcslater',
+    count: 50,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="https://josephcslater.github.io/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'josephcslater'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-62100376-3']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+
+</body>
+</html>
