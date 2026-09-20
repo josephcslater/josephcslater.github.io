@@ -31,7 +31,7 @@ SITENAME = 'Inside the Ivory Tower'
 SITEURL = 'https://josephcslater.github.io'
 
 PATH = 'content'
-BANNER = 'images/Alumni_Hall_1889_Sun.jpg'
+BANNER = 'images/IMG_4254_header.jpg'
 BANNER_SUBTITLE = ''
 TIMEZONE = 'America/New_York'
 
